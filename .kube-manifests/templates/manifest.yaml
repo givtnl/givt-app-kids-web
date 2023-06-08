@@ -1,0 +1,75 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: "kids-webapp"
+  labels:
+    app: "kids-webapp"
+
+spec:
+  selector:
+    matchLabels:
+      app: "kids-webapp"
+  template:
+    metadata:
+      labels:
+        app: "kids-webapp"
+    spec:
+      containers:
+        - name: "kids-webapp"
+          image: "givt/givt/givt-app-kids-web:{{ $.Values.dockerTag }}"
+          ports:
+            - name: web
+              containerPort: 80
+          resources:
+            limits:
+              cpu: 200m
+            requests:
+              cpu: 100m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "kids-webapp"
+
+spec:
+  ports:
+    - name: web
+      port: 80
+      targetPort: web
+  selector:
+    app: "kids-webapp"
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: "kids-webapp"
+  namespace: default
+
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: "Host(`{{ $.Values.hostName }}`) && PathPrefix(`/`)"
+      priority: 10
+      services:
+        - kind: Service
+          name: "kids-webapp"
+          namespace: default
+          passHostHeader: true
+          port: 80
+          serversTransport: givt4kids
+          responseForwarding:
+            flushInterval: 1ms
+          scheme: http
+          sticky:
+            cookie:
+              httpOnly: false
+              name: cookie
+              secure: false
+              sameSite: none
+          strategy: RoundRobin
+          weight: 10
+  tls:
+    certResolver: letsencrypt
