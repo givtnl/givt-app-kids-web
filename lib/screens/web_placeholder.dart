@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class WebPlaceholder extends StatefulWidget {
-  @override
-  State<WebPlaceholder> createState() => _WebPlaceholderState();
-}
-
-class _WebPlaceholderState extends State<WebPlaceholder> {
+class WebPlaceholder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xFFEEEDE4),
+        backgroundColor: const Color(0xFFEEEDE4),
         body: SizedBox(
           width: size.width,
           height: size.height,
@@ -20,7 +15,7 @@ class _WebPlaceholderState extends State<WebPlaceholder> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Spacer(flex: 2),
+              const Spacer(flex: 2),
               SizedBox(
                 width: size.width * 0.3,
                 child: Column(
@@ -42,7 +37,7 @@ class _WebPlaceholderState extends State<WebPlaceholder> {
                               height: 1.2)),
                     ]),
               ),
-              Spacer(flex: 1),
+              const Spacer(flex: 1),
               Column(
                 children: [
                   SizedBox(height: size.height * 0.2),
@@ -55,7 +50,7 @@ class _WebPlaceholderState extends State<WebPlaceholder> {
                   ),
                 ],
               ),
-              Spacer(flex: 2),
+              const Spacer(flex: 2),
             ],
           ),
         ),

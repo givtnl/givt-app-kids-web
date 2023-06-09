@@ -11,7 +11,7 @@ class GivtApp extends StatelessWidget {
     return MaterialApp(
       title: 'Givt Kids',
       theme: ThemeData(
-          primaryColor: Color.fromARGB(255, 62, 73, 112),
+          primaryColor: const Color.fromARGB(255, 62, 73, 112),
           fontFamily: "Raleway"),
       home: WebPlaceholder(),
     );
