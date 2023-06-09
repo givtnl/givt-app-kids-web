@@ -91,6 +91,6 @@ jobs:
         uses: Azure/k8s-deploy@v4
         with:
           namespace: default
-          manifests: ${{ steps.bake.outputs.manifestsBundle }}+
+          manifests: ${{ steps.bake.outputs.manifestsBundle }}
           images: |
             givt/givt-app-kids-web:${{ github.sha }}
