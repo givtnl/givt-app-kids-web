@@ -56,14 +56,14 @@ jobs:
         id: install
 
       - name: Log in to K8S Dev
-        if: contains(github.ref, 'main')
+        if: contains(github.ref, 'development')
         uses: Azure/k8s-set-context@v3
         with:
           method: kubeconfig
           kubeconfig: ${{ secrets.DEV_US_KUBECONF }}
 
       - name: Log in to K8S Prod
-        if: contains(github.ref, 'development')
+        if: contains(github.ref, 'main')
         uses: Azure/k8s-set-context@v3
         with:
           method: kubeconfig
