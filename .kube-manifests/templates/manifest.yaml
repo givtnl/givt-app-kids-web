@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: "kids-webapp"
-          image: "givt/givt/givt-app-kids-web:{{ $.Values.dockerTag }}"
+          image: "givt/givt-app-kids-web:{{ $.Values.dockerTag }}"
           ports:
             - name: web
               containerPort: 80
