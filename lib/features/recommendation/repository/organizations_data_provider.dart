@@ -9,9 +9,12 @@ class OrganizationsDataProvider {
         '/givt4kidsservice/v1/Organization/get-organizations');
 
     try {
-      var response = await http.get(url, headers: {
-        'Access-Control-Allow-Origin': 'https://dev-backend.givt.app',
-      });
+      var response = await http.get(
+        url,
+        // headers: {
+        //   'Access-Control-Allow-Origin': 'https://dev-backend.givt.app',
+        // }
+      );
 
       log('get-organizations status code: ${response.statusCode}');
 
