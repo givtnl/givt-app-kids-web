@@ -24,4 +24,4 @@ jobs:
       
       - name: Wrong merge! https://nfcollect.atlassian.net/wiki/spaces/IS/pages/41549825/Git+branching+strategy
         if: contains(TRUE, ${{ env.NOMERGE }})
-        uses: styfle/cancel-workflow-action
+        uses: styfle/cancel-workflow-action@0.9.1
