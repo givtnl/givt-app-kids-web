@@ -42,7 +42,7 @@ class Organization extends Equatable {
       ein: map['ein'] ?? '',
       description: map['description'] ?? '',
       qrCodeURL: map['qrCodeURL'],
-      pictureURL: map['qrCodeURL'], // TODO: update with pictureURL
+      pictureURL: map['organizationLogoURL'],
     );
   }
 
@@ -55,7 +55,7 @@ class Organization extends Equatable {
       'ein': ein,
       'description': description,
       'qrCodeURL': qrCodeURL,
-      'qrCodeURL': pictureURL, // TODO: update with pictureURL
+      'organizationLogoURL': pictureURL,
     };
   }
 }
