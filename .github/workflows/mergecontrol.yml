@@ -1,0 +1,27 @@
+name: Check Merge Source Branch
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  check_merge_source_branch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Check Merge Source Branch
+        run: |
+          sleep 10
+          if [ "${{ github.event.pull_request.base.ref }}" == "main" ] && [ "${{ github.event.pull_request.head.ref }}" != "develop" ]; then
+            echo "Error: Merging from a branch other than 'develop' is not allowed."
+            echo "NOMERGE=TRUE" >> $GITHUB_ENV
+          fi
+          exit 0
+      
+      - name: Wrong merge! https://nfcollect.atlassian.net/wiki/spaces/IS/pages/41549825/Git+branching+strategy
+        if: contains(TRUE, ${{ env.NOMERGE }})
+        uses: styfle/cancel-workflow-action@0.9.1
