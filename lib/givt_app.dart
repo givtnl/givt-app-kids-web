@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:givt_app_kids_web/features/recommendation/cubit/organizations_cubit.dart';
+import 'package:givt_app_kids_web/features/recommendation/screens/organizations_screen.dart';
 import 'package:givt_app_kids_web/screens/web_placeholder.dart';
 import 'app_config.dart';
 
@@ -8,12 +11,19 @@ class GivtApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Givt Kids',
-      theme: ThemeData(
-          primaryColor: const Color.fromARGB(255, 62, 73, 112),
-          fontFamily: "Raleway"),
-      home: WebPlaceholder(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<OrganizationsCubit>(
+          create: (BuildContext context) => OrganizationsCubit(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Givt Kids',
+        theme: ThemeData(
+            primaryColor: const Color.fromARGB(255, 62, 73, 112),
+            fontFamily: "Raleway"),
+        home: const OrganizationsScreen(),
+      ),
     );
   }
 }
