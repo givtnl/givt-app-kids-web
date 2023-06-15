@@ -15,7 +15,13 @@ jobs:
 
       - name: Check Merge Source Branch
         run: |
+          sleep 10
           if [ "${{ github.event.pull_request.base.ref }}" == "main" ] && [ "${{ github.event.pull_request.head.ref }}" != "develop" ]; then
             echo "Error: Merging from a branch other than 'develop' is not allowed."
-            exit 1
+            echo "NOMERGE=TRUE" >> $GITHUB_ENV
           fi
+          exit 0
+      
+      - name: Wrong merge! https://nfcollect.atlassian.net/wiki/spaces/IS/pages/41549825/Git+branching+strategy
+        if: contains(TRUE, ${{ env.NOMERGE }})
+        uses: styfle/cancel-workflow-action
