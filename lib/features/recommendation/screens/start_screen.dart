@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:givt_app_kids_web/features/recommendation/screens/where_screen.dart';
+import 'package:givt_app_kids_web/features/recommendation/widgets/fab_recomendation.dart';
 
 class StartScren extends StatelessWidget {
   const StartScren({super.key});
@@ -70,29 +72,9 @@ class StartScren extends StatelessWidget {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Padding(
-        padding: EdgeInsets.only(bottom: size.height * 0.05),
-        child: ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF54A1EE),
-              elevation: 15,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(size.height * 0.02),
-              ),
-              minimumSize: Size(size.width * 0.2, size.height * 0.1),
-            ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: size.height * 0.02, vertical: size.height * 0.01),
-              child: Text('I\'m ready!',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: 0.8,
-                      height: 1.2)),
-            )),
+      floatingActionButton: const RecommendationFAB(
+        text: 'I\'m ready!',
+        route: WhereScreen.routeName,
       ),
     );
   }
