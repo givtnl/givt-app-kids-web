@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:givt_app_kids_web/features/recommendation/cubit/cubit/quiz_cubit.dart';
 import 'package:givt_app_kids_web/features/recommendation/cubit/organizations_cubit.dart';
 import 'package:givt_app_kids_web/features/recommendation/screens/organizations_screen.dart';
 import 'package:givt_app_kids_web/features/recommendation/screens/start_screen.dart';
-import 'package:givt_app_kids_web/features/recommendation/screens/where_screen.dart';
+import 'package:givt_app_kids_web/features/recommendation/screens/quiz_screen.dart';
 import 'package:givt_app_kids_web/screens/web_placeholder.dart';
 import 'app_config.dart';
 
@@ -18,6 +19,9 @@ class GivtApp extends StatelessWidget {
         BlocProvider<OrganizationsCubit>(
           create: (BuildContext context) => OrganizationsCubit(),
         ),
+        BlocProvider<QuizCubit>(
+          create: (BuildContext context) => QuizCubit(),
+        ),
       ],
       child: MaterialApp(
         title: 'Givt Kids',
@@ -26,7 +30,7 @@ class GivtApp extends StatelessWidget {
             fontFamily: "Raleway"),
         home: const StartScren(),
         routes: {
-          WhereScreen.routeName: (context) => const WhereScreen(),
+          WhereScreen.routeName: (context) => WhereScreen(),
         },
       ),
     );

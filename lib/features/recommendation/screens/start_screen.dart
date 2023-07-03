@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:givt_app_kids_web/features/recommendation/screens/where_screen.dart';
+import 'package:givt_app_kids_web/features/recommendation/screens/quiz_screen.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/fab_recomendation.dart';
+
+import '../cubit/cubit/quiz_cubit.dart';
 
 class StartScren extends StatelessWidget {
   const StartScren({super.key});
@@ -72,9 +75,13 @@ class StartScren extends StatelessWidget {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: const RecommendationFAB(
+      floatingActionButton: RecommendationFAB(
         text: 'I\'m ready!',
-        route: WhereScreen.routeName,
+        onClicked: () {
+          // fetch tags from backend ???
+          //context.read<QuizCubit>().nextWhere();
+          Navigator.pushNamed(context, WhereScreen.routeName);
+        },
       ),
     );
   }
