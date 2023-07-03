@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/fab_recomendation.dart';
+import 'package:givt_app_kids_web/features/recommendation/widgets/givy_bubble.dart';
 
 class WhereScreen extends StatelessWidget {
   const WhereScreen({super.key});
@@ -22,9 +23,8 @@ class WhereScreen extends StatelessWidget {
         child: Column(
           children: [
             Spacer(flex: 1),
-            SvgPicture.asset(
-              height: size.height * 0.20,
-              "images/transparent_logo.svg",
+            GivyBubble(
+              text: 'Where do you want to help?',
             ),
             Spacer(flex: 1),
             Text('Where would you like to help?',
