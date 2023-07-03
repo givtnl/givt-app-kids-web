@@ -6,7 +6,7 @@ abstract class QuizState extends Equatable {
     required this.interests,
   });
   final String where;
-  final List interests;
+  final List<String> interests;
   @override
   List<Object> get props => [where, interests];
 }
