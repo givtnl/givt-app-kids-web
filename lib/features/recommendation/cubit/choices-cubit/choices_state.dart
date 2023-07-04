@@ -2,23 +2,23 @@ part of 'choices_cubit.dart';
 
 abstract class ChoicesState extends Equatable {
   const ChoicesState({
-    required this.where,
+    required this.location,
     required this.interests,
   });
-  final String where;
+  final String location;
   final List<String> interests;
   @override
-  List<Object> get props => [where, interests];
+  List<Object> get props => [location, interests];
 }
 
 class ChoicesEmpty extends ChoicesState {
-  ChoicesEmpty({required super.where, required super.interests});
+  ChoicesEmpty({required super.location, required super.interests});
 }
 
 class WhereSelected extends ChoicesState {
-  WhereSelected({required super.where, required super.interests});
+  WhereSelected({required super.location, required super.interests});
 }
 
 class InterestsSelected extends ChoicesState {
-  InterestsSelected({required super.where, required super.interests});
+  InterestsSelected({required super.location, required super.interests});
 }
