@@ -3,20 +3,20 @@ import 'package:equatable/equatable.dart';
 class Tag extends Equatable {
   const Tag({
     required this.key,
-    required this.text,
+    required this.displayText,
     required this.pictureUrl,
     required this.type,
   });
 
   final String key;
-  final String text;
+  final String displayText;
   final String pictureUrl;
   final TagType type;
 
   @override
   List<Object?> get props => [
         key,
-        text,
+        displayText,
         pictureUrl,
         type,
       ];
@@ -24,11 +24,11 @@ class Tag extends Equatable {
   factory Tag.fromMap(Map<String, dynamic> map) {
     return Tag(
       key: map['key'] ?? '',
-      text: map['text'] ?? '',
+      displayText: map['displayText'] ?? '',
       pictureUrl: map['pictureUrl'] ?? '',
       type: TagType.values.firstWhere(
         (element) => element.name == map['type'],
-        orElse: () => TagType.interest,
+        orElse: () => TagType.INTERESTS,
       ),
     );
   }
@@ -36,11 +36,12 @@ class Tag extends Equatable {
   Map<String, dynamic> toJson() {
     return {
       'key': key,
-      'text': text,
+      'displayText': displayText,
       'pictureUrl': pictureUrl,
       'type': type.name,
     };
   }
 }
 
-enum TagType { location, interest }
+// ignore: constant_identifier_names
+enum TagType { LOCATION, INTERESTS }

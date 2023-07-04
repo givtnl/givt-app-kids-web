@@ -5,25 +5,31 @@ import 'package:givt_app_kids_web/features/recommendation/models/tag.dart';
 import 'package:http/http.dart' as http;
 
 class OrganizationsDataProvider {
-  Future<List<dynamic>> getRecommendedOrganizations(List<Tag> inputTags) async {
+  Future<List<dynamic>> getRecommendedOrganizations({
+    required Tag location,
+    required List<Tag> interests,
+  }) async {
     final url = Uri.https('dev-backend.givtapp.net',
-        'givt4kidsservice/v1/Organisation/recommendations');
+        '/givt4kidsservice/v1/Organisation/recommendations');
 
     try {
-      final locationTag =
-          inputTags.firstWhere((tag) => tag.type == TagType.location);
-      final interestTags = inputTags
-          .takeWhile((tag) => tag.type == TagType.interest)
-          .map((tag) => tag.key)
-          .toList();
-      var response = await http.post(url,
-          body: jsonEncode({
-            {
-              "range": locationTag.key,
-              "pageSize": 3,
-              "tags": interestTags,
-            }
-          }));
+      var response = await http.post(
+        url,
+        // headers: {"Content-Type": "application/json"},
+        body: jsonEncode(
+          // {
+          //   "range": location.key,
+          //   // "pageSize": 3,
+          //   "tags": interests.map((interest) => interest.key).toList(),
+          // },
+
+          {
+            "range": "USA",
+            "pageSize": 3,
+            "tags": ["CLEANOCEANS", "GETFOOD", "CAREFORCHILDREN"],
+          },
+        ),
+      );
 
       log('get-recommended-organizations status code: ${response.statusCode}');
 

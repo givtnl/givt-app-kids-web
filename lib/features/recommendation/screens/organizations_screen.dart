@@ -85,7 +85,7 @@ class _OrganizationsScreenState extends State<OrganizationsScreen> {
                                         state.organizations.length,
                                     height: size.height * .80,
                                     name: organization.name,
-                                    description: organization.description,
+                                    description: organization.shortDescription,
                                     pictureURL: organization.promoPictureUrl,
                                     qrCodeURL: organization.qrCodeURL,
                                   ))
