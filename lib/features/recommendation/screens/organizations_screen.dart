@@ -21,7 +21,7 @@ class _OrganizationsScreenState extends State<OrganizationsScreen> {
   void initState() {
     super.initState();
 
-    context.read<OrganizationsCubit>().fetchOrganizations();
+//    context.read<OrganizationsCubit>().fetchOrganizations();
   }
 
   @override
@@ -86,7 +86,7 @@ class _OrganizationsScreenState extends State<OrganizationsScreen> {
                                     height: size.height * .80,
                                     name: organization.name,
                                     description: organization.description,
-                                    pictureURL: organization.pictureURL,
+                                    pictureURL: organization.promoPictureUrl,
                                     qrCodeURL: organization.qrCodeURL,
                                   ))
                               .toList(),

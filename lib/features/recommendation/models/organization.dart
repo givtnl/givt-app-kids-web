@@ -1,48 +1,63 @@
+import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
+import 'package:givt_app_kids_web/features/recommendation/models/tag.dart';
 
 class Organization extends Equatable {
   const Organization({
     required this.guid,
     required this.name,
-    required this.country,
-    required this.telephoneNumber,
     required this.ein,
+    required this.collectGroupId,
     required this.description,
+    required this.namespace,
     required this.qrCodeURL,
-    required this.pictureURL,
+    required this.promoPictureUrl,
+    required this.organisationLogoURL,
+    required this.tags,
   });
 
   final String guid;
   final String name;
-  final String country;
-  final String telephoneNumber;
   final String ein;
+  final String collectGroupId;
   final String description;
+  final String namespace;
   final String qrCodeURL;
-  final String pictureURL;
+  final String promoPictureUrl;
+  final String organisationLogoURL;
+  final List<Tag> tags;
 
   @override
   List<Object?> get props => [
         guid,
         name,
-        country,
-        telephoneNumber,
         ein,
+        collectGroupId,
         description,
+        namespace,
         qrCodeURL,
-        pictureURL,
+        promoPictureUrl,
+        organisationLogoURL,
+        tags,
       ];
 
   factory Organization.fromMap(Map<String, dynamic> map) {
+    ;
+
     return Organization(
       guid: map['guid'] ?? '',
       name: map['name'] ?? '',
-      country: map['country'] ?? '',
-      telephoneNumber: map['telNr'] ?? '',
       ein: map['ein'] ?? '',
+      collectGroupId: map['collectGroupId'] ?? '',
       description: map['description'] ?? '',
-      qrCodeURL: map['qrCodeURL'],
-      pictureURL: map['organizationLogoURL'],
+      namespace: map['namespace'] ?? '',
+      qrCodeURL: map['qrCodeURL'] ?? '',
+      promoPictureUrl: map['promoPictureUrl'] ?? '',
+      organisationLogoURL: map['organisationLogoURL'] ?? '',
+      tags: (json.decode(map['tags']) as List<dynamic>)
+          .map((map) => Tag.fromMap(map))
+          .toList(),
     );
   }
 
