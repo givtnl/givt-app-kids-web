@@ -27,15 +27,20 @@ class WhereScreen extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        child: Column(
+        child: Flex(
+          direction: Axis.vertical,
           children: [
-            GivyBubble(
-              text: whereQuestions.question,
+            Spacer(),
+            Flexible(
+              flex: 3,
+              child: GivyBubble(
+                text: whereQuestions.question,
+              ),
             ),
             CarouselSlider(
                 carouselController: _controller,
                 options: CarouselOptions(
-                  height: size.height * 0.8,
+                  height: size.height * 0.7,
                   viewportFraction: 1,
                   enlargeCenterPage: true,
                   enableInfiniteScroll: false,
@@ -57,9 +62,17 @@ class WhereScreen extends StatelessWidget {
                                     ),
                                     color: Color(0XFFFAF4D8),
                                     child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         SvgPicture.asset(item.image),
-                                        Text(item.title)
+                                        Text(
+                                          item.title,
+                                          style: TextStyle(
+                                              color: Color(0xFF405A66),
+                                              fontSize: 24,
+                                              fontWeight: FontWeight.w700),
+                                        )
                                       ],
                                     )),
                               ))
@@ -85,7 +98,7 @@ class WhereScreen extends StatelessWidget {
                     ),
                   )
                 ]),
-            Spacer(flex: 1),
+            Spacer(flex: 4),
           ],
         ),
       ),

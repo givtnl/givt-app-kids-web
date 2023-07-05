@@ -9,18 +9,28 @@ class OrganizationsDataProvider {
         '/givt4kidsservice/v1/Organization/get-organizations');
 
     try {
-      var response = await http.get(
+      final sendbody = jsonEncode(
+        {
+          "pageSize": 3,
+          "range": "USA",
+          "tags": ["CLEANOCEANS", "GETFOOD", "CAREFORCHILDREN"]
+        },
+      );
+      var response = await http.post(
         url,
-        // headers: {
-        //   'Access-Control-Allow-Origin': 'https://dev-backend.givt.app',
-        // }
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: sendbody,
       );
 
-      log('get-organizations status code: ${response.statusCode}');
+      // log('get-recommended-organizations status code: ${response.statusCode}');
 
       if (response.statusCode < 400) {
-        var decodedBody = json.decode(response.body) as List<dynamic>;
-        return decodedBody;
+        var decodedBody = json.decode(response.body);
+        log('body is $decodedBody');
+        var itemsList = decodedBody['items'] as List<dynamic>;
+        return itemsList;
       } else {
         throw Exception(response.body);
       }
