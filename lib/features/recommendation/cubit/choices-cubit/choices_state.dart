@@ -5,14 +5,15 @@ abstract class ChoicesState extends Equatable {
     required this.location,
     required this.interests,
   });
-  final String location;
-  final List<String> interests;
+  final Tag location;
+  final List<Tag> interests;
   @override
   List<Object> get props => [location, interests];
 }
 
 class ChoicesEmpty extends ChoicesState {
-  ChoicesEmpty({required super.location, required super.interests});
+  ChoicesEmpty(
+      {super.location = const Tag.empty(), super.interests = const []});
 }
 
 class WhereSelected extends ChoicesState {

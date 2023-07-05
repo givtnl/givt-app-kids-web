@@ -15,7 +15,7 @@ class InterestCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
-        color: Color(0XFFFAF4D8),
+        color: item.color,
         child: Stack(
           children: [
             Radio(value: 0, groupValue: 1, onChanged: (int) {}),
