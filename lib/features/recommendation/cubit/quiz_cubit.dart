@@ -10,6 +10,7 @@ class QuizCubit extends Cubit<QuizState> {
   QuizCubit() : super(QuizInitial(questions: []));
 
   void startQuiz() async {
+    emit(QuizLoading());
     final tagsRepository = TagsRepository();
     try {
       final List<Tag> response = await tagsRepository.fetchTags();

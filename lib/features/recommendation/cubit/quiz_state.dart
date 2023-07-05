@@ -14,6 +14,10 @@ class QuizInitial extends QuizState {
   QuizInitial({required super.questions});
 }
 
+class QuizLoading extends QuizState {
+  QuizLoading({super.questions = const []});
+}
+
 class QuizStarted extends QuizState {
   QuizStarted({required super.questions});
 }
