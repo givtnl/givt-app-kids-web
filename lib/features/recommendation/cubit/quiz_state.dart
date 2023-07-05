@@ -7,13 +7,17 @@ abstract class QuizState extends Equatable {
   final List<QuizQuestion> questions;
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [questions];
 }
 
 class QuizInitial extends QuizState {
   QuizInitial({required super.questions});
 }
 
-class QuizFetched extends QuizState {
-  QuizFetched({required super.questions});
+class QuizStarted extends QuizState {
+  QuizStarted({required super.questions});
+}
+
+class QuizError extends QuizState {
+  QuizError({required super.questions});
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:givt_app_kids_web/features/recommendation/cubit/cubit/quiz_cubit.dart';
+import 'package:givt_app_kids_web/features/recommendation/cubit/quiz_cubit.dart';
 import 'package:givt_app_kids_web/features/recommendation/cubit/organizations_cubit.dart';
 import 'package:givt_app_kids_web/features/recommendation/screens/organizations_screen.dart';
 import 'package:givt_app_kids_web/features/recommendation/screens/start_screen.dart';

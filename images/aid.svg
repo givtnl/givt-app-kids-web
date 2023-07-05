@@ -1,4 +1,54 @@
 <svg width="118" height="120" viewBox="0 0 118 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+<defs>
+<linearGradient id="paint0_linear_2019_9106" x1="22.8187" y1="103.094" x2="79.8715" y2="103.094" gradientUnits="userSpaceOnUse">
+<stop stop-opacity="0.7"/>
+<stop offset="0.96" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="paint1_linear_2019_9106" x1="34.7911" y1="76.8228" x2="0.291695" y2="76.8228" gradientUnits="userSpaceOnUse">
+<stop stop-opacity="0.7"/>
+<stop offset="0.96" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="paint2_linear_2019_9106" x1="33.8284" y1="54.7931" x2="74.2469" y2="54.7931" gradientUnits="userSpaceOnUse">
+<stop stop-opacity="0.7"/>
+<stop offset="0.96" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="paint3_linear_2019_9106" x1="35.1593" y1="27.8573" x2="60.5365" y2="27.8573" gradientUnits="userSpaceOnUse">
+<stop stop-opacity="0.7"/>
+<stop offset="0.96" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="paint4_linear_2019_9106" x1="51.3174" y1="-0.88525" x2="50.0957" y2="7.40563" gradientUnits="userSpaceOnUse">
+<stop stop-opacity="0.7"/>
+<stop offset="0.96" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="paint5_linear_2019_9106" x1="69.4631" y1="37.9735" x2="88.9008" y2="37.9735" gradientUnits="userSpaceOnUse">
+<stop stop-opacity="0.7"/>
+<stop offset="0.96" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="paint6_linear_2019_9106" x1="87.2229" y1="19.54" x2="83.9206" y2="26.2031" gradientUnits="userSpaceOnUse">
+<stop stop-opacity="0.7"/>
+<stop offset="0.96" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="paint7_linear_2019_9106" x1="103.393" y1="74.5451" x2="102.749" y2="63.4833" gradientUnits="userSpaceOnUse">
+<stop stop-opacity="0.7"/>
+<stop offset="0.96" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="paint8_linear_2019_9106" x1="82.9287" y1="60.1538" x2="112.034" y2="60.1538" gradientUnits="userSpaceOnUse">
+<stop stop-opacity="0.7"/>
+<stop offset="0.96" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="paint9_linear_2019_9106" x1="1.78238" y1="20.2071" x2="27.6234" y2="20.2071" gradientUnits="userSpaceOnUse">
+<stop stop-opacity="0.7"/>
+<stop offset="0.96" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="paint10_linear_2019_9106" x1="15.3565" y1="77.456" x2="15.3565" y2="61.3064" gradientUnits="userSpaceOnUse">
+<stop stop-opacity="0.7"/>
+<stop offset="0.96" stop-opacity="0"/>
+</linearGradient>
+<clipPath id="clip0_2019_9106">
+<rect width="118" height="120" fill="white"/>
+</clipPath>
+</defs>
 <g clip-path="url(#clip0_2019_9106)">
 <path d="M64.0745 88.3926H22.8187V117.796H64.0745V88.3926Z" fill="#ECB57B"/>
 <path d="M79.8715 88.3926H60.9794V117.796H79.8715V88.3926Z" fill="#E6A253"/>
@@ -167,53 +217,4 @@
 <path d="M30.713 47.456C30.713 47.456 26.4129 48.4427 24.3533 45.2952C24.3533 45.2952 23.8282 49.8321 19.0848 51.953C19.0848 51.953 18.6705 53.1302 16.6489 53.6066C15.797 53.8064 14.9102 53.8064 14.0584 53.6066C12.0367 53.1333 11.6224 51.953 11.6224 51.953C6.88191 49.8321 6.35389 45.2952 6.35389 45.2952C4.29722 48.4427 -0.00280762 47.456 -0.00280762 47.456C0.840279 54.6609 6.81773 57.8392 6.81773 57.8392L6.05925 73.7153C7.9788 77.2624 13.5712 77.3669 15.3536 77.3054C17.1361 77.3669 22.7314 77.2624 24.648 73.7153L23.8895 57.8392C23.8895 57.8392 29.864 54.664 30.71 47.456H30.713Z" fill="#76C6B8"/>
 <path style="mix-blend-mode:overlay" opacity="0.93" d="M30.713 47.456C30.713 47.456 26.4129 48.4427 24.3533 45.2952C24.3533 45.2952 23.8282 49.8321 19.0848 51.953C19.0848 51.953 18.6705 53.1302 16.6489 53.6066C15.797 53.8064 14.9102 53.8064 14.0584 53.6066C12.0367 53.1333 11.6224 51.953 11.6224 51.953C6.88191 49.8321 6.35389 45.2952 6.35389 45.2952C4.29722 48.4427 -0.00280762 47.456 -0.00280762 47.456C0.840279 54.6609 6.81773 57.8392 6.81773 57.8392L6.05925 73.7153C7.9788 77.2624 13.5712 77.3669 15.3536 77.3054C17.1361 77.3669 22.7314 77.2624 24.648 73.7153L23.8895 57.8392C23.8895 57.8392 29.864 54.664 30.71 47.456H30.713Z" fill="url(#paint10_linear_2019_9106)"/>
 </g>
-<defs>
-<linearGradient id="paint0_linear_2019_9106" x1="22.8187" y1="103.094" x2="79.8715" y2="103.094" gradientUnits="userSpaceOnUse">
-<stop stop-opacity="0.7"/>
-<stop offset="0.96" stop-opacity="0"/>
-</linearGradient>
-<linearGradient id="paint1_linear_2019_9106" x1="34.7911" y1="76.8228" x2="0.291695" y2="76.8228" gradientUnits="userSpaceOnUse">
-<stop stop-opacity="0.7"/>
-<stop offset="0.96" stop-opacity="0"/>
-</linearGradient>
-<linearGradient id="paint2_linear_2019_9106" x1="33.8284" y1="54.7931" x2="74.2469" y2="54.7931" gradientUnits="userSpaceOnUse">
-<stop stop-opacity="0.7"/>
-<stop offset="0.96" stop-opacity="0"/>
-</linearGradient>
-<linearGradient id="paint3_linear_2019_9106" x1="35.1593" y1="27.8573" x2="60.5365" y2="27.8573" gradientUnits="userSpaceOnUse">
-<stop stop-opacity="0.7"/>
-<stop offset="0.96" stop-opacity="0"/>
-</linearGradient>
-<linearGradient id="paint4_linear_2019_9106" x1="51.3174" y1="-0.88525" x2="50.0957" y2="7.40563" gradientUnits="userSpaceOnUse">
-<stop stop-opacity="0.7"/>
-<stop offset="0.96" stop-opacity="0"/>
-</linearGradient>
-<linearGradient id="paint5_linear_2019_9106" x1="69.4631" y1="37.9735" x2="88.9008" y2="37.9735" gradientUnits="userSpaceOnUse">
-<stop stop-opacity="0.7"/>
-<stop offset="0.96" stop-opacity="0"/>
-</linearGradient>
-<linearGradient id="paint6_linear_2019_9106" x1="87.2229" y1="19.54" x2="83.9206" y2="26.2031" gradientUnits="userSpaceOnUse">
-<stop stop-opacity="0.7"/>
-<stop offset="0.96" stop-opacity="0"/>
-</linearGradient>
-<linearGradient id="paint7_linear_2019_9106" x1="103.393" y1="74.5451" x2="102.749" y2="63.4833" gradientUnits="userSpaceOnUse">
-<stop stop-opacity="0.7"/>
-<stop offset="0.96" stop-opacity="0"/>
-</linearGradient>
-<linearGradient id="paint8_linear_2019_9106" x1="82.9287" y1="60.1538" x2="112.034" y2="60.1538" gradientUnits="userSpaceOnUse">
-<stop stop-opacity="0.7"/>
-<stop offset="0.96" stop-opacity="0"/>
-</linearGradient>
-<linearGradient id="paint9_linear_2019_9106" x1="1.78238" y1="20.2071" x2="27.6234" y2="20.2071" gradientUnits="userSpaceOnUse">
-<stop stop-opacity="0.7"/>
-<stop offset="0.96" stop-opacity="0"/>
-</linearGradient>
-<linearGradient id="paint10_linear_2019_9106" x1="15.3565" y1="77.456" x2="15.3565" y2="61.3064" gradientUnits="userSpaceOnUse">
-<stop stop-opacity="0.7"/>
-<stop offset="0.96" stop-opacity="0"/>
-</linearGradient>
-<clipPath id="clip0_2019_9106">
-<rect width="118" height="120" fill="white"/>
-</clipPath>
-</defs>
 </svg>
