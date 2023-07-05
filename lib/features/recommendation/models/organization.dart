@@ -52,10 +52,8 @@ class Organization extends Equatable {
       organisationLogoURL: map['organisationLogoURL'],
       promoPictureUrl: map['promoPictureUrl'],
       shortDescription: map['shortDescription'],
-      longDescription: map['organisationLogoURL'],
-      tags: (json.decode(map['tags']) as List<dynamic>)
-          .map((map) => Tag.fromMap(map))
-          .toList(),
+      longDescription: map['longDescription'],
+      tags: List<Tag>.from(map['tags'].map((map) => Tag.fromMap(map)).toList()),
     );
   }
 

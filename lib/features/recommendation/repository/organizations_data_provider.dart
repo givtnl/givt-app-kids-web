@@ -15,18 +15,12 @@ class OrganizationsDataProvider {
     try {
       var response = await http.post(
         url,
-        // headers: {"Content-Type": "application/json"},
+        headers: {"Content-Type": "application/json"},
         body: jsonEncode(
-          // {
-          //   "range": location.key,
-          //   // "pageSize": 3,
-          //   "tags": interests.map((interest) => interest.key).toList(),
-          // },
-
           {
-            "range": "USA",
+            "range": location.key,
             "pageSize": 3,
-            "tags": ["CLEANOCEANS", "GETFOOD", "CAREFORCHILDREN"],
+            "tags": interests.map((interest) => interest.key).toList(),
           },
         ),
       );
