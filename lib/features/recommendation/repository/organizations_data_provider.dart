@@ -1,34 +1,34 @@
 import 'dart:developer';
 import 'dart:convert';
 
+import 'package:givt_app_kids_web/features/recommendation/models/tag.dart';
 import 'package:http/http.dart' as http;
 
 class OrganizationsDataProvider {
-  Future<List<dynamic>> fetchOrganizations() async {
-    final url = Uri.https('dev-backend.givt.app',
-        '/givt4kidsservice/v1/Organization/get-organizations');
+  Future<List<dynamic>> getRecommendedOrganizations({
+    required Tag location,
+    required List<Tag> interests,
+  }) async {
+    final url = Uri.https('dev-backend.givtapp.net',
+        '/givt4kidsservice/v1/Organisation/recommendations');
 
     try {
-      final sendbody = jsonEncode(
-        {
-          "pageSize": 3,
-          "range": "USA",
-          "tags": ["CLEANOCEANS", "GETFOOD", "CAREFORCHILDREN"]
-        },
-      );
       var response = await http.post(
         url,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: sendbody,
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(
+          {
+            "range": location.key,
+            "pageSize": 3,
+            "tags": interests.map((interest) => interest.key).toList(),
+          },
+        ),
       );
 
-      // log('get-recommended-organizations status code: ${response.statusCode}');
+      log('get-recommended-organizations status code: ${response.statusCode}');
 
       if (response.statusCode < 400) {
         var decodedBody = json.decode(response.body);
-        log('body is $decodedBody');
         var itemsList = decodedBody['items'] as List<dynamic>;
         return itemsList;
       } else {
