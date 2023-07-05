@@ -12,6 +12,7 @@ class LocationCard extends StatelessWidget {
   final Tag item;
   @override
   Widget build(BuildContext context) {
+    final userChoices = context.watch<ChoicesCubit>();
     return Container(
       height: size.height * 0.3,
       width: size.width * 0.25,
@@ -21,12 +22,20 @@ class LocationCard extends StatelessWidget {
             elevation: 25,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
+              side: userChoices.state.location == item
+                  ? const BorderSide(
+                      color: Color(0xFF97A486),
+                      width: 2,
+                    )
+                  : BorderSide.none,
             ),
-            backgroundColor: Color(0XFFFAF4D8),
+            backgroundColor: userChoices.state.location == item
+                ? Color(0XFFDFF3C5)
+                : Color(0XFFFAF4D8),
           ),
           onPressed: () {
             // log('btn pressed: ${item.displayText}');
-            context.read<ChoicesCubit>().chooseLocation(item);
+            userChoices.chooseLocation(item);
           },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
