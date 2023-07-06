@@ -6,7 +6,7 @@ abstract class OrganizationsState extends Equatable {
   final List<Organization> organizations;
 
   @override
-  List<Object> get props => [organizations];
+  List<Object?> get props => [organizations];
 }
 
 class OrganizationsInitialState extends OrganizationsState {
@@ -21,6 +21,29 @@ class OrganizationsFetchedState extends OrganizationsState {
   const OrganizationsFetchedState({required super.organizations});
 }
 
+class OrganizationsOverviewState extends OrganizationsState {
+  const OrganizationsOverviewState({
+    required super.organizations,
+    this.flippedOrganization,
+  });
+
+  final Organization? flippedOrganization;
+  @override
+  List<Object?> get props => [organizations, flippedOrganization];
+}
+
+class OrganizationDetailesState extends OrganizationsState {
+  const OrganizationDetailesState({
+    required super.organizations,
+    required this.selectedOrganisation,
+  });
+
+  final Organization selectedOrganisation;
+
+  @override
+  List<Object?> get props => [organizations, selectedOrganisation];
+}
+
 class OrganizationsExternalErrorState extends OrganizationsState {
   const OrganizationsExternalErrorState({required this.errorMessage})
       : super(organizations: const []);
@@ -28,5 +51,5 @@ class OrganizationsExternalErrorState extends OrganizationsState {
   final String errorMessage;
 
   @override
-  List<Object> get props => [organizations, errorMessage];
+  List<Object?> get props => [organizations, errorMessage];
 }
