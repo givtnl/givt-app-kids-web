@@ -65,7 +65,7 @@ class OrganizationItem extends StatelessWidget {
                                     (tag) => Container(
                                       margin: EdgeInsets.symmetric(vertical: 3),
                                       decoration: BoxDecoration(
-                                        color: Colors.amber,
+                                        color: tag.color,
                                         borderRadius: BorderRadius.only(
                                           topRight: Radius.circular(25),
                                           bottomRight: Radius.circular(25),
