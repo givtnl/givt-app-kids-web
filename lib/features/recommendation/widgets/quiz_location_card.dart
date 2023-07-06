@@ -33,10 +33,7 @@ class LocationCard extends StatelessWidget {
                 ? Color(0XFFDFF3C5)
                 : Color(0XFFFAF4D8),
           ),
-          onPressed: () {
-            // log('btn pressed: ${item.displayText}');
-            userChoices.chooseLocation(item);
-          },
+          onPressed: () => userChoices.chooseLocation(item),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
