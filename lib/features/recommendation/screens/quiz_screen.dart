@@ -24,8 +24,15 @@ class WhereScreen extends StatelessWidget {
   // _getButtonActiveState(BuildContext context) {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    log('we are on question ${context.watch<ChoicesCubit>().state.questionIndex}');
+    bool _tooNarrow = (MediaQueryData.fromWindow(WidgetsBinding.instance.window)
+                .orientation ==
+            Orientation.portrait) &&
+        (MediaQuery.of(context).size.width < 600);
+    final anchorSize = MediaQuery.of(context).size.aspectRatio > 1
+        ? MediaQuery.of(context).size.width
+        : MediaQuery.of(context).size.height;
+    // Size size = MediaQuery.of(context).size;
+    // log('we are on question ${context.watch<ChoicesCubit>().state.questionIndex}');
 
     return BlocListener<OrganizationsCubit, OrganizationsState>(
       listener: (context, state) {
@@ -49,14 +56,15 @@ class WhereScreen extends StatelessWidget {
                               ? "Sorry, something is off..."
                               : state.questions[choices.questionIndex].question,
                       extraChild: choices is InterestsSelected
-                          ? Tally(size: size, tally: choices.interests.length)
+                          ? Tally(
+                              size: anchorSize, tally: choices.interests.length)
                           : null,
                     ),
                   ),
                   CarouselSlider(
                       carouselController: _controller,
                       options: CarouselOptions(
-                        height: size.height * 0.7,
+                        height: MediaQuery.of(context).size.height * 0.7,
                         viewportFraction: 1,
                         enlargeCenterPage: true,
                         enableInfiniteScroll: false,
@@ -68,7 +76,7 @@ class WhereScreen extends StatelessWidget {
                               Center(
                                 child: LoadingAnimationWidget.waveDots(
                                     color: Color(0xFF54A1EE),
-                                    size: size.width * 0.2),
+                                    size: anchorSize * 0.2),
                               )
                             ]
                           : state.questions.isEmpty
@@ -76,15 +84,15 @@ class WhereScreen extends StatelessWidget {
                               : [
                                   LocationViewport(
                                     options: state.questions[0].options,
-                                    size: size,
+                                    size: anchorSize,
                                   ),
                                   InterestsViewPort(
                                       options: state.questions[1].options,
-                                      size: size),
+                                      size: anchorSize),
                                   Center(
                                     child: LoadingAnimationWidget.waveDots(
                                         color: Color(0xFF54A1EE),
-                                        size: size.width * 0.2),
+                                        size: anchorSize * 0.2),
                                   ),
                                 ]),
                   Spacer(flex: 4),

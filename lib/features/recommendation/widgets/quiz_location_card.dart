@@ -8,15 +8,15 @@ import 'package:givt_app_kids_web/features/recommendation/models/tag.dart';
 
 class LocationCard extends StatelessWidget {
   const LocationCard({required this.item, required this.size, super.key});
-  final Size size;
+  final double size;
   final Tag item;
   @override
   Widget build(BuildContext context) {
     final userChoices = context.watch<ChoicesCubit>();
     return Container(
-      height: size.height * 0.3,
-      width: size.width * 0.25,
-      padding: EdgeInsets.all(size.width * 0.005),
+      height: size * 0.2,
+      width: size * 0.3,
+      padding: EdgeInsets.all(size * 0.005),
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             elevation: 25,

@@ -13,15 +13,13 @@ class StartScren extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool _tooNarrow =
-        (MediaQueryData.fromWindow(WidgetsBinding.instance!.window)
-                    .orientation ==
-                Orientation.portrait) &&
-            (MediaQuery.of(context).size.width < 600);
+    bool _tooNarrow = (MediaQueryData.fromWindow(WidgetsBinding.instance.window)
+                .orientation ==
+            Orientation.portrait) &&
+        (MediaQuery.of(context).size.width < 600);
     final anchorSize = MediaQuery.of(context).size.aspectRatio > 1
         ? MediaQuery.of(context).size.width
         : MediaQuery.of(context).size.height;
-    log('anchorSize: $anchorSize');
     return Scaffold(
       body: Container(
         width: double.infinity,

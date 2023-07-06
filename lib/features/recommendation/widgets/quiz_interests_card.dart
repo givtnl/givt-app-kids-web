@@ -7,14 +7,14 @@ import '../cubit/choices-cubit/choices_cubit.dart';
 
 class InterestCard extends StatelessWidget {
   const InterestCard({required this.item, required this.size, super.key});
-  final Size size;
+  final double size;
   final Tag item;
   @override
   Widget build(BuildContext context) {
     final userChoices = context.watch<ChoicesCubit>();
 
     return Container(
-      margin: EdgeInsets.all(size.width * 0.003),
+      margin: EdgeInsets.all(size * 0.003),
       child: ElevatedButton(
         onPressed: () => userChoices.chooseInterest(item),
         style: ElevatedButton.styleFrom(
@@ -35,7 +35,7 @@ class InterestCard extends StatelessWidget {
         child: Stack(
           children: [
             Padding(
-              padding: EdgeInsets.only(top: size.width * 0.01),
+              padding: EdgeInsets.only(top: size * 0.01),
               child: Radio(
                   activeColor: Color(0XFF7AAA35),
                   value: userChoices.state.interests.contains(item) ? 1 : 0,
@@ -48,7 +48,7 @@ class InterestCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   SizedBox(
-                    width: size.width * 0.08,
+                    width: size * 0.08,
                     child: Text(
                       item.displayText,
                       maxLines: 2,
@@ -62,7 +62,7 @@ class InterestCard extends StatelessWidget {
                     padding: const EdgeInsets.all(5.0),
                     child: SvgPicture.network(
                       item.pictureUrl,
-                      width: size.width * 0.055,
+                      width: size * 0.055,
                     ),
                   ),
                 ],

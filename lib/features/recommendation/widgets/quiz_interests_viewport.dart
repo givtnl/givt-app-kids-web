@@ -6,16 +6,16 @@ import 'package:givt_app_kids_web/features/recommendation/widgets/quiz_interests
 class InterestsViewPort extends StatelessWidget {
   const InterestsViewPort(
       {required this.options, required this.size, super.key});
-  final Size size;
+  final double size;
   final List<Tag> options;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: size.height * 0.7,
+      height: size * 0.7,
       child: Center(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: size.width * 0.1),
+          padding: EdgeInsets.symmetric(horizontal: size * 0.1),
           child: GridView.count(
             childAspectRatio: 2,
             crossAxisCount: 4,

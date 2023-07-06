@@ -6,7 +6,7 @@ import 'package:givt_app_kids_web/features/recommendation/widgets/quiz_location_
 class LocationViewport extends StatelessWidget {
   const LocationViewport(
       {required this.options, required this.size, super.key});
-  final Size size;
+  final double size;
   final List<Tag> options;
   @override
   Widget build(BuildContext context) {
