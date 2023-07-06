@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:givt_app_kids_web/features/recommendation/screens/quiz_screen.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/fab_recomendation.dart';
+
+import '../cubit/quiz_cubit.dart';
 
 class StartScren extends StatelessWidget {
   const StartScren({super.key});
@@ -76,7 +79,10 @@ class StartScren extends StatelessWidget {
         text: 'I\'m ready!',
         onClicked: () {
           // fetch tags from backend ???
-          //context.read<QuizCubit>().nextWhere();
+          //final quizQubit = context.read<QuizCubit>();
+          //quizQubit.emit(QuizLoading());
+          context.read<QuizCubit>().startQuiz();
+          //context.read<OrganizationsCubit>().getRecommendedOrganizationsTEST();
           Navigator.pushNamed(context, WhereScreen.routeName);
         },
       ),
