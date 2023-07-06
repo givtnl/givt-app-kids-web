@@ -7,6 +7,7 @@ class Tally extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.all(size.height * 0.015),
       padding: EdgeInsets.all(size.height * 0.015),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(size.height * 0.1),
