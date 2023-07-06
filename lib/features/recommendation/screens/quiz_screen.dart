@@ -62,14 +62,11 @@ class WhereScreen extends StatelessWidget {
                             ? [SizedBox()]
                             : [
                                 LocationViewport(
-                                  options: state
-                                      .questions[choices.questionIndex].options,
+                                  options: state.questions[0].options,
                                   size: size,
                                 ),
                                 InterestsViewPort(
-                                    options: state
-                                        .questions[choices.questionIndex]
-                                        .options,
+                                    options: state.questions[1].options,
                                     size: size),
                                 Center(
                                   child: LoadingAnimationWidget.waveDots(
