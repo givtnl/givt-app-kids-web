@@ -7,6 +7,7 @@ import 'package:givt_app_kids_web/features/recommendation/cubit/choices-cubit/ch
 import 'package:givt_app_kids_web/features/recommendation/cubit/quiz_cubit.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/fab_recomendation.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/givy_bubble.dart';
+import 'package:givt_app_kids_web/features/recommendation/widgets/quiz_interests_tally.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/quiz_interests_viewport.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/quiz_location_viewport.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/quiz_scaffold.dart';
@@ -38,6 +39,9 @@ class WhereScreen extends StatelessWidget {
                         : state.questions.isEmpty
                             ? "Sorry, something is off..."
                             : state.questions[choices.questionIndex].question,
+                    extraChild: choices is InterestsSelected
+                        ? Tally(size: size, tally: choices.interests.length)
+                        : null,
                   ),
                 ),
                 CarouselSlider(
