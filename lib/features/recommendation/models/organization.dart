@@ -1,61 +1,74 @@
+import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
+import 'package:givt_app_kids_web/features/recommendation/models/tag.dart';
 
 class Organization extends Equatable {
   const Organization({
     required this.guid,
+    required this.collectGroupId,
     required this.name,
-    required this.country,
-    required this.telephoneNumber,
-    required this.ein,
-    required this.description,
+    required this.namespace,
     required this.qrCodeURL,
-    required this.pictureURL,
+    required this.organisationLogoURL,
+    required this.promoPictureUrl,
+    required this.shortDescription,
+    required this.longDescription,
+    required this.tags,
   });
 
   final String guid;
+  final String collectGroupId;
   final String name;
-  final String country;
-  final String telephoneNumber;
-  final String ein;
-  final String description;
+  final String namespace;
   final String qrCodeURL;
-  final String pictureURL;
+  final String organisationLogoURL;
+  final String promoPictureUrl;
+  final String shortDescription;
+  final String longDescription;
+  final List<Tag> tags;
 
   @override
   List<Object?> get props => [
         guid,
+        collectGroupId,
         name,
-        country,
-        telephoneNumber,
-        ein,
-        description,
+        namespace,
         qrCodeURL,
-        pictureURL,
+        organisationLogoURL,
+        promoPictureUrl,
+        shortDescription,
+        longDescription,
+        tags,
       ];
 
   factory Organization.fromMap(Map<String, dynamic> map) {
     return Organization(
-      guid: map['guid'] ?? '',
-      name: map['name'] ?? '',
-      country: map['country'] ?? '',
-      telephoneNumber: map['telNr'] ?? '',
-      ein: map['ein'] ?? '',
-      description: map['description'] ?? '',
+      guid: map['guid'],
+      collectGroupId: map['collectGroupId'],
+      name: map['name'],
+      namespace: map['namespace'] ?? '',
       qrCodeURL: map['qrCodeURL'],
-      pictureURL: map['organizationLogoURL'],
+      organisationLogoURL: map['organisationLogoURL'],
+      promoPictureUrl: map['promoPictureUrl'],
+      shortDescription: map['shortDescription'],
+      longDescription: map['longDescription'],
+      tags: List<Tag>.from(map['tags'].map((map) => Tag.fromMap(map)).toList()),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'guid': guid,
+      'collectGroupId': collectGroupId,
       'name': name,
-      'country': country,
-      'telNr': telephoneNumber,
-      'ein': ein,
-      'description': description,
+      'namespace': namespace,
       'qrCodeURL': qrCodeURL,
-      'organizationLogoURL': pictureURL,
+      'organisationLogoURL': organisationLogoURL,
+      'promoPictureUrl': promoPictureUrl,
+      'shortDescription': shortDescription,
+      'longDescription': longDescription,
+      'tags': jsonEncode(tags),
     };
   }
 }
