@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'dart:convert';
 
-import 'package:givt_app_kids_web/features/recommendation/models/tag.dart';
 import 'package:http/http.dart' as http;
 
 class TagsDataProvider {

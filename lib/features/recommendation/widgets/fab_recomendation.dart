@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 
 class RecommendationFAB extends StatelessWidget {
-  RecommendationFAB(
-      {required this.active,
-      required this.text,
-      required this.onClicked,
-      super.key});
+  RecommendationFAB({
+    required this.active,
+    required this.text,
+    required this.onClicked,
+    super.key,
+    this.padding,
+  });
   final String text;
   final VoidCallback onClicked;
   final bool active;
+  final EdgeInsets? padding;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Padding(
-      padding: EdgeInsets.only(bottom: size.height * 0.05),
+      padding: padding ?? EdgeInsets.only(bottom: size.height * 0.05),
       child: ElevatedButton(
           onPressed: active ? () => onClicked() : () {},
           style: ElevatedButton.styleFrom(

@@ -42,6 +42,31 @@ class Organization extends Equatable {
         tags,
       ];
 
+  Organization copyWith({
+    String? guid,
+    String? collectGroupId,
+    String? name,
+    String? namespace,
+    String? qrCodeURL,
+    String? organisationLogoURL,
+    String? promoPictureUrl,
+    String? shortDescription,
+    String? longDescription,
+    List<Tag>? tags,
+  }) =>
+      Organization(
+        guid: guid ?? this.guid,
+        collectGroupId: collectGroupId ?? this.collectGroupId,
+        name: name ?? this.name,
+        namespace: namespace ?? this.namespace,
+        qrCodeURL: qrCodeURL ?? this.qrCodeURL,
+        organisationLogoURL: organisationLogoURL ?? this.organisationLogoURL,
+        promoPictureUrl: promoPictureUrl ?? this.promoPictureUrl,
+        shortDescription: shortDescription ?? this.shortDescription,
+        longDescription: longDescription ?? this.longDescription,
+        tags: tags ?? this.tags,
+      );
+
   factory Organization.fromMap(Map<String, dynamic> map) {
     return Organization(
       guid: map['guid'],

@@ -9,20 +9,10 @@ import 'package:givt_app_kids_web/features/recommendation/cubit/organizations_cu
 import 'package:givt_app_kids_web/features/recommendation/widgets/givy_bubble.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/organization_item.dart';
 
-class OrganizationsScreen extends StatefulWidget {
+class OrganizationsScreen extends StatelessWidget {
   const OrganizationsScreen({super.key});
 
   static const String routeName = "/organizations";
-
-  @override
-  State<OrganizationsScreen> createState() => _OrganizationsScreenState();
-}
-
-class _OrganizationsScreenState extends State<OrganizationsScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +36,15 @@ class _OrganizationsScreenState extends State<OrganizationsScreen> {
       builder: (context, state) {
         return SafeArea(
           child: Scaffold(
-            backgroundColor: const Color(0xFFEEEDE4),
             body: Container(
               width: size.width,
               height: size.height,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("images/gradient.png"),
+                  fit: BoxFit.cover,
+                ),
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
