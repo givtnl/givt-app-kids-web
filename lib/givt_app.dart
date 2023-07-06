@@ -5,7 +5,6 @@ import 'package:givt_app_kids_web/features/recommendation/cubit/organizations_cu
 import 'package:givt_app_kids_web/features/recommendation/screens/organizations_screen.dart';
 import 'package:givt_app_kids_web/features/recommendation/screens/start_screen.dart';
 import 'package:givt_app_kids_web/features/recommendation/screens/quiz_screen.dart';
-import 'package:givt_app_kids_web/screens/web_placeholder.dart';
 import 'app_config.dart';
 
 class GivtApp extends StatelessWidget {
@@ -31,6 +30,7 @@ class GivtApp extends StatelessWidget {
         home: const StartScren(),
         routes: {
           WhereScreen.routeName: (context) => WhereScreen(),
+          OrganizationsScreen.routeName: (context) => OrganizationsScreen(),
         },
       ),
     );

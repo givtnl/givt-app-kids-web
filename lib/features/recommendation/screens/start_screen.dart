@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:givt_app_kids_web/features/recommendation/cubit/organizations_cubit.dart';
 import 'package:givt_app_kids_web/features/recommendation/screens/quiz_screen.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/fab_recomendation.dart';
-
-import '../cubit/cubit/quiz_cubit.dart';
 
 class StartScren extends StatelessWidget {
   const StartScren({super.key});
@@ -81,7 +77,6 @@ class StartScren extends StatelessWidget {
         onClicked: () {
           // fetch tags from backend ???
           //context.read<QuizCubit>().nextWhere();
-          context.read<OrganizationsCubit>().getRecommendedOrganizationsTEST();
           Navigator.pushNamed(context, WhereScreen.routeName);
         },
       ),
