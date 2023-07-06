@@ -78,6 +78,7 @@ class StartScren extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: RecommendationFAB(
+        active: true,
         text: 'I\'m ready!',
         onClicked: () {
           // fetch tags from backend ???

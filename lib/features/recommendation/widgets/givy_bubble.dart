@@ -23,7 +23,6 @@ class GivyBubble extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(size.height * 0.015),
               child: SvgPicture.asset(
-                //height: size.height * 0.12,
                 "images/givy_pink_bubble.svg",
                 alignment: Alignment.centerLeft,
               ),
