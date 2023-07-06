@@ -24,7 +24,12 @@ class OrganizationsCubit extends Cubit<OrganizationsState> {
       final response =
           await organizationsRepository.getRecommendedOrganizations(
               location: location, interests: interests);
+
       emit(OrganizationsFetchedState(
+        organizations: response,
+      ));
+
+      emit(OrganizationsOverviewState(
         organizations: response,
       ));
     } catch (error) {
@@ -34,8 +39,38 @@ class OrganizationsCubit extends Cubit<OrganizationsState> {
     }
   }
 
+  void flipOrganization(Organization organization) {
+    if (state is OrganizationsOverviewState) {
+      final currentFlippedOrganization =
+          (state as OrganizationsOverviewState).flippedOrganization;
+      emit(OrganizationsOverviewState(
+        organizations: state.organizations,
+        flippedOrganization:
+            currentFlippedOrganization == organization ? null : organization,
+      ));
+    }
+  }
+
+  void showOrganizationDetails(Organization organization) {
+    if (state is OrganizationsOverviewState) {
+      emit(OrganizationDetailesState(
+        organizations: state.organizations,
+        selectedOrganisation: organization,
+      ));
+    }
+  }
+
+  void showOrganizationsOverview() {
+    if (state is OrganizationDetailesState) {
+      emit(OrganizationsOverviewState(
+        organizations: state.organizations,
+      ));
+    }
+  }
+
   Future<void> getRecommendedOrganizationsTEST() async {
     return await getRecommendedOrganizations(
+      fakeComputingExtraDelay: const Duration(seconds: 0),
       location: const Tag(
         area: '',
         color: Color(0xFF285C92),
