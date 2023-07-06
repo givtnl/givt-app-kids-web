@@ -32,6 +32,7 @@ class GivyBubble extends StatelessWidget {
               child: SvgPicture.asset(
                 "images/givy_pink_bubble.svg",
                 alignment: Alignment.centerLeft,
+                height: height * 0.12,
               ),
             ),
             Expanded(
