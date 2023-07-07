@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:givt_app_kids_web/features/recommendation/cubit/organizations_cubit.dart';
+import 'package:givt_app_kids_web/features/recommendation/widgets/fab_recomendation.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/givy_bubble.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/organization_item.dart';
 
@@ -49,23 +50,21 @@ class OrganizationsScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  SizedBox(
-                    height: size.height * .025,
-                  ),
-                  const GivyBubble(
-                    text: 'These charities fit your interests!',
+                  Spacer(),
+                  GivyBubble(
+                    text: state.organizations.isEmpty
+                        ? 'Oops, something went wrong...'
+                        : 'These charities fit your interests!',
                     small: true,
                   ),
-                  SizedBox(
-                    height: size.height * .025,
-                  ),
+                  Spacer(),
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: state.organizations
                         .map(
                           (organization) => OrganizationItem(
                             width:
-                                (size.width * .90) / state.organizations.length,
+                                (size.width * .8) / state.organizations.length,
                             height: size.height * .83,
                             organization: organization,
                             isFlipped: (state as OrganizationsOverviewState)
@@ -78,6 +77,15 @@ class OrganizationsScreen extends StatelessWidget {
                 ],
               ),
             ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
+            floatingActionButton: state.organizations.isEmpty
+                ? RecommendationFAB(
+                    active: true,
+                    text: 'Restart',
+                    onClicked: () =>
+                        Navigator.popUntil(context, (route) => route.isFirst))
+                : null,
           ),
         );
       },

@@ -19,8 +19,8 @@ class LocationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final userChoices = context.watch<ChoicesCubit>();
     return Container(
-      height: size * 0.2,
-      width: size * 0.3,
+      height: size * 0.17,
+      width: size * 0.27,
       padding: EdgeInsets.all(size * 0.005),
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
@@ -42,13 +42,13 @@ class LocationCard extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgPicture.network(item.pictureUrl, height: size * 0.1),
+              SvgPicture.network(item.pictureUrl, height: size * 0.09),
               SizedBox(height: size * 0.01),
               Text(
                 item.displayText,
                 style: TextStyle(
                     color: Color(0xFF405A66),
-                    fontSize: size * 0.025,
+                    fontSize: size * 0.02,
                     fontWeight: FontWeight.w700),
               )
             ],

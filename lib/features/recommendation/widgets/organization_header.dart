@@ -14,6 +14,13 @@ class OrganizationHeader extends StatelessWidget {
 
   final Organization organization;
   final bool fullScreenMode;
+  _arrangedTags() {
+    final tags = organization.tags;
+    if (tags.length > 3) {
+      return tags.take(3).toList();
+    }
+    return tags;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +33,7 @@ class OrganizationHeader extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(top: 10),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: organization.tags
                     .map(
@@ -45,10 +53,11 @@ class OrganizationHeader extends StatelessWidget {
                           ),
                           child: Text(
                             tag.displayText,
-                            style: const TextStyle(
+                            style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
-                              fontSize: 15,
+                              fontSize:
+                                  MediaQuery.of(context).size.height * 0.025,
                             ),
                           ),
                         ),

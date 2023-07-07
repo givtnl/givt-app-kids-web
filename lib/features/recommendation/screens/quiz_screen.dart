@@ -69,7 +69,7 @@ class WhereScreen extends StatelessWidget {
                         enlargeCenterPage: true,
                         enableInfiniteScroll: false,
                         scrollDirection: Axis.vertical,
-                        //scrollPhysics: NeverScrollableScrollPhysics(),
+                        scrollPhysics: NeverScrollableScrollPhysics(),
                       ),
                       items: state is QuizLoading
                           ? [
