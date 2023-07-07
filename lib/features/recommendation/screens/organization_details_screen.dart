@@ -284,11 +284,11 @@ class OrganizationDetailsScreen extends StatelessWidget {
                                               BorderRadius.circular(25),
                                         ),
                                       ),
-                                      child: const Padding(
+                                      child: Padding(
                                         padding: EdgeInsets.all(10),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,
-                                          children: [
+                                          children: const [
                                             Icon(
                                               Icons.arrow_back_rounded,
                                               color: Color(0xFF0E90CC),

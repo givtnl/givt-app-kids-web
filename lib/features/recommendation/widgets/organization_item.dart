@@ -44,7 +44,7 @@ class OrganizationItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(25.0),
               child: Card(
                 elevation: 10,
-                color: isFlipped ? const Color(0xFFC7DFBC) : Colors.white,
+                color: isFlipped ? const Color(0xFFC7DFBC) : Color(0XFFFAF4D8),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25.0),
                 ),

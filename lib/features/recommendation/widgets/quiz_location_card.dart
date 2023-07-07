@@ -7,9 +7,14 @@ import 'package:givt_app_kids_web/features/recommendation/cubit/choices-cubit/ch
 import 'package:givt_app_kids_web/features/recommendation/models/tag.dart';
 
 class LocationCard extends StatelessWidget {
-  const LocationCard({required this.item, required this.size, super.key});
+  const LocationCard(
+      {required this.narrow,
+      required this.item,
+      required this.size,
+      super.key});
   final double size;
   final Tag item;
+  final bool narrow;
   @override
   Widget build(BuildContext context) {
     final userChoices = context.watch<ChoicesCubit>();
@@ -37,12 +42,13 @@ class LocationCard extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgPicture.network(item.pictureUrl),
+              SvgPicture.network(item.pictureUrl, height: size * 0.1),
+              SizedBox(height: size * 0.01),
               Text(
                 item.displayText,
-                style: const TextStyle(
+                style: TextStyle(
                     color: Color(0xFF405A66),
-                    fontSize: 24,
+                    fontSize: size * 0.025,
                     fontWeight: FontWeight.w700),
               )
             ],

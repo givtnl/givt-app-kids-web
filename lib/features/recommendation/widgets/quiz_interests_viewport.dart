@@ -5,9 +5,13 @@ import 'package:givt_app_kids_web/features/recommendation/widgets/quiz_interests
 
 class InterestsViewPort extends StatelessWidget {
   const InterestsViewPort(
-      {required this.options, required this.size, super.key});
+      {required this.narrow,
+      required this.options,
+      required this.size,
+      super.key});
   final double size;
   final List<Tag> options;
+  final bool narrow;
 
   @override
   Widget build(BuildContext context) {
@@ -15,15 +19,28 @@ class InterestsViewPort extends StatelessWidget {
       height: size * 0.7,
       child: Center(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: size * 0.1),
-          child: GridView.count(
-            childAspectRatio: 2,
-            crossAxisCount: 4,
-            shrinkWrap: true,
-            children: options
-                .map((item) => InterestCard(item: item, size: size))
-                .toList(),
-          ),
+          padding: narrow
+              ? EdgeInsets.symmetric(horizontal: size * 0.02)
+              : EdgeInsets.symmetric(horizontal: size * 0.1),
+          child: narrow
+              ? GridView.count(
+                  childAspectRatio: 2,
+                  crossAxisCount: 3,
+                  shrinkWrap: true,
+                  children: options
+                      .map((item) =>
+                          InterestCard(narrow: narrow, item: item, size: size))
+                      .toList(),
+                )
+              : GridView.count(
+                  childAspectRatio: 2,
+                  crossAxisCount: 4,
+                  shrinkWrap: true,
+                  children: options
+                      .map((item) =>
+                          InterestCard(narrow: narrow, item: item, size: size))
+                      .toList(),
+                ),
         ),
       ),
     );

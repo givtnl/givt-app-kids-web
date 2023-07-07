@@ -36,6 +36,7 @@ flutter:
       fonts:
         - asset: fonts/Raleway-Regular.ttf
         - asset: fonts/Raleway-Bold.ttf
+        - asset: fonts/OpenSans-VariableFont_wdth_wght.ttf
           weight: 700
 
   # For details regarding fonts from package dependencies,

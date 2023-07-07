@@ -26,8 +26,8 @@ class WhereScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     bool _tooNarrow = (MediaQueryData.fromWindow(WidgetsBinding.instance.window)
                 .orientation ==
-            Orientation.portrait) &&
-        (MediaQuery.of(context).size.width < 600);
+            Orientation.portrait) ||
+        (MediaQuery.of(context).size.width < 850);
     final anchorSize = MediaQuery.of(context).size.aspectRatio > 1
         ? MediaQuery.of(context).size.width
         : MediaQuery.of(context).size.height;
@@ -83,10 +83,12 @@ class WhereScreen extends StatelessWidget {
                               ? [SizedBox()]
                               : [
                                   LocationViewport(
+                                    narrow: _tooNarrow,
                                     options: state.questions[0].options,
                                     size: anchorSize,
                                   ),
                                   InterestsViewPort(
+                                      narrow: _tooNarrow,
                                       options: state.questions[1].options,
                                       size: anchorSize),
                                   Center(
