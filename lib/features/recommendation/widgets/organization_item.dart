@@ -47,12 +47,12 @@ class OrganizationItem extends StatelessWidget {
                 elevation: 10,
                 color: isFlipped ? const Color(0xFFC7DFBC) : Colors.white,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(availableHeight * 0.08),
+                  borderRadius: BorderRadius.circular(availableHeight * 0.07),
                 ),
                 child: Column(
                   children: [
                     SizedBox(
-                      height: availableHeight * 0.05,
+                      height: availableHeight * 0.033,
                     ),
                     SizedBox(
                       height: availableHeight * 0.20,
@@ -126,14 +126,16 @@ class OrganizationItem extends StatelessWidget {
                               ),
                               Container(
                                 alignment: Alignment.center,
-                                height: availableHeight * 0.14,
+                                height: availableHeight * 0.12,
                                 child: Text(
                                   organization.name,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 20,
+                                    fontSize:
+                                        MediaQuery.of(context).size.height *
+                                            0.03,
                                   ),
                                 ),
                               ),
