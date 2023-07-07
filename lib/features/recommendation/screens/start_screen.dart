@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -11,7 +13,13 @@ class StartScren extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    bool _tooNarrow = (MediaQueryData.fromWindow(WidgetsBinding.instance.window)
+                .orientation ==
+            Orientation.portrait) &&
+        (MediaQuery.of(context).size.width < 600);
+    final anchorSize = MediaQuery.of(context).size.aspectRatio > 1
+        ? MediaQuery.of(context).size.width
+        : MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -26,45 +34,67 @@ class StartScren extends StatelessWidget {
           children: [
             Spacer(flex: 1),
             SvgPicture.asset(
-              height: size.height * 0.20,
+              height: anchorSize * 0.1,
               "images/transparent_logo.svg",
             ),
             Spacer(flex: 1),
+            _tooNarrow
+                ? Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(anchorSize * 0.4),
+                        color: const Color(0xFFBED7E1)),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: anchorSize * 0.05, vertical: 0),
+                    child: SvgPicture.asset(
+                      height: anchorSize * 0.1,
+                      "images/givy_pencil.svg",
+                    ),
+                  )
+                : SizedBox(),
+            _tooNarrow ? SizedBox(height: anchorSize * 0.05) : SizedBox(),
             ClipRRect(
-              borderRadius: BorderRadius.circular(size.height * 0.4),
+              borderRadius: BorderRadius.circular(anchorSize * 0.4),
               child: Container(
-                width: size.width * 0.7,
+                width: anchorSize * 0.7,
                 decoration: const BoxDecoration(
                   color: Color(0xFFBED7E1),
                 ),
                 child: Row(
+                  mainAxisAlignment: _tooNarrow
+                      ? MainAxisAlignment.center
+                      : MainAxisAlignment.start,
                   children: [
+                    _tooNarrow
+                        ? SizedBox(width: anchorSize * 0.05)
+                        : Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: anchorSize * 0.05, vertical: 0),
+                            child: SvgPicture.asset(
+                              height: anchorSize * 0.1,
+                              "images/givy_pencil.svg",
+                            ),
+                          ),
                     Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: size.height * 0.08, vertical: 0),
-                      child: SvgPicture.asset(
-                        height: size.height * 0.20,
-                        "images/givy_pencil.svg",
+                      padding: EdgeInsets.all(anchorSize * 0.02),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Let\'s choose a charity!',
+                              style: TextStyle(
+                                  color: const Color(0xFF405A66),
+                                  fontSize: anchorSize * 0.03,
+                                  fontWeight: FontWeight.bold)),
+                          Text(
+                              'Grab your parent or sibling if you want some help! ',
+                              style: TextStyle(
+                                  color: Color(0xFF405A66),
+                                  fontSize: anchorSize * 0.015,
+                                  fontWeight: FontWeight.w500,
+                                  letterSpacing: 0.8,
+                                  height: 1.2)),
+                        ],
                       ),
-                    ),
-                    Column(
-                      //mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text('Let\'s choose a charity!',
-                            style: TextStyle(
-                                color: Color(0xFF405A66),
-                                fontSize: 42,
-                                fontWeight: FontWeight.bold)),
-                        Text(
-                            'Grab your parent or sibling if you want some help! ',
-                            style: TextStyle(
-                                color: Color(0xFF405A66),
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: 0.8,
-                                height: 1.2)),
-                      ],
                     ),
                   ],
                 ),

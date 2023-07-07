@@ -32,16 +32,19 @@ class OrganizationsOverviewState extends OrganizationsState {
   List<Object?> get props => [organizations, flippedOrganization];
 }
 
-class OrganizationDetailesState extends OrganizationsState {
+class OrganizationDetailesState extends OrganizationsOverviewState {
   const OrganizationDetailesState({
     required super.organizations,
     required this.selectedOrganisation,
+    this.isDonateMode = false,
   });
 
   final Organization selectedOrganisation;
+  final bool isDonateMode;
 
   @override
-  List<Object?> get props => [organizations, selectedOrganisation];
+  List<Object?> get props =>
+      [organizations, selectedOrganisation, flippedOrganization, isDonateMode];
 }
 
 class OrganizationsExternalErrorState extends OrganizationsState {

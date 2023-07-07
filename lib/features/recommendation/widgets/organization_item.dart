@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:givt_app_kids_web/features/recommendation/cubit/organizations_cubit.dart';
 import 'package:givt_app_kids_web/features/recommendation/models/organization.dart';
+import 'package:givt_app_kids_web/features/recommendation/screens/organization_details_screen.dart';
+import 'package:givt_app_kids_web/features/recommendation/widgets/organization_header.dart';
 
 class OrganizationItem extends StatelessWidget {
   const OrganizationItem({
@@ -42,7 +44,7 @@ class OrganizationItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(25.0),
               child: Card(
                 elevation: 10,
-                color: isFlipped ? const Color(0xFFC7DFBC) : Colors.white,
+                color: isFlipped ? const Color(0xFFC7DFBC) : Color(0XFFFAF4D8),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25.0),
                 ),
@@ -53,59 +55,8 @@ class OrganizationItem extends StatelessWidget {
                     ),
                     SizedBox(
                       height: availableHeight * 0.20,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            flex: 3,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: organization.tags
-                                  .map(
-                                    (tag) => Container(
-                                      margin: EdgeInsets.symmetric(vertical: 3),
-                                      decoration: BoxDecoration(
-                                        color: tag.color,
-                                        borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(25),
-                                          bottomRight: Radius.circular(25),
-                                        ),
-                                      ),
-                                      child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                          vertical: 5,
-                                          horizontal: 15,
-                                        ),
-                                        child: Text(
-                                          tag.displayText,
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 15,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                  .toList()
-                                  .take(3)
-                                  .toList(),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: Container(
-                              height: double.infinity,
-                              child: Padding(
-                                padding: EdgeInsets.all(10),
-                                child: Image.network(
-                                  organization.organisationLogoURL,
-                                  fit: BoxFit.contain,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+                      child: OrganizationHeader(
+                        organization: organization,
                       ),
                     ),
                     isFlipped
@@ -196,7 +147,15 @@ class OrganizationItem extends StatelessWidget {
               child: isFlipped
                   ? Center(
                       child: ElevatedButton(
-                        onPressed: () => {},
+                        onPressed: () {
+                          context
+                              .read<OrganizationsCubit>()
+                              .showOrganizationDetails(
+                                organization: organization,
+                              );
+                          Navigator.pushNamed(
+                              context, OrganizationDetailsScreen.routeName);
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFFD6EAFF),
                           elevation: 1,
@@ -219,6 +178,7 @@ class OrganizationItem extends StatelessWidget {
                                   // height: 1.2,
                                 ),
                               ),
+                              SizedBox(width: 5),
                               Icon(
                                 Icons.arrow_forward_rounded,
                                 color: Color(0xFF0E90CC),

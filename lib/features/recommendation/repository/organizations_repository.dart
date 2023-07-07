@@ -13,7 +13,12 @@ class OrganizationsRepository {
 
     List<Organization> result = [];
     for (final organizationMap in response) {
-      result.add(Organization.fromMap(organizationMap));
+      final organization = Organization.fromMap(organizationMap);
+      organization.tags.removeWhere((tag) =>
+          !interests.contains(tag) && tag.type == TagType.INTERESTS ||
+          location.key != tag.key && tag.type == TagType.LOCATION);
+
+      result.add(organization);
     }
     return result;
   }

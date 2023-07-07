@@ -51,11 +51,16 @@ class OrganizationsCubit extends Cubit<OrganizationsState> {
     }
   }
 
-  void showOrganizationDetails(Organization organization) {
-    if (state is OrganizationsOverviewState) {
+  void showOrganizationDetails({
+    required Organization organization,
+    bool isDonateMode = false,
+  }) {
+    if (state is OrganizationsOverviewState ||
+        state is OrganizationDetailesState) {
       emit(OrganizationDetailesState(
         organizations: state.organizations,
         selectedOrganisation: organization,
+        isDonateMode: isDonateMode,
       ));
     }
   }
