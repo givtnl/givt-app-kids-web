@@ -26,6 +26,7 @@ class OrganizationHeader extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(top: 10),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: organization.tags
                     .map(

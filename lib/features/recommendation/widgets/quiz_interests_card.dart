@@ -56,7 +56,7 @@ class InterestCard extends StatelessWidget {
                         maxLines: 2,
                         style: TextStyle(
                             color: Color(0xFF405A66),
-                            fontSize: size * 0.02,
+                            fontSize: size * 0.017,
                             fontWeight: FontWeight.w700),
                       ),
                     ),
@@ -64,45 +64,51 @@ class InterestCard extends StatelessWidget {
                 ),
               )
             : Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(top: size * 0.01),
-                          child: Radio(
-                              activeColor: Color(0XFF7AAA35),
-                              value: userChoices.state.interests.contains(item)
-                                  ? 1
-                                  : 0,
-                              groupValue: 1,
-                              toggleable: true,
-                              onChanged: (int) =>
-                                  userChoices.chooseInterest(item)),
+                child: Container(
+                  width: size * 0.2,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(top: size * 0.01),
+                              child: Radio(
+                                  activeColor: Color(0XFF7AAA35),
+                                  value:
+                                      userChoices.state.interests.contains(item)
+                                          ? 1
+                                          : 0,
+                                  groupValue: 1,
+                                  toggleable: true,
+                                  onChanged: (int) =>
+                                      userChoices.chooseInterest(item)),
+                            ),
+                            Expanded(
+                              //width: size * 0.08,
+                              child: Text(
+                                item.displayText,
+                                maxLines: 2,
+                                style: TextStyle(
+                                    color: Color(0xFF405A66),
+                                    fontSize: size * 0.018,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                            ),
+                          ],
                         ),
-                        SizedBox(
-                          width: size * 0.08,
-                          child: Text(
-                            item.displayText,
-                            maxLines: 2,
-                            style: TextStyle(
-                                color: Color(0xFF405A66),
-                                fontSize: size * 0.02,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: SvgPicture.network(
-                        item.pictureUrl,
-                        width: size * 0.055,
                       ),
-                    ),
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: SvgPicture.network(
+                          item.pictureUrl,
+                          width: size * 0.055,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
       ),

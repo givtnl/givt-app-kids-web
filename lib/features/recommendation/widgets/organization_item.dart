@@ -25,7 +25,7 @@ class OrganizationItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const margin = 10.0;
+    const margin = 20.0;
     final availableHeight = height - margin * 2;
 
     return Container(
@@ -33,6 +33,7 @@ class OrganizationItem extends StatelessWidget {
         width: width,
         height: height,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             InkWell(
@@ -44,9 +45,9 @@ class OrganizationItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(25.0),
               child: Card(
                 elevation: 10,
-                color: isFlipped ? const Color(0xFFC7DFBC) : Color(0XFFFAF4D8),
+                color: isFlipped ? const Color(0xFFC7DFBC) : Colors.white,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25.0),
+                  borderRadius: BorderRadius.circular(availableHeight * 0.08),
                 ),
                 child: Column(
                   children: [
@@ -83,7 +84,7 @@ class OrganizationItem extends StatelessWidget {
                                         ),
                                         child: Image.network(
                                           organization.qrCodeURL,
-                                          fit: BoxFit.fitHeight,
+                                          fit: BoxFit.cover,
                                         ),
                                       ),
                                       Container(
