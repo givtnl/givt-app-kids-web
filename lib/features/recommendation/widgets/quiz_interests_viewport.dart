@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:givt_app_kids_web/features/recommendation/models/tag.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/quiz_interests_card.dart';
 

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class Tally extends StatelessWidget {
   Tally({required this.size, required this.tally, super.key});
-  double size;
-  int tally;
+  final double size;
+  final int tally;
   @override
   Widget build(BuildContext context) {
     return Container(
