@@ -21,18 +21,14 @@ class WhereScreen extends StatelessWidget {
 
   final CarouselController _controller = CarouselController();
 
-  // _getButtonActiveState(BuildContext context) {
   @override
   Widget build(BuildContext context) {
-    bool _tooNarrow = (MediaQueryData.fromWindow(WidgetsBinding.instance.window)
-                .orientation ==
-            Orientation.portrait) ||
-        (MediaQuery.of(context).size.width < 850);
+    bool _tooNarrow =
+        (MediaQuery.of(context).orientation == Orientation.portrait) ||
+            (MediaQuery.of(context).size.width < 850);
     final anchorSize = MediaQuery.of(context).size.aspectRatio > 1
         ? MediaQuery.of(context).size.width
         : MediaQuery.of(context).size.height;
-    // Size size = MediaQuery.of(context).size;
-    // log('we are on question ${context.watch<ChoicesCubit>().state.questionIndex}');
 
     return BlocListener<OrganizationsCubit, OrganizationsState>(
       listener: (context, state) {
@@ -46,7 +42,7 @@ class WhereScreen extends StatelessWidget {
             builder: (context, choices) {
               return QuizScaffold(
                 flexChildren: [
-                  Spacer(),
+                  const Spacer(),
                   Flexible(
                     flex: 3,
                     child: GivyBubble(
