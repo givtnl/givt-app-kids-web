@@ -13,6 +13,7 @@ import 'package:givt_app_kids_web/features/recommendation/widgets/quiz_interests
 import 'package:givt_app_kids_web/features/recommendation/widgets/quiz_interests_viewport.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/quiz_location_viewport.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/quiz_scaffold.dart';
+import 'package:go_router/go_router.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class WhereScreen extends StatelessWidget {
@@ -33,7 +34,7 @@ class WhereScreen extends StatelessWidget {
     return BlocListener<OrganizationsCubit, OrganizationsState>(
       listener: (context, state) {
         if (state is OrganizationsFetchedState) {
-          Navigator.pushNamed(context, OrganizationsScreen.routeName);
+          context.push(OrganizationsScreen.routeName);
         }
       },
       child: BlocBuilder<QuizCubit, QuizState>(
@@ -108,7 +109,7 @@ class WhereScreen extends StatelessWidget {
                   text: state is QuizStarted ? 'Next' : 'Restart',
                   onClicked: state is QuizStarted == false
                       ? () {
-                          Navigator.popUntil(context, (route) => route.isFirst);
+                          context.goNamed('/');
                         }
                       : choices is WhereSelected
                           ? () {

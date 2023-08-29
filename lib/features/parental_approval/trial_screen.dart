@@ -1,11 +1,15 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 
 class TrialApproval extends StatelessWidget {
-  const TrialApproval({super.key});
+  const TrialApproval(
+      {required this.decision,
+      required this.kidGUID,
+      required this.transactionId,
+      super.key});
   static const String routeName = "/parental-trial";
-
+  final String decision;
+  final String kidGUID;
+  final String transactionId;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,10 +18,9 @@ class TrialApproval extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           const Text('Hi you are on page trial'),
-          Text('Uri base origin: ${Uri.base.origin.toString()}'),
+          const SizedBox(height: 20),
           Text(
-              'Uri path: ${Uri.parse("http://localhost:61769/#/?decision='true'?transactionId=64922?kidGUID=16e5ce1b-1ec2-4591-8512-0116b0ef647d").fragment}'),
-          Text('Window location: ${window.location.href}')
+              'decision is $decision, \nkid is $kidGUID, \ntransaction is $transactionId'),
           //
         ],
       )),

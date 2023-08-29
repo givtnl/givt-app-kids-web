@@ -8,6 +8,7 @@ import 'package:givt_app_kids_web/features/recommendation/cubit/organizations_cu
 import 'package:givt_app_kids_web/features/recommendation/models/organization.dart';
 import 'package:givt_app_kids_web/features/recommendation/screens/organization_details_screen.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/organization_header.dart';
+import 'package:go_router/go_router.dart';
 
 class OrganizationItem extends StatelessWidget {
   const OrganizationItem({
@@ -156,8 +157,7 @@ class OrganizationItem extends StatelessWidget {
                               .showOrganizationDetails(
                                 organization: organization,
                               );
-                          Navigator.pushNamed(
-                              context, OrganizationDetailsScreen.routeName);
+                          context.push(OrganizationDetailsScreen.routeName);
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFFD6EAFF),
