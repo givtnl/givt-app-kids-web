@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:givt_app_kids_web/features/parental_approval/trial_screen.dart';
+import 'package:givt_app_kids_web/features/parental_approval/decision_screen.dart';
 import 'package:givt_app_kids_web/features/recommendation/screens/organization_details_screen.dart';
 import 'package:givt_app_kids_web/features/recommendation/screens/organizations_screen.dart';
 import 'package:givt_app_kids_web/features/recommendation/screens/quiz_screen.dart';
@@ -35,10 +35,10 @@ class AppRouter {
           builder: (context, state) => WhereScreen(),
         ),
         GoRoute(
-            path: TrialApproval.routeName,
-            name: TrialApproval.routeName,
+            path: DecisionApproval.routeName,
+            name: DecisionApproval.routeName,
             builder: (context, state) {
-              return TrialApproval(
+              return DecisionApproval(
                 decision: state.uri.queryParameters['decision'] ?? '',
                 kidGUID: state.uri.queryParameters['kidGUID'] ?? '',
                 transactionId: state.uri.queryParameters['transactionId'] ?? '',

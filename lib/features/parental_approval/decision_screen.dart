@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class TrialApproval extends StatelessWidget {
-  const TrialApproval(
+class DecisionApproval extends StatelessWidget {
+  const DecisionApproval(
       {required this.decision,
       required this.kidGUID,
       required this.transactionId,
       super.key});
-  static const String routeName = "/parental-trial";
+  static const String routeName = "/parental-decision";
   final String decision;
   final String kidGUID;
   final String transactionId;
@@ -17,7 +17,7 @@ class TrialApproval extends StatelessWidget {
           child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Text('Hi you are on page trial'),
+          const Text('Hi you are on page decision'),
           const SizedBox(height: 20),
           Text(
               'decision is $decision, \nkid is $kidGUID, \ntransaction is $transactionId'),
