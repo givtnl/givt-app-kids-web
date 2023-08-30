@@ -1,12 +1,12 @@
 import 'dart:developer';
 import 'dart:convert';
 
+import 'package:givt_app_kids_web/utils/api_helper.dart';
 import 'package:http/http.dart' as http;
 
 class TagsDataProvider {
   Future<List<dynamic>> fetchTags() async {
-    final url = Uri.https(
-        'dev-backend.givtapp.net', '/givt4kidsservice/v1/Organisation/tags');
+    final url = Uri.https(ApiHelper.apiURL, ApiHelper.tagsPath);
 
     try {
       var response = await http.get(url);
