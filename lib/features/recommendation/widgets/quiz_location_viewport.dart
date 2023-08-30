@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:givt_app_kids_web/features/recommendation/models/quiz_question.dart';
 import 'package:givt_app_kids_web/features/recommendation/models/tag.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/quiz_location_card.dart';
 

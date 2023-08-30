@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:givt_app_kids_web/features/recommendation/screens/quiz_screen.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/fab_recomendation.dart';
+import 'package:go_router/go_router.dart';
 
 import '../cubit/quiz_cubit.dart';
 
@@ -11,10 +12,9 @@ class StartScren extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool _tooNarrow = (MediaQueryData.fromWindow(WidgetsBinding.instance.window)
-                .orientation ==
-            Orientation.portrait) &&
-        (MediaQuery.of(context).size.width < 600);
+    bool tooNarrow =
+        (MediaQuery.of(context).orientation == Orientation.portrait) &&
+            (MediaQuery.of(context).size.width < 600);
     final anchorSize = MediaQuery.of(context).size.aspectRatio > 1
         ? MediaQuery.of(context).size.width
         : MediaQuery.of(context).size.height;
@@ -30,13 +30,13 @@ class StartScren extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Spacer(flex: 1),
+            const Spacer(flex: 1),
             SvgPicture.asset(
               height: anchorSize * 0.1,
               "images/transparent_logo.svg",
             ),
-            Spacer(flex: 1),
-            _tooNarrow
+            const Spacer(flex: 1),
+            tooNarrow
                 ? Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(anchorSize * 0.4),
@@ -48,8 +48,8 @@ class StartScren extends StatelessWidget {
                       "images/givy_pencil.svg",
                     ),
                   )
-                : SizedBox(),
-            _tooNarrow ? SizedBox(height: anchorSize * 0.05) : SizedBox(),
+                : const SizedBox(),
+            tooNarrow ? SizedBox(height: anchorSize * 0.05) : const SizedBox(),
             ClipRRect(
               borderRadius: BorderRadius.circular(anchorSize * 0.4),
               child: Container(
@@ -58,11 +58,11 @@ class StartScren extends StatelessWidget {
                   color: Color(0xFFBED7E1),
                 ),
                 child: Row(
-                  mainAxisAlignment: _tooNarrow
+                  mainAxisAlignment: tooNarrow
                       ? MainAxisAlignment.center
                       : MainAxisAlignment.start,
                   children: [
-                    _tooNarrow
+                    tooNarrow
                         ? SizedBox(width: anchorSize * 0.05)
                         : Padding(
                             padding: EdgeInsets.symmetric(
@@ -107,12 +107,8 @@ class StartScren extends StatelessWidget {
         active: true,
         text: 'I\'m ready!',
         onClicked: () {
-          // fetch tags from backend ???
-          //final quizQubit = context.read<QuizCubit>();
-          //quizQubit.emit(QuizLoading());
           context.read<QuizCubit>().startQuiz();
-          //context.read<OrganizationsCubit>().getRecommendedOrganizationsTEST();
-          Navigator.pushNamed(context, WhereScreen.routeName);
+          context.push(WhereScreen.routeName);
         },
       ),
     );
