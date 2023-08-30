@@ -14,8 +14,8 @@ class GivtApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsFlutterBinding.ensureInitialized();
-
     ApiHelper.apiURL = config.apiBaseUrl;
+
     return MultiBlocProvider(
       providers: [
         BlocProvider<OrganizationsCubit>(
