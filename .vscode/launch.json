@@ -5,10 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "givt-app-kids-web",
+            "name": "Launch dev debug",
             "request": "launch",
             "type": "dart",
-            "program": "lib/main_development.dart"
+            "flutterMode": "debug",
+            "program": "lib/main_development.dart",
+            "args": [
+                "--flavor",
+                "development",
+                "--target",
+                "lib/main_development.dart",
+              ]
         },
         {
             "name": "givt-app-kids-web (profile mode)",
