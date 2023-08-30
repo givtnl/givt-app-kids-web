@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:givt_app_kids_web/features/parental_approval/bloc/decision_bloc.dart';
 import 'package:givt_app_kids_web/features/parental_approval/decision_screen.dart';
 import 'package:givt_app_kids_web/features/recommendation/screens/organization_details_screen.dart';
 import 'package:givt_app_kids_web/features/recommendation/screens/organizations_screen.dart';
@@ -38,10 +40,14 @@ class AppRouter {
             path: DecisionApproval.routeName,
             name: DecisionApproval.routeName,
             builder: (context, state) {
-              return DecisionApproval(
-                decision: state.uri.queryParameters['decision'] ?? '',
-                kidGUID: state.uri.queryParameters['kidGUID'] ?? '',
-                transactionId: state.uri.queryParameters['transactionId'] ?? '',
+              return BlocProvider(
+                create: (context) => DecisionBloc()..add(const DecisionInit()),
+                child: DecisionApproval(
+                  decision: state.uri.queryParameters['decision'] ?? '',
+                  kidGUID: state.uri.queryParameters['kidGUID'] ?? '',
+                  transactionId:
+                      state.uri.queryParameters['transactionId'] ?? '',
+                ),
               );
             }),
       ]);

@@ -1,4 +1,4 @@
-part of 'decision_cubit.dart';
+part of 'decision_bloc.dart';
 
 enum DecisionStatus {
   initial,

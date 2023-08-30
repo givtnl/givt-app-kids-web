@@ -2,8 +2,9 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:givt_app_kids_web/features/parental_approval/cubit/decision_cubit.dart';
 import 'package:givt_app_kids_web/utils/size_utils.dart';
+
+import 'bloc/decision_bloc.dart';
 
 class DecisionApproval extends StatelessWidget {
   const DecisionApproval(
@@ -22,50 +23,34 @@ class DecisionApproval extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double anchorSize = SizeUtil.anchorSize(context);
-    return BlocProvider(
-      create: (context) => DecisionCubit(),
-      child: BlocConsumer<DecisionCubit, DecisionState>(
-        listener: (context, state) {
-          log(state.status.toString());
-          if (state.status == DecisionStatus.initial) {
-            log('executing');
-            context.read<DecisionCubit>().approve();
-          }
-          if (state.status == DecisionStatus.approved) {
-            log('approved');
-          }
-        },
-        builder: (context, state) {
-          return Scaffold(
-            backgroundColor: const Color.fromRGBO(54, 109, 174, 0.20),
-            body: Center(
-              child: Container(
-                width: anchorSize * 0.35,
-                height: anchorSize * 0.35,
-                decoration: BoxDecoration(
-                    color: const Color.fromRGBO(53, 80, 112, 1),
-                    borderRadius: BorderRadius.circular(30)),
-                padding: EdgeInsets.all(anchorSize * 0.05),
-                child: _buildColumn(state, anchorSize, context),
-              ),
+    return BlocConsumer<DecisionBloc, DecisionState>(
+      listener: (context, state) {
+        log(state.status.toString());
+      },
+      builder: (context, state) {
+        return Scaffold(
+          backgroundColor: getBackgroundColor(state.status),
+          body: Center(
+            child: Container(
+              width: anchorSize * 0.35,
+              height: anchorSize * 0.35,
+              decoration: BoxDecoration(
+                  color: getCardColor(state.status),
+                  borderRadius: BorderRadius.circular(30)),
+              padding: EdgeInsets.all(anchorSize * 0.05),
+              child: _buildColumn(state, anchorSize, context),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 
   Widget _buildColumn(
       DecisionState state, double anchorSize, BuildContext context) {
-    // if (state.status == DecisionStatus.initial) {
-    //   context.read<DecisionCubit>().approve();
-    // }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // ElevatedButton(
-        //     onPressed: () => context.read<DecisionCubit>().approve(),
-        //     child: Text('Approve')),
         const Spacer(),
         getIcon(state.status),
         const Spacer(),
@@ -76,11 +61,13 @@ class DecisionApproval extends StatelessWidget {
               fontWeight: FontWeight.w600,
             )),
         const SizedBox(height: 20),
-        Text(state.status.toString(),
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: anchorSize * 0.015,
-            )),
+        state.status == DecisionStatus.error
+            ? Text('Please try again later.',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: anchorSize * 0.015,
+                ))
+            : const SizedBox(),
         const Spacer(),
       ],
     );
@@ -113,6 +100,36 @@ class DecisionApproval extends StatelessWidget {
         return 'Oops something went wrong.';
       case DecisionStatus.declined:
         return '$kidName\'s donation to $organizationName is successfully.';
+    }
+  }
+
+  Color getCardColor(DecisionStatus status) {
+    switch (status) {
+      case DecisionStatus.initial:
+        return const Color.fromRGBO(53, 80, 112, 1);
+      case DecisionStatus.loading:
+        return const Color.fromRGBO(53, 80, 112, 1);
+      case DecisionStatus.approved:
+        return const Color.fromRGBO(125, 189, 161, 1);
+      case DecisionStatus.error:
+        return const Color.fromRGBO(211, 114, 109, 1);
+      case DecisionStatus.declined:
+        return const Color.fromRGBO(53, 80, 112, 1);
+    }
+  }
+
+  Color getBackgroundColor(DecisionStatus status) {
+    switch (status) {
+      case DecisionStatus.initial:
+        return const Color.fromRGBO(54, 109, 174, 0.20);
+      case DecisionStatus.loading:
+        return const Color.fromRGBO(54, 109, 174, 0.20);
+      case DecisionStatus.approved:
+        return const Color.fromRGBO(125, 189, 161, 0.20);
+      case DecisionStatus.error:
+        return const Color.fromRGBO(211, 114, 109, 0.20);
+      case DecisionStatus.declined:
+        return const Color.fromRGBO(54, 109, 174, 0.20);
     }
   }
 }
