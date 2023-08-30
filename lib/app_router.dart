@@ -40,6 +40,7 @@ class AppRouter {
             path: DecisionApproval.routeName,
             name: DecisionApproval.routeName,
             builder: (context, state) {
+              final String kidName = state.uri.queryParameters['kidName'] ?? '';
               return BlocProvider(
                 create: (context) => DecisionBloc()..add(const DecisionInit()),
                 child: DecisionApproval(
@@ -47,6 +48,9 @@ class AppRouter {
                   kidGUID: state.uri.queryParameters['kidGUID'] ?? '',
                   transactionId:
                       state.uri.queryParameters['transactionId'] ?? '',
+                  kidName: kidName.replaceAll('?', ''),
+                  organizationName:
+                      state.uri.queryParameters['organisationName'] ?? '',
                 ),
               );
             }),

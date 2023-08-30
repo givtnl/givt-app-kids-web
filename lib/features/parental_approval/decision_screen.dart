@@ -11,14 +11,16 @@ class DecisionApproval extends StatelessWidget {
       {required this.decision,
       required this.kidGUID,
       required this.transactionId,
+      required this.kidName,
+      required this.organizationName,
       super.key});
 
   static const String routeName = "/parent-decision";
   final String decision;
   final String kidGUID;
   final String transactionId;
-  final String kidName = 'Brad';
-  final String organizationName = 'WWF';
+  final String kidName;
+  final String organizationName;
 
   @override
   Widget build(BuildContext context) {

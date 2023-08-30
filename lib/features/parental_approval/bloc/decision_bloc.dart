@@ -12,11 +12,5 @@ class DecisionBloc extends Bloc<DecisionEvent, DecisionState> {
     await Future.delayed(const Duration(seconds: 1), () {
       emit(state.copyWith(status: DecisionStatus.approved));
     });
-    await Future.delayed(const Duration(seconds: 2), () {
-      emit(state.copyWith(status: DecisionStatus.declined));
-    });
-    await Future.delayed(const Duration(seconds: 2), () {
-      emit(state.copyWith(status: DecisionStatus.error));
-    });
   }
 }
