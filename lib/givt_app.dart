@@ -7,6 +7,7 @@ import 'package:givt_app_kids_web/features/recommendation/screens/organization_d
 import 'package:givt_app_kids_web/features/recommendation/screens/organizations_screen.dart';
 import 'package:givt_app_kids_web/features/recommendation/screens/start_screen.dart';
 import 'package:givt_app_kids_web/features/recommendation/screens/quiz_screen.dart';
+import 'package:givt_app_kids_web/utils/api_helper.dart';
 import 'app_config.dart';
 
 class GivtApp extends StatelessWidget {
@@ -15,6 +16,8 @@ class GivtApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsFlutterBinding.ensureInitialized();
+    ApiHelper.apiURL = config.apiBaseUrl;
     return MultiBlocProvider(
       providers: [
         BlocProvider<OrganizationsCubit>(
