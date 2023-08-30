@@ -13,6 +13,7 @@ import 'package:givt_app_kids_web/features/recommendation/widgets/quiz_interests
 import 'package:givt_app_kids_web/features/recommendation/widgets/quiz_interests_viewport.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/quiz_location_viewport.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/quiz_scaffold.dart';
+import 'package:go_router/go_router.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class WhereScreen extends StatelessWidget {
@@ -21,23 +22,19 @@ class WhereScreen extends StatelessWidget {
 
   final CarouselController _controller = CarouselController();
 
-  // _getButtonActiveState(BuildContext context) {
   @override
   Widget build(BuildContext context) {
-    bool _tooNarrow = (MediaQueryData.fromWindow(WidgetsBinding.instance.window)
-                .orientation ==
-            Orientation.portrait) ||
-        (MediaQuery.of(context).size.width < 850);
+    bool _tooNarrow =
+        (MediaQuery.of(context).orientation == Orientation.portrait) ||
+            (MediaQuery.of(context).size.width < 850);
     final anchorSize = MediaQuery.of(context).size.aspectRatio > 1
         ? MediaQuery.of(context).size.width
         : MediaQuery.of(context).size.height;
-    // Size size = MediaQuery.of(context).size;
-    // log('we are on question ${context.watch<ChoicesCubit>().state.questionIndex}');
 
     return BlocListener<OrganizationsCubit, OrganizationsState>(
       listener: (context, state) {
         if (state is OrganizationsFetchedState) {
-          Navigator.pushNamed(context, OrganizationsScreen.routeName);
+          context.push(OrganizationsScreen.routeName);
         }
       },
       child: BlocBuilder<QuizCubit, QuizState>(
@@ -46,7 +43,7 @@ class WhereScreen extends StatelessWidget {
             builder: (context, choices) {
               return QuizScaffold(
                 flexChildren: [
-                  Spacer(),
+                  const Spacer(),
                   Flexible(
                     flex: 3,
                     child: GivyBubble(
@@ -112,7 +109,7 @@ class WhereScreen extends StatelessWidget {
                   text: state is QuizStarted ? 'Next' : 'Restart',
                   onClicked: state is QuizStarted == false
                       ? () {
-                          Navigator.popUntil(context, (route) => route.isFirst);
+                          context.goNamed('/');
                         }
                       : choices is WhereSelected
                           ? () {
