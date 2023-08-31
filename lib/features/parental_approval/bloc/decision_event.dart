@@ -12,5 +12,15 @@ class DecisionEvent extends Equatable {
 }
 
 class DecisionInit extends DecisionEvent {
-  const DecisionInit();
+  const DecisionInit({
+    this.donationId = '',
+    this.childId = '',
+    this.decision = false,
+  });
+  final String donationId;
+  final String childId;
+  final bool decision;
+
+  @override
+  List<Object> get props => [donationId, childId, decision];
 }

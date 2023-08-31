@@ -16,7 +16,7 @@ class DecisionApproval extends StatelessWidget {
       super.key});
 
   static const String routeName = "/parent-decision";
-  final String decision;
+  final bool decision;
   final String kidGUID;
   final String transactionId;
   final String kidName;
@@ -56,14 +56,14 @@ class DecisionApproval extends StatelessWidget {
         const Spacer(),
         getIcon(state.status),
         const Spacer(),
-        Text(getText(state.status),
+        Text(getText(state.status, state.errorMessage),
             style: TextStyle(
               color: Colors.white,
               fontSize: anchorSize * 0.02,
               fontWeight: FontWeight.w600,
             )),
         const SizedBox(height: 20),
-        state.status == DecisionStatus.error
+        state.status == DecisionStatus.error && state.errorMessage.isEmpty
             ? Text('Please try again later.',
                 style: TextStyle(
                   color: Colors.white,
@@ -90,7 +90,7 @@ class DecisionApproval extends StatelessWidget {
     }
   }
 
-  String getText(DecisionStatus status) {
+  String getText(DecisionStatus status, String errorMessage) {
     switch (status) {
       case DecisionStatus.initial:
         return 'Working on it...';
@@ -99,9 +99,20 @@ class DecisionApproval extends StatelessWidget {
       case DecisionStatus.approved:
         return 'Thank you!\n$kidName\'s donation to $organizationName has been approved.';
       case DecisionStatus.error:
-        return 'Oops something went wrong.';
+        return getErrorText(errorMessage);
       case DecisionStatus.declined:
-        return '$kidName\'s donation to $organizationName is successfully.';
+        return '$kidName\'s donation to $organizationName is successfully declined.';
+    }
+  }
+
+  String getErrorText(String errorMessage) {
+    switch (errorMessage) {
+      case 'TRANSACTION_ALREADY_DECLINED':
+        return 'This transaction has already been declined.';
+      case 'TRANSACTION_ALREADY_APPROVED':
+        return 'This transaction has already been approved.';
+      default:
+        return 'Oops something went wrong.';
     }
   }
 

@@ -40,17 +40,36 @@ class AppRouter {
             path: DecisionApproval.routeName,
             name: DecisionApproval.routeName,
             builder: (context, state) {
-              final String kidName = state.uri.queryParameters['kidName'] ?? '';
+              final String kidName =
+                  state.uri.queryParameters['kidName']?.replaceAll('?', '') ??
+                      '';
+              final String donationId = state
+                      .uri.queryParameters['transactionId']
+                      ?.replaceAll('?', '') ??
+                  '';
+              final String decision =
+                  state.uri.queryParameters['decision']?.replaceAll('?', '') ??
+                      '';
+              final childId =
+                  state.uri.queryParameters['kidGUID']?.replaceAll('?', '') ??
+                      '';
+              final String organizationName = state
+                      .uri.queryParameters['organisationName']
+                      ?.replaceAll('?', '') ??
+                  '';
               return BlocProvider(
-                create: (context) => DecisionBloc()..add(const DecisionInit()),
+                create: (context) => DecisionBloc()
+                  ..add(DecisionInit(
+                    donationId: donationId,
+                    childId: childId,
+                    decision: decision.contains('true'),
+                  )),
                 child: DecisionApproval(
-                  decision: state.uri.queryParameters['decision'] ?? '',
-                  kidGUID: state.uri.queryParameters['kidGUID'] ?? '',
-                  transactionId:
-                      state.uri.queryParameters['transactionId'] ?? '',
-                  kidName: kidName.replaceAll('?', ''),
-                  organizationName:
-                      state.uri.queryParameters['organisationName'] ?? '',
+                  decision: decision.contains('true'),
+                  kidGUID: childId,
+                  transactionId: donationId,
+                  kidName: kidName,
+                  organizationName: organizationName,
                 ),
               );
             }),
