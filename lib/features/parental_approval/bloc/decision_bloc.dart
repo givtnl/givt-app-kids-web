@@ -22,23 +22,23 @@ class DecisionBloc extends Bloc<DecisionEvent, DecisionState> {
       decision,
     );
     if (decisionResponse.isError == false) {
-      if (decision == false) {
+      if (!decision) {
         emit(state.copyWith(status: DecisionStatus.declined));
         return;
       }
-      if (decision == true) {
+      if (decision) {
         emit(state.copyWith(status: DecisionStatus.approved));
         return;
       }
     }
 
-    if (decisionResponse.isError == true) {
-      if (decision == false &&
+    if (decisionResponse.isError) {
+      if (!decision &&
           decisionResponse.errorMessage == 'TRANSACTION_ALREADY_DECLINED') {
         emit(state.copyWith(status: DecisionStatus.declined));
         return;
       }
-      if (decision == true &&
+      if (decision &&
           decisionResponse.errorMessage == 'TRANSACTION_ALREADY_APPROVED') {
         emit(state.copyWith(status: DecisionStatus.approved));
         return;
