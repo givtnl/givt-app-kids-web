@@ -26,10 +26,8 @@ class DecisionBloc extends Bloc<DecisionEvent, DecisionState> {
         emit(state.copyWith(status: DecisionStatus.declined));
         return;
       }
-      if (decision) {
-        emit(state.copyWith(status: DecisionStatus.approved));
-        return;
-      }
+      emit(state.copyWith(status: DecisionStatus.approved));
+      return;
     }
 
     if (decisionResponse.isError) {
