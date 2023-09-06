@@ -15,35 +15,41 @@ class DecisionBloc extends Bloc<DecisionEvent, DecisionState> {
     final donationId = int.parse(event.donationId);
     final decision = event.decision;
     final decisionRepository = TransactionDecisionRepository();
-    final DecisionResponse decisionResponse =
-        await decisionRepository.submitDecision(
-      donationId,
-      event.childId,
-      decision,
-    );
-    if (decisionResponse.isError == false) {
-      if (!decision) {
-        emit(state.copyWith(status: DecisionStatus.declined));
-        return;
-      }
-      emit(state.copyWith(status: DecisionStatus.approved));
-      return;
-    }
 
-    if (decisionResponse.isError) {
-      if (!decision &&
-          decisionResponse.errorMessage == 'TRANSACTION_ALREADY_DECLINED') {
-        emit(state.copyWith(status: DecisionStatus.declined));
-        return;
-      }
-      if (decision &&
-          decisionResponse.errorMessage == 'TRANSACTION_ALREADY_APPROVED') {
+    try {
+      final DecisionResponse decisionResponse =
+          await decisionRepository.submitDecision(
+        donationId,
+        event.childId,
+        decision,
+      );
+      if (decisionResponse.isError == false) {
+        if (!decision) {
+          emit(state.copyWith(status: DecisionStatus.declined));
+          return;
+        }
         emit(state.copyWith(status: DecisionStatus.approved));
         return;
       }
+
+      if (decisionResponse.isError) {
+        if (!decision &&
+            decisionResponse.errorMessage == 'TRANSACTION_ALREADY_DECLINED') {
+          emit(state.copyWith(status: DecisionStatus.declined));
+          return;
+        }
+        if (decision &&
+            decisionResponse.errorMessage == 'TRANSACTION_ALREADY_APPROVED') {
+          emit(state.copyWith(status: DecisionStatus.approved));
+          return;
+        }
+        emit(state.copyWith(
+            status: DecisionStatus.error,
+            errorMessage: decisionResponse.errorMessage));
+      }
+    } catch (e) {
       emit(state.copyWith(
-          status: DecisionStatus.error,
-          errorMessage: decisionResponse.errorMessage));
+          status: DecisionStatus.error, errorMessage: e.toString()));
     }
   }
 }
