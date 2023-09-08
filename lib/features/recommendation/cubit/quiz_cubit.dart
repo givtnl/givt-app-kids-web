@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:givt_app_kids_web/features/recommendation/models/quiz_question.dart';
 import 'package:givt_app_kids_web/features/recommendation/models/tag.dart';
 import 'package:givt_app_kids_web/features/recommendation/repository/tags_repository.dart';
+import 'package:givt_app_kids_web/utils/analytics_helper.dart';
 
 part 'quiz_state.dart';
 
@@ -13,6 +14,9 @@ class QuizCubit extends Cubit<QuizState> {
     emit(QuizLoading());
     final tagsRepository = TagsRepository();
     try {
+      AnalyticsHelper.logEvent(
+        eventName: AmplitudeEvent.recommendationFlowStarted,
+      );
       final List<Tag> response = await tagsRepository.fetchTags();
       // emit Quiz started
       emit(QuizStarted(questions: [

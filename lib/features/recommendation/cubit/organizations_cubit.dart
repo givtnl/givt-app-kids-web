@@ -6,6 +6,7 @@ import 'package:equatable/equatable.dart';
 import 'package:givt_app_kids_web/features/recommendation/models/organization.dart';
 import 'package:givt_app_kids_web/features/recommendation/models/tag.dart';
 import 'package:givt_app_kids_web/features/recommendation/repository/organizations_repository.dart';
+import 'package:givt_app_kids_web/utils/analytics_helper.dart';
 
 part 'organizations_state.dart';
 
@@ -18,9 +19,13 @@ class OrganizationsCubit extends Cubit<OrganizationsState> {
     Duration fakeComputingExtraDelay = Duration.zero,
   }) async {
     emit(const OrganizationsFetchingState());
-    await Future.delayed(fakeComputingExtraDelay);
     final organizationsRepository = OrganizationsRepository();
     try {
+      AnalyticsHelper.logEvent(
+          eventName: AmplitudeEvent.helpPeopleClicked,
+          eventProperties: {
+            "interests": '${interests.map((e) => e.displayText).toList()}',
+          });
       final response =
           await organizationsRepository.getRecommendedOrganizations(
               location: location, interests: interests);

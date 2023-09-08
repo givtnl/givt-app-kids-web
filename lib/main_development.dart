@@ -6,7 +6,7 @@ void main() {
   var configuredApp = AppConfig(
     flavorName: 'development',
     apiBaseUrl: 'dev-backend.givt.app',
-    amplitudePublicKey: 'e02f6615e27048c072e1058476fce30b',
+    amplitudePublicKey: 'b629e330cd5913bd1defb72d73b1acd0',
   );
 
   bootstrap(

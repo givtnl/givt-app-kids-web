@@ -108,7 +108,7 @@ class StartScren extends StatelessWidget {
         text: 'I\'m ready!',
         onClicked: () {
           context.read<QuizCubit>().startQuiz();
-          context.push(WhereScreen.routeName);
+          context.goNamed(WhereScreen.routeName);
         },
       ),
     );
