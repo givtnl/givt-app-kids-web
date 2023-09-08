@@ -4,6 +4,7 @@ import 'package:givt_app_kids_web/app_router.dart';
 import 'package:givt_app_kids_web/features/recommendation/cubit/choices-cubit/choices_cubit.dart';
 import 'package:givt_app_kids_web/features/recommendation/cubit/quiz_cubit.dart';
 import 'package:givt_app_kids_web/features/recommendation/cubit/organizations_cubit.dart';
+import 'package:givt_app_kids_web/utils/analytics_helper.dart';
 import 'package:givt_app_kids_web/utils/api_helper.dart';
 import 'app_config.dart';
 
@@ -15,6 +16,7 @@ class GivtApp extends StatelessWidget {
   Widget build(BuildContext context) {
     WidgetsFlutterBinding.ensureInitialized();
     ApiHelper.apiURL = config.apiBaseUrl;
+    AnalyticsHelper.init(config.amplitudePublicKey);
 
     return MultiBlocProvider(
       providers: [
