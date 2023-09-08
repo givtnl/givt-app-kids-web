@@ -53,6 +53,11 @@ class OrganizationsCubit extends Cubit<OrganizationsState> {
         flippedOrganization:
             currentFlippedOrganization == organization ? null : organization,
       ));
+      AnalyticsHelper.logEvent(
+          eventName: AmplitudeEvent.charityClicked,
+          eventProperties: {
+            "charity": organization.name,
+          });
     }
   }
 
@@ -67,6 +72,11 @@ class OrganizationsCubit extends Cubit<OrganizationsState> {
         selectedOrganisation: organization,
         isDonateMode: isDonateMode,
       ));
+      AnalyticsHelper.logEvent(
+          eventName: AmplitudeEvent.learnMoreClicked,
+          eventProperties: {
+            "charity": organization.name,
+          });
     }
   }
 
