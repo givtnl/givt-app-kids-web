@@ -72,11 +72,19 @@ class OrganizationsCubit extends Cubit<OrganizationsState> {
         selectedOrganisation: organization,
         isDonateMode: isDonateMode,
       ));
-      AnalyticsHelper.logEvent(
-          eventName: AmplitudeEvent.learnMoreClicked,
-          eventProperties: {
-            "charity": organization.name,
-          });
+      if (isDonateMode) {
+        AnalyticsHelper.logEvent(
+            eventName: AmplitudeEvent.donateClicked,
+            eventProperties: {
+              "charity": organization.name,
+            });
+      } else {
+        AnalyticsHelper.logEvent(
+            eventName: AmplitudeEvent.learnMoreClicked,
+            eventProperties: {
+              "charity": organization.name,
+            });
+      }
     }
   }
 
