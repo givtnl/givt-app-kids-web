@@ -157,7 +157,8 @@ class OrganizationItem extends StatelessWidget {
                               .showOrganizationDetails(
                                 organization: organization,
                               );
-                          context.goNamed(OrganizationDetailsScreen.routeName);
+                          context
+                              .pushNamed(OrganizationDetailsScreen.routeName);
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFFD6EAFF),
