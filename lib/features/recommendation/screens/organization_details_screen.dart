@@ -25,9 +25,24 @@ class OrganizationDetailsScreen extends StatelessWidget {
     final availableHeight = size.height -
         (size.height * topPaddingRelative +
             size.height * bottomPaddingRelative);
-
     return BlocBuilder<OrganizationsCubit, OrganizationsState>(
       builder: (context, state) {
+        final Image? orgQRimage = state is OrganizationDetailesState
+            ? Image.network(
+                state.selectedOrganisation.qrCodeURL,
+                fit: BoxFit.fitHeight,
+              )
+            : null;
+        final Image? orgPromoImage = state is OrganizationDetailesState
+            ? Image.network(
+                state.selectedOrganisation.promoPictureUrl,
+                fit: BoxFit.fitHeight,
+              )
+            : null;
+        if (state is OrganizationDetailesState) {
+          precacheImage(orgQRimage!.image, context);
+          precacheImage(orgPromoImage!.image, context);
+        }
         return SafeArea(
           child: Scaffold(
             body: state is! OrganizationDetailesState
@@ -177,14 +192,8 @@ class OrganizationDetailsScreen extends StatelessWidget {
                                                                             .only(
                                                                         top:
                                                                             10),
-                                                                child: Image
-                                                                    .network(
-                                                                  state
-                                                                      .selectedOrganisation
-                                                                      .qrCodeURL,
-                                                                  fit: BoxFit
-                                                                      .fitHeight,
-                                                                ),
+                                                                child:
+                                                                    orgQRimage,
                                                               ),
                                                             ),
                                                             const Spacer(),
@@ -252,11 +261,7 @@ class OrganizationDetailsScreen extends StatelessWidget {
                                                     ),
                                                   ],
                                                 )
-                                              : Image.network(
-                                                  state.selectedOrganisation
-                                                      .promoPictureUrl,
-                                                  fit: BoxFit.fitHeight,
-                                                ),
+                                              : orgPromoImage,
                                         ),
                                       )
                                     ],
@@ -285,11 +290,11 @@ class OrganizationDetailsScreen extends StatelessWidget {
                                               BorderRadius.circular(25),
                                         ),
                                       ),
-                                      child: Padding(
+                                      child: const Padding(
                                         padding: EdgeInsets.all(10),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,
-                                          children: const [
+                                          children: [
                                             Icon(
                                               Icons.arrow_back_rounded,
                                               color: Color(0xFF0E90CC),

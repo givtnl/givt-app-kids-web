@@ -24,6 +24,12 @@ class OrganizationHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Image orgLogoImage = Image.network(
+      organization.organisationLogoURL,
+      fit: BoxFit.contain,
+    );
+    precacheImage(orgLogoImage.image, context);
+
     return Container(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -75,10 +81,7 @@ class OrganizationHeader extends StatelessWidget {
               height: double.infinity,
               child: Padding(
                 padding: const EdgeInsets.all(10),
-                child: Image.network(
-                  organization.organisationLogoURL,
-                  fit: BoxFit.contain,
-                ),
+                child: orgLogoImage,
               ),
             ),
           ),

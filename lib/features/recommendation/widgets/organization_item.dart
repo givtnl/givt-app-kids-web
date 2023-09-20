@@ -28,12 +28,16 @@ class OrganizationItem extends StatelessWidget {
   Widget build(BuildContext context) {
     const margin = 20.0;
     final availableHeight = height - margin * 2;
-    Image image = Image.network(
+    final Image orgQRimage = Image.network(
       organization.qrCodeURL,
       fit: BoxFit.cover,
     );
-
-    precacheImage(image.image, context);
+    final Image orgPromoImage = Image.network(
+      organization.promoPictureUrl,
+      fit: BoxFit.fitHeight,
+    );
+    precacheImage(orgQRimage.image, context);
+    precacheImage(orgPromoImage.image, context);
 
     return Container(
         margin: const EdgeInsets.all(margin),
@@ -89,7 +93,7 @@ class OrganizationItem extends StatelessWidget {
                                           left: 20,
                                           right: 20,
                                         ),
-                                        child: image,
+                                        child: orgQRimage,
                                       ),
                                       Container(
                                         height: availableHeight * 0.13,
@@ -122,12 +126,8 @@ class OrganizationItem extends StatelessWidget {
                         : Column(
                             children: [
                               SizedBox(
-                                height: availableHeight * 0.51,
-                                child: Image.network(
-                                  organization.promoPictureUrl,
-                                  fit: BoxFit.fitHeight,
-                                ),
-                              ),
+                                  height: availableHeight * 0.51,
+                                  child: orgPromoImage),
                               Container(
                                 alignment: Alignment.center,
                                 height: availableHeight * 0.12,
