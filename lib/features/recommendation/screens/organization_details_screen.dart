@@ -7,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:givt_app_kids_web/features/recommendation/cubit/organizations_cubit.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/fab_recomendation.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/organization_header.dart';
+import 'package:go_router/go_router.dart';
 
 class OrganizationDetailsScreen extends StatelessWidget {
   const OrganizationDetailsScreen({super.key});
@@ -274,7 +275,7 @@ class OrganizationDetailsScreen extends StatelessWidget {
                                     alignment: Alignment.bottomCenter,
                                     padding: const EdgeInsets.only(bottom: 12),
                                     child: ElevatedButton(
-                                      onPressed: () => Navigator.pop(context),
+                                      onPressed: () => context.pop(),
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor:
                                             const Color(0xFFD6EAFF),
@@ -284,11 +285,11 @@ class OrganizationDetailsScreen extends StatelessWidget {
                                               BorderRadius.circular(25),
                                         ),
                                       ),
-                                      child: Padding(
+                                      child: const Padding(
                                         padding: EdgeInsets.all(10),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,
-                                          children: const [
+                                          children: [
                                             Icon(
                                               Icons.arrow_back_rounded,
                                               color: Color(0xFF0E90CC),

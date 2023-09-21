@@ -5,8 +5,8 @@ import 'package:givt_app_kids_web/givt_app.dart';
 void main() {
   var configuredApp = AppConfig(
     flavorName: 'development',
-    apiBaseUrl: 'givt-debug-api.azurewebsites.net',
-    amplitudePublicKey: 'e02f6615e27048c072e1058476fce30b',
+    apiBaseUrl: 'dev-backend.givt.app',
+    amplitudePublicKey: 'b629e330cd5913bd1defb72d73b1acd0',
   );
 
   bootstrap(

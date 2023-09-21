@@ -8,6 +8,7 @@ import 'package:givt_app_kids_web/features/recommendation/cubit/organizations_cu
 import 'package:givt_app_kids_web/features/recommendation/models/organization.dart';
 import 'package:givt_app_kids_web/features/recommendation/screens/organization_details_screen.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/organization_header.dart';
+import 'package:go_router/go_router.dart';
 
 class OrganizationItem extends StatelessWidget {
   const OrganizationItem({
@@ -27,6 +28,12 @@ class OrganizationItem extends StatelessWidget {
   Widget build(BuildContext context) {
     const margin = 20.0;
     final availableHeight = height - margin * 2;
+    Image image = Image.network(
+      organization.qrCodeURL,
+      fit: BoxFit.cover,
+    );
+
+    precacheImage(image.image, context);
 
     return Container(
         margin: const EdgeInsets.all(margin),
@@ -82,10 +89,7 @@ class OrganizationItem extends StatelessWidget {
                                           left: 20,
                                           right: 20,
                                         ),
-                                        child: Image.network(
-                                          organization.qrCodeURL,
-                                          fit: BoxFit.cover,
-                                        ),
+                                        child: image,
                                       ),
                                       Container(
                                         height: availableHeight * 0.13,
@@ -156,8 +160,8 @@ class OrganizationItem extends StatelessWidget {
                               .showOrganizationDetails(
                                 organization: organization,
                               );
-                          Navigator.pushNamed(
-                              context, OrganizationDetailsScreen.routeName);
+                          context
+                              .pushNamed(OrganizationDetailsScreen.routeName);
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFFD6EAFF),

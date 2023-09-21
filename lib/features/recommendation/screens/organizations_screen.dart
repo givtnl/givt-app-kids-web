@@ -9,6 +9,8 @@ import 'package:givt_app_kids_web/features/recommendation/cubit/organizations_cu
 import 'package:givt_app_kids_web/features/recommendation/widgets/fab_recomendation.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/givy_bubble.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/organization_item.dart';
+import 'package:givt_app_kids_web/utils/analytics_helper.dart';
+import 'package:go_router/go_router.dart';
 
 class OrganizationsScreen extends StatelessWidget {
   const OrganizationsScreen({super.key});
@@ -83,8 +85,11 @@ class OrganizationsScreen extends StatelessWidget {
                 ? RecommendationFAB(
                     active: true,
                     text: 'Restart',
-                    onClicked: () =>
-                        Navigator.popUntil(context, (route) => route.isFirst))
+                    onClicked: () {
+                      context.goNamed('/');
+                      AnalyticsHelper.logEvent(
+                          eventName: AmplitudeEvent.restartClicked);
+                    })
                 : null,
           ),
         );

@@ -5,8 +5,8 @@ import 'package:givt_app_kids_web/givt_app.dart';
 void main() {
   var configuredApp = AppConfig(
     flavorName: 'production',
-    apiBaseUrl: 'api.givt.app',
-    amplitudePublicKey: '05353d3a94c0d52d75cc1e7d13faa8e1',
+    apiBaseUrl: 'backend.givt.app',
+    amplitudePublicKey: '5e5b687fee8a7a6a91bfae9c6fdc2eb1',
   );
 
   bootstrap(

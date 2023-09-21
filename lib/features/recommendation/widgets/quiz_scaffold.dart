@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:givt_app_kids_web/features/recommendation/cubit/quiz_cubit.dart';
 
 class QuizScaffold extends StatelessWidget {
   const QuizScaffold(

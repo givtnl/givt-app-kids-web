@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:convert';
 
 import 'package:givt_app_kids_web/features/recommendation/models/tag.dart';
+import 'package:givt_app_kids_web/utils/api_helper.dart';
 import 'package:http/http.dart' as http;
 
 class OrganizationsDataProvider {
@@ -9,8 +10,7 @@ class OrganizationsDataProvider {
     required Tag location,
     required List<Tag> interests,
   }) async {
-    final url = Uri.https('dev-backend.givtapp.net',
-        '/givt4kidsservice/v1/Organisation/recommendations');
+    final url = Uri.https(ApiHelper.apiURL, ApiHelper.recommendationsPath);
 
     try {
       var response = await http.post(
