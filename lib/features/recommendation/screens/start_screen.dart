@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:givt_app_kids_web/features/recommendation/screens/quiz_screen.dart';
+import 'package:givt_app_kids_web/core/app/pages.dart';
+import 'package:givt_app_kids_web/features/recommendation/quiz/cubit/quiz_cubit.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/fab_recomendation.dart';
 import 'package:go_router/go_router.dart';
 
-import '../cubit/quiz_cubit.dart';
-
-class StartScren extends StatelessWidget {
-  const StartScren({super.key});
+class StartScreen extends StatelessWidget {
+  const StartScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -103,13 +102,18 @@ class StartScren extends StatelessWidget {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: RecommendationFAB(
-        active: true,
-        text: 'I\'m ready!',
-        onClicked: () {
-          context.read<QuizCubit>().startQuiz();
-          context.goNamed(WhereScreen.routeName);
+      floatingActionButton: GestureDetector(
+        onLongPress: () {
+          context.goNamed(Pages.login.name);
         },
+        child: RecommendationFAB(
+          active: true,
+          text: 'I\'m ready!',
+          onClicked: () {
+            context.read<QuizCubit>().startQuiz();
+            context.goNamed(Pages.quizWhere.name);
+          },
+        ),
       ),
     );
   }

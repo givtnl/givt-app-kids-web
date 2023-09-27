@@ -12,15 +12,14 @@ class DecisionApproval extends StatelessWidget {
       required this.kidGUID,
       required this.transactionId,
       required this.kidName,
-      required this.organizationName,
+      required this.organisationName,
       super.key});
 
-  static const String routeName = "/parent-decision";
   final bool decision;
   final String kidGUID;
   final String transactionId;
   final String kidName;
-  final String organizationName;
+  final String organisationName;
 
   @override
   Widget build(BuildContext context) {
@@ -97,11 +96,11 @@ class DecisionApproval extends StatelessWidget {
       case DecisionStatus.loading:
         return 'Working on it...';
       case DecisionStatus.approved:
-        return 'Thank you!\n$kidName\'s donation to $organizationName has been approved.';
+        return 'Thank you!\n$kidName\'s donation to $organisationName has been approved.';
       case DecisionStatus.error:
         return getErrorText(errorMessage);
       case DecisionStatus.declined:
-        return '$kidName\'s donation to $organizationName is successfully declined.';
+        return '$kidName\'s donation to $organisationName is successfully declined.';
     }
   }
 

@@ -3,10 +3,10 @@ import 'dart:developer';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:givt_app_kids_web/features/recommendation/cubit/choices-cubit/choices_cubit.dart';
-import 'package:givt_app_kids_web/features/recommendation/cubit/organizations_cubit.dart';
-import 'package:givt_app_kids_web/features/recommendation/cubit/quiz_cubit.dart';
-import 'package:givt_app_kids_web/features/recommendation/screens/organizations_screen.dart';
+import 'package:givt_app_kids_web/core/app/pages.dart';
+import 'package:givt_app_kids_web/features/recommendation/choices/cubit/choices_cubit.dart';
+import 'package:givt_app_kids_web/features/recommendation/organisations/cubit/organisations_cubit.dart';
+import 'package:givt_app_kids_web/features/recommendation/quiz/cubit/quiz_cubit.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/fab_recomendation.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/givy_bubble.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/quiz_interests_tally.dart';
@@ -32,15 +32,15 @@ class WhereScreen extends StatelessWidget {
         ? MediaQuery.of(context).size.width
         : MediaQuery.of(context).size.height;
 
-    return BlocListener<OrganizationsCubit, OrganizationsState>(
+    return BlocListener<OrganisationsCubit, OrganisationsState>(
       listener: (context, state) {
-        if (state is OrganizationsFetchedState) {
-          context.push(OrganizationsScreen.routeName);
+        if (state is OrganisationsFetchedState) {
+          context.pushNamed(Pages.organisations.name);
           AnalyticsHelper.logEvent(
               eventName: AmplitudeEvent.charitiesShown,
               eventProperties: {
                 "charities":
-                    state.organizations.map((e) => e.name).toList().toString(),
+                    state.organisations.map((e) => e.name).toList().toString(),
               });
         }
       },
@@ -116,7 +116,7 @@ class WhereScreen extends StatelessWidget {
                   text: state is QuizStarted ? 'Next' : 'Restart',
                   onClicked: state is QuizStarted == false
                       ? () {
-                          context.goNamed('/');
+                          context.goNamed(Pages.start.name);
                           AnalyticsHelper.logEvent(
                             eventName: AmplitudeEvent.restartClicked,
                           );
@@ -133,8 +133,8 @@ class WhereScreen extends StatelessWidget {
                               ? () {
                                   _controller.nextPage();
                                   context
-                                      .read<OrganizationsCubit>()
-                                      .getRecommendedOrganizations(
+                                      .read<OrganisationsCubit>()
+                                      .getRecommendedOrganisations(
                                         location: choices.location,
                                         interests: choices.interests,
                                         // fakeComputingExtraDelay:

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:givt_app_kids_web/features/recommendation/cubit/choices-cubit/choices_cubit.dart';
-import 'package:givt_app_kids_web/features/recommendation/models/tag.dart';
+import 'package:givt_app_kids_web/features/recommendation/choices/cubit/choices_cubit.dart';
+import 'package:givt_app_kids_web/features/recommendation/choices/models/tag.dart';
 
 class LocationCard extends StatelessWidget {
   const LocationCard(
