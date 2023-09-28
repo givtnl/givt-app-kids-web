@@ -1,24 +1,26 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:givt_app_kids_web/features/parental_approval/models/decision_response.dart';
-import 'package:givt_app_kids_web/features/parental_approval/repository/transaction_decision_repository.dart';
+import 'package:givt_app_kids_web/features/parental_approval/repositories/transaction_decision_repository.dart';
 
 part 'decision_event.dart';
 part 'decision_state.dart';
 
 class DecisionBloc extends Bloc<DecisionEvent, DecisionState> {
-  DecisionBloc() : super(DecisionInitial()) {
+  DecisionBloc(this._decisionRepository) : super(DecisionInitial()) {
     on<DecisionInit>(_onInit);
   }
+
+  final TransactionDecisionRepository _decisionRepository;
+
   void _onInit(DecisionInit event, Emitter<DecisionState> emit) async {
     emit(state.copyWith(status: DecisionStatus.loading));
     final donationId = int.parse(event.donationId);
     final decision = event.decision;
-    final decisionRepository = TransactionDecisionRepository();
 
     try {
       final DecisionResponse decisionResponse =
-          await decisionRepository.submitDecision(
+          await _decisionRepository.submitDecision(
         donationId,
         event.childId,
         decision,

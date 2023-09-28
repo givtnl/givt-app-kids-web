@@ -13,6 +13,9 @@ enum AmplitudeEvent {
   recommendationFlowStarted('recommendation_flow_started'),
   restartClicked('restart_clicked'),
   whereToHelpClicked('where_to_help_clicked'),
+  loginPressed('login_pressed'),
+  profilePressed('profile_pressed'),
+  buttonPressed('button_pressed'),
   ;
 
   final String value;

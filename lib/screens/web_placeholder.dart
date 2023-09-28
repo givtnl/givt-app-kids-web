@@ -29,7 +29,7 @@ class WebPlaceholder extends StatelessWidget {
                               fontWeight: FontWeight.bold)),
                       SizedBox(height: size.height * 0.03),
                       const Text(
-                          'Hey there, future changemaker! Are you ready to make a difference in the world? With Givt4Kids, you can! \n\nHere\'s a fun and safe way to help the causes you care about. Whether it\'s a local animal shelter or a global charity, you can contribute using your \'giving allowance\' set by your parents. All you have to do is scan a QR code of the organization you want to support and decide how much you\'d like to donate from your approved funds. \n\nDon\'t worry, your parents will be with you every step of the way, keeping everything secure. So let\'s start your giving journey with Givt4Kids and see how awesome generosity can be.',
+                          'Hey there, future changemaker! Are you ready to make a difference in the world? With Givt4Kids, you can! \n\nHere\'s a fun and safe way to help the causes you care about. Whether it\'s a local animal shelter or a global charity, you can contribute using your \'giving allowance\' set by your parents. All you have to do is scan a QR code of the organisation you want to support and decide how much you\'d like to donate from your approved funds. \n\nDon\'t worry, your parents will be with you every step of the way, keeping everything secure. So let\'s start your giving journey with Givt4Kids and see how awesome generosity can be.',
                           style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w500,

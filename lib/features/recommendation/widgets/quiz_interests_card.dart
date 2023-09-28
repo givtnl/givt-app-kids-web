@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:givt_app_kids_web/features/recommendation/models/tag.dart';
-
-import '../cubit/choices-cubit/choices_cubit.dart';
+import 'package:givt_app_kids_web/features/recommendation/choices/cubit/choices_cubit.dart';
+import 'package:givt_app_kids_web/features/recommendation/choices/models/tag.dart';
 
 class InterestCard extends StatelessWidget {
   const InterestCard(

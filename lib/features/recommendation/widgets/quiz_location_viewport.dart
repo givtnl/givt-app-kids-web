@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:givt_app_kids_web/features/recommendation/models/tag.dart';
+import 'package:givt_app_kids_web/features/recommendation/choices/models/tag.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/quiz_location_card.dart';
 
 class LocationViewport extends StatelessWidget {
