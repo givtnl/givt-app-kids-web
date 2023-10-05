@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:givt_app_kids_web/features/recommendation/widgets/givt_elevated_button.dart';
+import 'package:givt_app_kids_web/shared/widgets/givt_elevated_button.dart';
 
 class GivtPrimaryElevatedButton extends StatelessWidget {
   const GivtPrimaryElevatedButton({
     required this.text,
     required this.onPressed,
+    this.isLoading = false,
     super.key,
   });
 
@@ -13,6 +14,7 @@ class GivtPrimaryElevatedButton extends StatelessWidget {
 
   final String text;
   final void Function() onPressed;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,8 @@ class GivtPrimaryElevatedButton extends StatelessWidget {
       text: text,
       onPressed: onPressed,
       backgroundColor: _primaryBackgroundColor,
-      foregroundColor: _primaryForegroundColor, //onPrimaryColor: Colors.white,
+      foregroundColor: _primaryForegroundColor,
+      isLoading: isLoading,
     );
   }
 }

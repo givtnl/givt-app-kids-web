@@ -8,11 +8,23 @@ import 'package:givt_app_kids_web/utils/analytics_helper.dart';
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit(this._authRepositoy) : super(const LoggedOutState());
+  AuthCubit(this._authRepositoy) : super(const LoggedOutState()) {
+    _initFromCache();
+  }
 
   final AuthRepository _authRepositoy;
 
-  void logout() => emit(const LoggedOutState());
+  Future<void> _initFromCache() async {
+    final session = await _authRepositoy.getSessionFromCache();
+    if (session != const Session.empty()) {
+      emit(LoggedInState(session: session));
+    }
+  }
+
+  Future<void> logout() async {
+    await _authRepositoy.logout();
+    emit(const LoggedOutState());
+  }
 
   Future<void> login(String email, String password) async {
     if (!_validateInputFields(email, password)) {

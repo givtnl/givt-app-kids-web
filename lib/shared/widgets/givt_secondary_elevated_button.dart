@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:givt_app_kids_web/features/recommendation/widgets/givt_elevated_button.dart';
+import 'package:givt_app_kids_web/shared/widgets/givt_elevated_button.dart';
 
 class GivtSecondaryElevatedButton extends StatelessWidget {
   const GivtSecondaryElevatedButton({
     required this.text,
     required this.onPressed,
+    this.isLoading = false,
     super.key,
   });
 
@@ -13,6 +14,7 @@ class GivtSecondaryElevatedButton extends StatelessWidget {
 
   final String text;
   final void Function() onPressed;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +24,7 @@ class GivtSecondaryElevatedButton extends StatelessWidget {
       backgroundColor: _secondaryBackgroundColor,
       foregroundColor: _secondaryForegroundColor,
       showBorder: true,
+      isLoading: isLoading,
     );
   }
 }

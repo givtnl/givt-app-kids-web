@@ -2,15 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:givt_app_kids_web/core/app/pages.dart';
+import 'package:givt_app_kids_web/features/auth/cubit/auth_cubit.dart';
 import 'package:givt_app_kids_web/features/recommendation/quiz/cubit/quiz_cubit.dart';
-import 'package:givt_app_kids_web/features/recommendation/widgets/bubble.dart';
-import 'package:givt_app_kids_web/features/recommendation/widgets/givt_primary_elevated_button.dart';
-import 'package:givt_app_kids_web/features/recommendation/widgets/givt_secondary_elevated_button.dart';
+import 'package:givt_app_kids_web/shared/widgets/bubble.dart';
+import 'package:givt_app_kids_web/shared/widgets/givt_primary_elevated_button.dart';
+import 'package:givt_app_kids_web/shared/widgets/givt_secondary_elevated_button.dart';
+import 'package:givt_app_kids_web/utils/analytics_helper.dart';
 import 'package:givt_app_kids_web/utils/font_utils.dart';
 import 'package:go_router/go_router.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
+
+  void _startQuiz(BuildContext context) {
+    context.read<QuizCubit>().startQuiz();
+    context.pushNamed(Pages.quizWhere.name);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,8 +91,17 @@ class StartScreen extends StatelessWidget {
                         GivtSecondaryElevatedButton(
                           text: 'Continue as guest',
                           onPressed: () {
-                            context.read<QuizCubit>().startQuiz();
-                            context.pushNamed(Pages.quizWhere.name);
+                            AnalyticsHelper.logEvent(
+                                eventName: AmplitudeEvent.buttonPressed,
+                                eventProperties: {
+                                  'button_name': 'Continue as guest',
+                                  'formatted_date':
+                                      DateTime.now().toIso8601String(),
+                                  'screen_name': Pages.start.name,
+                                });
+
+                            context.read<AuthCubit>().logout();
+                            _startQuiz(context);
                           },
                         ),
                         const SizedBox(
@@ -94,7 +110,21 @@ class StartScreen extends StatelessWidget {
                         GivtPrimaryElevatedButton(
                           text: 'Login to discover',
                           onPressed: () {
-                            context.pushNamed(Pages.login.name);
+                            AnalyticsHelper.logEvent(
+                                eventName: AmplitudeEvent.buttonPressed,
+                                eventProperties: {
+                                  'button_name': 'Login to discover',
+                                  'formatted_date':
+                                      DateTime.now().toIso8601String(),
+                                  'screen_name': Pages.start.name,
+                                });
+
+                            if (context.read<AuthCubit>().state
+                                is LoggedInState) {
+                              _startQuiz(context);
+                            } else {
+                              context.pushNamed(Pages.login.name);
+                            }
                           },
                         ),
                       ],

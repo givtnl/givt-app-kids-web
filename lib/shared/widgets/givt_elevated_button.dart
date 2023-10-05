@@ -7,6 +7,7 @@ class GivtElevatedButton extends StatelessWidget {
     required this.onPressed,
     required this.backgroundColor,
     required this.foregroundColor,
+    required this.isLoading,
     this.showBorder = false,
     this.padding = const EdgeInsets.symmetric(horizontal: 45, vertical: 12),
     super.key,
@@ -18,13 +19,14 @@ class GivtElevatedButton extends StatelessWidget {
   final bool showBorder;
   final void Function() onPressed;
   final EdgeInsets padding;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
 
     return ElevatedButton(
-      onPressed: onPressed,
+      onPressed: isLoading ? () {} : onPressed,
       style: ElevatedButton.styleFrom(
         backgroundColor: backgroundColor,
         elevation: 5,
@@ -38,21 +40,42 @@ class GivtElevatedButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
         ),
       ),
-      child: Padding(
-        padding: padding,
-        child: Text(
-          text,
-          style: TextStyle(
-            color: foregroundColor,
-            fontSize: FontUtils.getScaledFontSize(
-              inputFontSize: 20,
-              size: size,
+      child: Stack(
+        children: [
+          Positioned(
+            child: Padding(
+              padding: padding,
+              child: Opacity(
+                opacity: isLoading ? 0 : 1,
+                child: Text(
+                  text,
+                  style: TextStyle(
+                    color: foregroundColor,
+                    fontSize: FontUtils.getScaledFontSize(
+                      inputFontSize: 20,
+                      size: size,
+                    ),
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 0.8,
+                    height: 1.2,
+                  ),
+                ),
+              ),
             ),
-            fontWeight: FontWeight.w700,
-            letterSpacing: 0.8,
-            height: 1.2,
           ),
-        ),
+          if (isLoading)
+            Positioned(
+              left: 0,
+              right: 0,
+              top: 0,
+              bottom: 0,
+              child: Center(
+                child: CircularProgressIndicator(
+                  color: foregroundColor,
+                ),
+              ),
+            ),
+        ],
       ),
     );
   }

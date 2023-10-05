@@ -9,6 +9,7 @@ mixin AuthRepository {
   Future<Session> refreshToken();
   Future<Session> login(AuthRequest authRequest);
   Future<bool> logout();
+  Future<Session> getSessionFromCache();
 }
 
 class AuthRepositoryImpl with AuthRepository {
@@ -43,6 +44,18 @@ class AuthRepositoryImpl with AuthRepository {
 
   @override
   Future<bool> logout() async => _prefs.clear();
+
+  @override
+  Future<Session> getSessionFromCache() async {
+    final currentSession = _prefs.getString(Session.tag);
+    if (currentSession == null) {
+      return const Session.empty();
+    }
+    final session = Session.fromJson(
+      jsonDecode(currentSession) as Map<String, dynamic>,
+    );
+    return session;
+  }
 
   @override
   Future<Session> refreshToken() async {
