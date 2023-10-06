@@ -21,7 +21,7 @@ import 'package:givt_app_kids_web/shared/widgets/back_button.dart'
 class ProfileSelectionScreen extends StatelessWidget {
   const ProfileSelectionScreen({Key? key}) : super(key: key);
 
-  static const int _maxProfilesToShow = 4;
+  static const int maxProfilesToShow = 4;
 
   Future<void> _selectProfile(BuildContext context, Profile profile) async {
     context.read<ProfilesCubit>().setActiveProfile(profile);
@@ -53,7 +53,6 @@ class ProfileSelectionScreen extends StatelessWidget {
         );
       }
     }, builder: (context, state) {
-      final size = MediaQuery.sizeOf(context);
       return Scaffold(
         backgroundColor: const Color(0xFFEEEDE4),
         body: Stack(
@@ -131,7 +130,7 @@ class ProfileSelectionScreen extends StatelessWidget {
                                           },
                                         ),
                                       )
-                                      .take(_maxProfilesToShow)
+                                      .take(maxProfilesToShow)
                                       .toList(),
                                 ),
                               ),

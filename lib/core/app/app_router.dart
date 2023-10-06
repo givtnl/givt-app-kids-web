@@ -5,6 +5,7 @@ import 'package:givt_app_kids_web/core/injection/injection.dart';
 import 'package:givt_app_kids_web/features/auth/screens/login_screen.dart';
 import 'package:givt_app_kids_web/features/parental_approval/bloc/decision_bloc.dart';
 import 'package:givt_app_kids_web/features/parental_approval/decision_screen.dart';
+import 'package:givt_app_kids_web/features/profiles/screens/profile_selection_overlay_screen.dart';
 import 'package:givt_app_kids_web/features/profiles/screens/profile_selection_screen.dart';
 import 'package:givt_app_kids_web/features/recommendation/screens/organisation_details_screen.dart';
 import 'package:givt_app_kids_web/features/recommendation/screens/organisations_screen.dart';
@@ -49,6 +50,11 @@ class AppRouter {
           path: Pages.profileSelection.path,
           name: Pages.profileSelection.name,
           builder: (context, state) => const ProfileSelectionScreen(),
+        ),
+        GoRoute(
+          path: Pages.profileSelectionOverlay.path,
+          name: Pages.profileSelectionOverlay.name,
+          builder: (context, state) => const ProfileSelectionOverlayScreen(),
         ),
         GoRoute(
             path: Pages.parentDecision.path,

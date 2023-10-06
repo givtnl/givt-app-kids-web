@@ -5,11 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:givt_app_kids_web/core/app/pages.dart';
-import 'package:givt_app_kids_web/features/auth/cubit/auth_cubit.dart';
+import 'package:givt_app_kids_web/features/profiles/widgets/profile_wallet_button.dart';
 import 'package:givt_app_kids_web/features/recommendation/organisations/cubit/organisations_cubit.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/fab_recomendation.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/organisation_header.dart';
-import 'package:givt_app_kids_web/shared/widgets/logout_button.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:givt_app_kids_web/shared/widgets/back_button.dart'
@@ -32,7 +31,6 @@ class OrganisationDetailsScreen extends StatelessWidget {
 
     return BlocBuilder<OrganisationsCubit, OrganisationsState>(
       builder: (context, state) {
-        final authState = context.read<AuthCubit>().state;
         return SafeArea(
           child: Scaffold(
             body: Stack(
@@ -385,14 +383,13 @@ class OrganisationDetailsScreen extends StatelessWidget {
                     pageName: Pages.organisationDetails.name,
                   ),
                 ),
-                if (authState is LoggedInState)
-                  Positioned(
-                    top: 30,
-                    right: 30,
-                    child: LogoutButton(
-                      pageName: Pages.organisationDetails.name,
-                    ),
+                Positioned(
+                  top: 30,
+                  right: 30,
+                  child: ProfileWalletButton(
+                    pageName: Pages.organisationDetails.name,
                   ),
+                ),
               ],
             ),
           ),

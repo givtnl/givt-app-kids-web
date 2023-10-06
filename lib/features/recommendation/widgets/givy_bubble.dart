@@ -20,7 +20,7 @@ class GivyBubble extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(height * 0.4),
       child: Container(
-        width: size.width * 0.7,
+        width: size.width * 0.55,
         decoration: const BoxDecoration(
           color: Color.fromARGB(200, 226, 241, 246),
         ),

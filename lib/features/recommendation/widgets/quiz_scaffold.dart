@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:givt_app_kids_web/core/app/pages.dart';
-import 'package:givt_app_kids_web/features/auth/cubit/auth_cubit.dart';
+import 'package:givt_app_kids_web/features/profiles/widgets/profile_wallet_button.dart';
 
 import 'package:givt_app_kids_web/shared/widgets/back_button.dart'
     as givt_widgets;
-import 'package:givt_app_kids_web/shared/widgets/logout_button.dart';
 
 class QuizScaffold extends StatelessWidget {
   const QuizScaffold(
@@ -15,7 +13,6 @@ class QuizScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final authState = context.read<AuthCubit>().state;
     return Scaffold(
         body: Stack(
           children: [
@@ -42,14 +39,13 @@ class QuizScaffold extends StatelessWidget {
                 pageName: Pages.quizWhere.name,
               ),
             ),
-            if (authState is LoggedInState)
-              Positioned(
-                top: 30,
-                right: 30,
-                child: LogoutButton(
-                  pageName: Pages.quizWhere.name,
-                ),
+            Positioned(
+              top: 30,
+              right: 30,
+              child: ProfileWalletButton(
+                pageName: Pages.quizWhere.name,
               ),
+            ),
           ],
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
