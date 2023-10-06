@@ -21,6 +21,7 @@ class GivtApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthCubit>(
+          lazy: false,
           create: (BuildContext context) => AuthCubit(getIt()),
         ),
         BlocProvider<ProfilesCubit>(
