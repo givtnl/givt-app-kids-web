@@ -1,224 +1,176 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:flutter_svg/svg.dart';
 import 'package:givt_app_kids_web/core/app/pages.dart';
 import 'package:givt_app_kids_web/features/auth/cubit/auth_cubit.dart';
 import 'package:givt_app_kids_web/features/profiles/cubit/profiles_cubit.dart';
 import 'package:givt_app_kids_web/features/profiles/models/profile.dart';
 import 'package:givt_app_kids_web/features/profiles/widgets/profile_item.dart';
+import 'package:givt_app_kids_web/features/recommendation/quiz/cubit/quiz_cubit.dart';
+import 'package:givt_app_kids_web/shared/widgets/givt_continue_button.dart';
 import 'package:givt_app_kids_web/utils/analytics_helper.dart';
+import 'package:givt_app_kids_web/utils/font_utils.dart';
 import 'package:go_router/go_router.dart';
 
-class ProfileSelectionScreen extends StatefulWidget {
+import 'package:givt_app_kids_web/shared/widgets/back_button.dart'
+    as givt_widgets;
+
+class ProfileSelectionScreen extends StatelessWidget {
   const ProfileSelectionScreen({Key? key}) : super(key: key);
 
-  @override
-  State<ProfileSelectionScreen> createState() => _ProfileSelectionScreenState();
-}
+  static const int maxProfilesToShow = 4;
 
-class _ProfileSelectionScreenState extends State<ProfileSelectionScreen> {
-  @override
-  void initState() {
-    super.initState();
-    _fetchProfiles();
-  }
-
-  Future<void> _fetchProfiles() async {
-    final parentGuid =
-        (context.read<AuthCubit>().state as LoggedInState).session.userGUID;
-    context.read<ProfilesCubit>().fetchProfiles(parentGuid);
-  }
-
-  Future<void> _selectProfile(Profile profile) async {
+  Future<void> _selectProfile(BuildContext context, Profile profile) async {
     context.read<ProfilesCubit>().setActiveProfile(profile);
     await AnalyticsHelper.logEvent(
       eventName: AmplitudeEvent.profilePressed,
       eventProperties: {
-        "profile_name": '${profile.firstName} ${profile.lastName}',
+        "profile_name": profile.firstName,
       },
     );
   }
 
-  List<Widget> _createGridItems(List<Profile> profiles) {
-    List<Widget> gridItems = [];
-    for (var i = 0, j = 0; i < profiles.length && i < 4; i++, j++) {
-      gridItems.add(
-        GestureDetector(
-          onTap: () {
-            _selectProfile(profiles[i]);
-
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  "Current active user is ${profiles[i].firstName} ",
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            );
-
-            context.goNamed(Pages.start.name);
-            // context.pushReplacementNamed(Pages.wallet.name);
-          },
-          child: ProfileItem(
-            name: '${profiles[i].firstName} ${profiles[i].lastName}',
-            imageUrl: profiles[i].pictureURL,
-          ),
-        ),
-      );
-    }
-    return gridItems;
-  }
-
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-
-    return SafeArea(
-      child: BlocConsumer<ProfilesCubit, ProfilesState>(
+    final size = MediaQuery.sizeOf(context);
+    final anchorSize = size.aspectRatio > 1 ? size.width : size.height;
+    return BlocConsumer<ProfilesCubit, ProfilesState>(
         listener: (context, state) {
-          log('profiles state changed on $state');
-          if (state is ProfilesExternalErrorState) {
-            log(state.errorMessage);
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  "Cannot download profiles. Please try again later.",
-                  textAlign: TextAlign.center,
-                ),
-                backgroundColor: Theme.of(context).errorColor,
-              ),
-            );
-          }
-          // else if (state is ProfilesUpdatedState) {
-          //   log('Active profile is ${state.activeProfile.firstName}');
-          //   ScaffoldMessenger.of(context).showSnackBar(
-          //     SnackBar(
-          //       content: Text(
-          //         'Active profile is ${state.activeProfile.firstName} ${state.activeProfile.lastName}',
-          //         textAlign: TextAlign.center,
-          //       ),
-          //     ),
-          //   );
-          // }
-        },
-        builder: (context, state) {
-          final gridItems = _createGridItems(state.profiles);
-          return Scaffold(
-            backgroundColor: const Color(0xFFEEEDE4),
-            body: state is ProfilesLoadingState
-                ? Center(
-                    child: CircularProgressIndicator(
-                      color: Color(0xFF54A1EE),
-                    ),
-                  )
-                : state.profiles.isEmpty
-                    ? Center(
-                        child: Padding(
-                          padding: EdgeInsets.all(50),
+      log('profiles state changed on $state');
+      if (state is ProfilesExternalErrorState) {
+        log(state.errorMessage);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text(
+              "Cannot download profiles. Please try again later.",
+              textAlign: TextAlign.center,
+            ),
+            backgroundColor: Theme.of(context).errorColor,
+          ),
+        );
+      }
+    }, builder: (context, state) {
+      return Scaffold(
+        backgroundColor: const Color(0xFFEEEDE4),
+        body: Stack(
+          children: [
+            Positioned.fill(
+              child: state is ProfilesLoadingState
+                  ? const Center(
+                      child: CircularProgressIndicator(
+                        color: Color(0xFF0E90CC),
+                      ),
+                    )
+                  : state.profiles.isEmpty
+                      ? Center(
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
-                                "There are no profiles attached to the current user.",
+                                "There are no profiles attached to the current user.\nPlease use Givt app to create profiles.",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  color: Color(0xFF54A1EE),
-                                  fontSize: 25,
+                                  color: const Color(0xFF3B3240),
+                                  fontSize: FontUtils.getScaledFontSize(
+                                      inputFontSize: 25, size: size),
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : SingleChildScrollView(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: size.height * 0.08,
+                              ),
+                              SvgPicture.asset(
+                                height: anchorSize * 0.12,
+                                "images/transparent_logo.svg",
+                              ),
+                              SizedBox(
+                                height: size.height * 0.09,
+                              ),
+                              Text(
+                                "Who would like to give?",
+                                style: TextStyle(
+                                  color: const Color(0xFF3B3240),
+                                  fontSize: FontUtils.getScaledFontSize(
+                                      inputFontSize: 20, size: size),
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               SizedBox(
-                                height: 25,
+                                height: size.height * 0.08,
                               ),
-                              ElevatedButton.icon(
-                                onPressed: () => _fetchProfiles(),
-                                icon: Icon(Icons.refresh_rounded),
-                                label: Text("Retry"),
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: state.profiles
+                                      .map(
+                                        (profile) => ProfileItem(
+                                          width: anchorSize * 0.12,
+                                          name: profile.firstName,
+                                          imageUrl: profile.pictureURL,
+                                          onPressed: () {
+                                            _selectProfile(context, profile);
+                                            context
+                                                .read<QuizCubit>()
+                                                .startQuiz();
+                                            context.pushReplacementNamed(
+                                                Pages.quizWhere.name);
+                                          },
+                                        ),
+                                      )
+                                      .take(maxProfilesToShow)
+                                      .toList(),
+                                ),
+                              ),
+                              SizedBox(
+                                height: size.height * 0.1,
                               ),
                             ],
                           ),
                         ),
-                      )
-                    : SingleChildScrollView(
-                        child: Container(
-                          // padding: EdgeInsets.all(size.width * 0.09),
-                          child: Center(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  height: 150,
-                                ),
-                                Text(
-                                  "Choose your profile",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Color(0xFF54A1EE),
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 30,
-                                ),
-                                SizedBox.square(
-                                  dimension: size.height / 2,
-                                  child: GridView.count(
-                                    shrinkWrap: true,
-                                    crossAxisCount:
-                                        gridItems.length == 1 ? 1 : 2,
-                                    mainAxisSpacing: 10,
-                                    crossAxisSpacing: 10,
-                                    children: gridItems,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.startFloat,
-            floatingActionButton: state is ProfilesLoadingState
-                ? null
-                : FloatingActionButton.extended(
-                    backgroundColor: const Color(0xFF374A53),
-                    extendedPadding:
-                        EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                    onPressed: () {
-                      AnalyticsHelper.logEvent(
-                          eventName: AmplitudeEvent.buttonPressed,
-                          eventProperties: {
-                            'button_name': 'Log out',
-                            'formatted_date': DateTime.now().toIso8601String(),
-                            'screen_name': Pages.profileSelection.name,
-                          });
+            ),
+            Positioned(
+              top: 30,
+              left: 30,
+              child: givt_widgets.BackButton(
+                pageName: Pages.login.name,
+              ),
+            ),
+            Positioned(
+              right: 30,
+              bottom: 30,
+              child: GivtContinueButton(
+                onPressed: () {
+                  AnalyticsHelper.logEvent(
+                      eventName: AmplitudeEvent.buttonPressed,
+                      eventProperties: {
+                        'button_name': 'continue as guest',
+                        'formatted_date': DateTime.now().toIso8601String(),
+                        'screen_name': Pages.profileSelection.name,
+                      });
 
-                      context.read<AuthCubit>().logout();
-                      context
-                          .read<ProfilesCubit>()
-                          .setActiveProfile(Profile.empty());
-                      context.pushReplacementNamed(Pages.login.name);
-                    },
-                    label: const Text(
-                      'Log out',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                      ),
-                    ),
-                    icon: const Icon(
-                      Icons.logout,
-                      size: 25,
-                    ),
-                  ),
-          );
-        },
-      ),
-    );
+                  context.read<AuthCubit>().logout();
+
+                  context.read<QuizCubit>().startQuiz();
+                  context.pushReplacementNamed(Pages.quizWhere.name);
+                },
+              ),
+            ),
+          ],
+        ),
+      );
+    });
   }
 }

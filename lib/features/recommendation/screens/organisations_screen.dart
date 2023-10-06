@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:givt_app_kids_web/core/app/pages.dart';
 import 'package:givt_app_kids_web/features/auth/cubit/auth_cubit.dart';
+import 'package:givt_app_kids_web/features/profiles/widgets/profile_wallet_button.dart';
 import 'package:givt_app_kids_web/features/recommendation/organisations/cubit/organisations_cubit.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/fab_recomendation.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/givy_bubble.dart';
@@ -104,6 +105,13 @@ class OrganisationsScreen extends StatelessWidget {
                       pageName: Pages.organisations.name,
                     ),
                   ),
+                Positioned(
+                  top: 30,
+                  right: 30,
+                  child: ProfileWalletButton(
+                    pageName: Pages.organisations.name,
+                  ),
+                ),
               ],
             ),
             floatingActionButtonLocation:

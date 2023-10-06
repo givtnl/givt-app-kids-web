@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:givt_app_kids_web/features/profiles/models/wallet.dart';
 
 class Profile extends Equatable {
@@ -29,6 +30,21 @@ class Profile extends Equatable {
   final String comment;
   final Wallet wallet;
   final String pictureURL;
+
+  //temporary workaround solution
+  Color get backgroundColorByImage {
+    if (pictureURL.contains('monster1')) {
+      return const Color(0xFFA7CB42);
+    } else if (pictureURL.contains('monster2')) {
+      return const Color(0xFFAD81E1);
+    } else if (pictureURL.contains('monster3')) {
+      return const Color(0xFF69A9D3);
+    } else if (pictureURL.contains('monster4')) {
+      return const Color(0xFFFEAD1D);
+    } else {
+      return Colors.transparent;
+    }
+  }
 
   @override
   List<Object?> get props =>

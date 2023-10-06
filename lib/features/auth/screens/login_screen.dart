@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -8,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:givt_app_kids_web/core/app/pages.dart';
 import 'package:givt_app_kids_web/features/auth/cubit/auth_cubit.dart';
+import 'package:givt_app_kids_web/features/profiles/cubit/profiles_cubit.dart';
 import 'package:givt_app_kids_web/features/recommendation/quiz/cubit/quiz_cubit.dart';
 import 'package:givt_app_kids_web/shared/widgets/givt_continue_button.dart';
 import 'package:givt_app_kids_web/shared/widgets/givt_tertiary_elevated_button.dart';
@@ -48,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
           log(state.errorMessage);
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(
+              content: const Text(
                 "Cannot login. Please try again later.",
                 textAlign: TextAlign.center,
               ),
@@ -56,9 +55,8 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           );
         } else if (state is LoggedInState) {
-          // context.pushReplacementNamed(Pages.profileSelection.name);
-          context.read<QuizCubit>().startQuiz();
-          context.pushReplacementNamed(Pages.quizWhere.name);
+          context.read<ProfilesCubit>().fetchProfiles(state.session.userGUID);
+          context.pushReplacementNamed(Pages.profileSelection.name);
         }
       },
       builder: (context, state) => Scaffold(
@@ -69,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: SingleChildScrollView(
                 child: Container(
                   width: double.infinity,
-                  padding: EdgeInsets.symmetric(horizontal: 45),
+                  padding: const EdgeInsets.symmetric(horizontal: 45),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -87,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Text(
                         "Log in to your account with your Givt-app credentials",
                         style: TextStyle(
-                          color: Color(0xFF3B3240),
+                          color: const Color(0xFF3B3240),
                           fontSize: FontUtils.getScaledFontSize(
                               inputFontSize: 18, size: size),
                           fontWeight: FontWeight.normal,
@@ -102,13 +100,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           Text(
                             "Email",
                             style: TextStyle(
-                              color: Color(0xFF3B3240),
+                              color: const Color(0xFF3B3240),
                               fontSize: FontUtils.getScaledFontSize(
                                   inputFontSize: 18, size: size),
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
                           Container(
@@ -117,14 +115,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                 : _inputFieldsMaxWidth,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: Color(0xFFBFDBFC),
+                              color: const Color(0xFFBFDBFC),
                             ),
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                               horizontal: 10,
                               vertical: 0,
                             ),
                             child: TextField(
-                              key: ValueKey("email"),
+                              key: const ValueKey("email"),
                               style: TextStyle(
                                 fontSize: FontUtils.getScaledFontSize(
                                     inputFontSize: 18, size: size),
@@ -140,19 +138,19 @@ class _LoginScreenState extends State<LoginScreen> {
                               onChanged: (value) => _email = value,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
                           Text(
                             "Password",
                             style: TextStyle(
-                              color: Color(0xFF3B3240),
+                              color: const Color(0xFF3B3240),
                               fontSize: FontUtils.getScaledFontSize(
                                   inputFontSize: 18, size: size),
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
                           Container(
@@ -161,9 +159,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 : _inputFieldsMaxWidth,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: Color(0xFFBFDBFC),
+                              color: const Color(0xFFBFDBFC),
                             ),
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                               horizontal: 10,
                               vertical: 0,
                             ),
@@ -175,7 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       fontSize: FontUtils.getScaledFontSize(
                                           inputFontSize: 18, size: size),
                                     ),
-                                    key: ValueKey("password"),
+                                    key: const ValueKey("password"),
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
                                       errorText: state is InputFieldErrorState
@@ -190,7 +188,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(right: 5),
+                                  padding: const EdgeInsets.only(right: 5),
                                   child: GestureDetector(
                                     onTap: () {
                                       setState(() {
@@ -212,7 +210,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 120,
                       ),
                     ],

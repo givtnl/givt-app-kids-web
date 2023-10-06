@@ -8,6 +8,8 @@ enum Pages {
 
   login(path: '/login', name: 'LOGIN'),
   profileSelection(path: '/profile-selection', name: 'PROFILE_SELECTION'),
+  profileSelectionOverlay(
+      path: '/profile-selection-overlay', name: 'PROFILE_SELECTION_OVERLAY'),
   // wallet(path: '/wallet', name: 'WALLET'),
   // camera(path: '/camera', name: 'CAMERA'),
   // success(path: '/success', name: 'SUCCESS'),

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:givt_app_kids_web/core/app/pages.dart';
 import 'package:givt_app_kids_web/features/auth/cubit/auth_cubit.dart';
+import 'package:givt_app_kids_web/features/profiles/cubit/profiles_cubit.dart';
 import 'package:givt_app_kids_web/features/recommendation/quiz/cubit/quiz_cubit.dart';
 import 'package:givt_app_kids_web/shared/widgets/bubble.dart';
 import 'package:givt_app_kids_web/shared/widgets/givt_primary_elevated_button.dart';
@@ -119,9 +120,12 @@ class StartScreen extends StatelessWidget {
                                   'screen_name': Pages.start.name,
                                 });
 
-                            if (context.read<AuthCubit>().state
-                                is LoggedInState) {
-                              _startQuiz(context);
+                            final authState = context.read<AuthCubit>().state;
+                            if (authState is LoggedInState) {
+                              context
+                                  .read<ProfilesCubit>()
+                                  .fetchProfiles(authState.session.userGUID);
+                              context.pushNamed(Pages.profileSelection.name);
                             } else {
                               context.pushNamed(Pages.login.name);
                             }
