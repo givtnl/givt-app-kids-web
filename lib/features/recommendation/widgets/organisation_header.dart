@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:givt_app_kids_web/features/recommendation/organisations/models/organisation.dart';
+import 'package:givt_app_kids_web/utils/font_utils.dart';
 
 class OrganisationHeader extends StatelessWidget {
   const OrganisationHeader({
@@ -24,6 +25,7 @@ class OrganisationHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
     return Container(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -32,40 +34,42 @@ class OrganisationHeader extends StatelessWidget {
             flex: 3,
             child: Padding(
               padding: const EdgeInsets.only(top: 10),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: organisation.tags
-                    .map(
-                      (tag) => Container(
-                        margin: const EdgeInsets.symmetric(vertical: 3),
-                        decoration: BoxDecoration(
-                          color: tag.color,
-                          borderRadius: const BorderRadius.only(
-                            topRight: Radius.circular(25),
-                            bottomRight: Radius.circular(25),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: organisation.tags
+                      .map(
+                        (tag) => Container(
+                          margin: const EdgeInsets.symmetric(vertical: 3),
+                          decoration: BoxDecoration(
+                            color: tag.color,
+                            borderRadius: const BorderRadius.only(
+                              topRight: Radius.circular(25),
+                              bottomRight: Radius.circular(25),
+                            ),
                           ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 5,
-                            horizontal: 15,
-                          ),
-                          child: Text(
-                            tag.displayText,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize:
-                                  MediaQuery.of(context).size.height * 0.025,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 5,
+                              horizontal: 15,
+                            ),
+                            child: Text(
+                              tag.displayText,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: FontUtils.getScaledFontSize(
+                                    inputFontSize: 15, size: size),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    )
-                    .toList()
-                    .take(3)
-                    .toList(),
+                      )
+                      .toList()
+                      .take(3)
+                      .toList(),
+                ),
               ),
             ),
           ),

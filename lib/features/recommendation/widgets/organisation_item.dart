@@ -8,6 +8,7 @@ import 'package:givt_app_kids_web/core/app/pages.dart';
 import 'package:givt_app_kids_web/features/recommendation/organisations/cubit/organisations_cubit.dart';
 import 'package:givt_app_kids_web/features/recommendation/organisations/models/organisation.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/organisation_header.dart';
+import 'package:givt_app_kids_web/utils/font_utils.dart';
 import 'package:go_router/go_router.dart';
 
 class OrganisationItem extends StatelessWidget {
@@ -35,10 +36,10 @@ class OrganisationItem extends StatelessWidget {
 
     precacheImage(image.image, context);
 
+    final size = MediaQuery.sizeOf(context);
     return Container(
         margin: const EdgeInsets.all(margin),
         width: width,
-        height: height,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -69,13 +70,14 @@ class OrganisationItem extends StatelessWidget {
                     ),
                     isFlipped
                         ? Container(
-                            height: availableHeight * 0.65,
+                            height: availableHeight * 0.63,
                             child: Card(
                               margin: EdgeInsets.zero,
                               elevation: 0,
                               color: Colors.white,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25.0),
+                                borderRadius: BorderRadius.circular(
+                                    availableHeight * 0.07),
                               ),
                               child: Stack(
                                 children: [
@@ -99,7 +101,10 @@ class OrganisationItem extends StatelessWidget {
                                           'Scan with the\nGivt4Kids app to donate',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
-                                            fontSize: 20,
+                                            fontSize:
+                                                FontUtils.getScaledFontSize(
+                                                    inputFontSize: 18,
+                                                    size: size),
                                             color: const Color(0xFF54A1EE),
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -113,6 +118,7 @@ class OrganisationItem extends StatelessWidget {
                                     child: SvgPicture.asset(
                                       'images/scan_to_give_arrow.svg',
                                       fit: BoxFit.fitHeight,
+                                      height: size.height * .1,
                                     ),
                                   ),
                                 ],
@@ -137,9 +143,8 @@ class OrganisationItem extends StatelessWidget {
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
-                                    fontSize:
-                                        MediaQuery.of(context).size.height *
-                                            0.03,
+                                    fontSize: FontUtils.getScaledFontSize(
+                                        inputFontSize: 20, size: size),
                                   ),
                                 ),
                               ),
@@ -170,18 +175,20 @@ class OrganisationItem extends StatelessWidget {
                           ),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.all(10),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 10,
+                            horizontal: 8,
+                          ),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
                                 'learn more',
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Color(0xFF0E90CC),
-                                  fontSize: 15,
+                                  fontSize: FontUtils.getScaledFontSize(
+                                      inputFontSize: 15, size: size),
                                   fontWeight: FontWeight.bold,
-                                  // letterSpacing: 0.8,
-                                  // height: 1.2,
                                 ),
                               ),
                               SizedBox(width: 5),

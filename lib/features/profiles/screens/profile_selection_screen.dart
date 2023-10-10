@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_svg/svg.dart';
 import 'package:givt_app_kids_web/core/app/pages.dart';
-import 'package:givt_app_kids_web/features/auth/cubit/auth_cubit.dart';
 import 'package:givt_app_kids_web/features/profiles/cubit/profiles_cubit.dart';
 import 'package:givt_app_kids_web/features/profiles/models/profile.dart';
 import 'package:givt_app_kids_web/features/profiles/widgets/profile_item.dart';
@@ -152,20 +151,7 @@ class ProfileSelectionScreen extends StatelessWidget {
               right: 30,
               bottom: 30,
               child: GivtContinueButton(
-                onPressed: () {
-                  AnalyticsHelper.logEvent(
-                      eventName: AmplitudeEvent.buttonPressed,
-                      eventProperties: {
-                        'button_name': 'continue as guest',
-                        'formatted_date': DateTime.now().toIso8601String(),
-                        'screen_name': Pages.profileSelection.name,
-                      });
-
-                  context.read<AuthCubit>().logout();
-
-                  context.read<QuizCubit>().startQuiz();
-                  context.pushReplacementNamed(Pages.quizWhere.name);
-                },
+                pageName: Pages.profileSelection.name,
               ),
             ),
           ],

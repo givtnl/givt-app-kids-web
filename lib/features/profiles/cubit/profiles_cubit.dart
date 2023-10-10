@@ -47,6 +47,10 @@ class ProfilesCubit extends Cubit<ProfilesState> {
     }
   }
 
+  void clearProfiles() {
+    emit(const ProfilesInitialState());
+  }
+
   void setActiveProfile(Profile profile) {
     final index = state.profiles.indexOf(profile);
     emit(ProfilesUpdatedState(
@@ -54,29 +58,4 @@ class ProfilesCubit extends Cubit<ProfilesState> {
       activeProfileIndex: index,
     ));
   }
-
-  // @override
-  // ProfilesState? fromJson(Map<String, dynamic> json) {
-  //   log('fromJSON: $json');
-  //   final profilesMap = jsonDecode(json['profiles']);
-  //   final activeProfileIndex = json['activeProfileIndex'];
-  //   final List<Profile> profiles = [];
-  //   for (final profileMap in profilesMap) {
-  //     profiles.add(Profile.fromMap(profileMap));
-  //   }
-  //   return ProfilesUpdatedState(
-  //     profiles: profiles,
-  //     activeProfileIndex: activeProfileIndex,
-  //   );
-  // }
-
-  // @override
-  // Map<String, dynamic>? toJson(ProfilesState state) {
-  //   final result = {
-  //     'profiles': jsonEncode(state.profiles),
-  //     'activeProfileIndex': state.activeProfileIndex,
-  //   };
-  //   log('toJSON: $result');
-  //   return result;
-  // }
 }

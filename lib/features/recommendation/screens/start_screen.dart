@@ -102,6 +102,8 @@ class StartScreen extends StatelessWidget {
                                 });
 
                             context.read<AuthCubit>().logout();
+                            context.read<ProfilesCubit>().clearProfiles();
+
                             _startQuiz(context);
                           },
                         ),
