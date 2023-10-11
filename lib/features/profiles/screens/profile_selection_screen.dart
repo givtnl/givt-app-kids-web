@@ -8,9 +8,7 @@ import 'package:givt_app_kids_web/core/app/pages.dart';
 import 'package:givt_app_kids_web/features/profiles/cubit/profiles_cubit.dart';
 import 'package:givt_app_kids_web/features/profiles/models/profile.dart';
 import 'package:givt_app_kids_web/features/profiles/widgets/profile_item.dart';
-import 'package:givt_app_kids_web/features/recommendation/quiz/cubit/quiz_cubit.dart';
 import 'package:givt_app_kids_web/shared/widgets/givt_continue_button.dart';
-import 'package:givt_app_kids_web/utils/analytics_helper.dart';
 import 'package:givt_app_kids_web/utils/font_utils.dart';
 import 'package:go_router/go_router.dart';
 
@@ -23,13 +21,10 @@ class ProfileSelectionScreen extends StatelessWidget {
   static const int maxProfilesToShow = 4;
 
   Future<void> _selectProfile(BuildContext context, Profile profile) async {
-    context.read<ProfilesCubit>().setActiveProfile(profile);
-    await AnalyticsHelper.logEvent(
-      eventName: AmplitudeEvent.profilePressed,
-      eventProperties: {
-        "profile_name": profile.firstName,
-      },
-    );
+    context.read<ProfilesCubit>().setActiveProfile(
+          profile: profile,
+          pageName: Pages.profileSelection.name,
+        );
   }
 
   @override
@@ -121,11 +116,8 @@ class ProfileSelectionScreen extends StatelessWidget {
                                           imageUrl: profile.pictureURL,
                                           onPressed: () {
                                             _selectProfile(context, profile);
-                                            context
-                                                .read<QuizCubit>()
-                                                .startQuiz();
-                                            context.pushReplacementNamed(
-                                                Pages.quizWhere.name);
+                                            context.pushNamed(
+                                                Pages.locationSelection.name);
                                           },
                                         ),
                                       )

@@ -4,7 +4,10 @@ import 'package:givt_app_kids_web/utils/analytics_helper.dart';
 import 'package:go_router/go_router.dart';
 
 class BackButton extends StatelessWidget {
-  const BackButton({required this.pageName, super.key});
+  const BackButton({
+    required this.pageName,
+    super.key,
+  });
 
   final String pageName;
   @override
@@ -18,8 +21,11 @@ class BackButton extends StatelessWidget {
           iconSize: 25,
           onPressed: () {
             AnalyticsHelper.logEvent(
-                eventName: AmplitudeEvent.backClicked,
-                eventProperties: {'page_name': pageName});
+              eventName: AmplitudeEvent.backPressed,
+              eventProperties: {
+                'page_name': pageName,
+              },
+            );
             context.pop();
           },
           icon: const Icon(

@@ -9,6 +9,7 @@ import 'package:givt_app_kids_web/features/auth/cubit/auth_cubit.dart';
 import 'package:givt_app_kids_web/features/profiles/cubit/profiles_cubit.dart';
 import 'package:givt_app_kids_web/shared/widgets/givt_continue_button.dart';
 import 'package:givt_app_kids_web/shared/widgets/givt_tertiary_elevated_button.dart';
+import 'package:givt_app_kids_web/utils/analytics_helper.dart';
 import 'package:givt_app_kids_web/utils/font_utils.dart';
 import 'package:go_router/go_router.dart';
 
@@ -192,6 +193,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                       setState(() {
                                         _isPasswordVisible =
                                             !_isPasswordVisible;
+
+                                        AnalyticsHelper.logEvent(
+                                          eventName: AmplitudeEvent
+                                              .passwordEyeSwitched,
+                                          eventProperties: {
+                                            'visible': _isPasswordVisible
+                                          },
+                                        );
                                       });
                                     },
                                     child: SvgPicture.asset(

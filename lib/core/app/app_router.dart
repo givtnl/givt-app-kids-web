@@ -7,10 +7,13 @@ import 'package:givt_app_kids_web/features/parental_approval/bloc/decision_bloc.
 import 'package:givt_app_kids_web/features/parental_approval/decision_screen.dart';
 import 'package:givt_app_kids_web/features/profiles/screens/profile_selection_overlay_screen.dart';
 import 'package:givt_app_kids_web/features/profiles/screens/profile_selection_screen.dart';
-import 'package:givt_app_kids_web/features/recommendation/screens/organisation_details_screen.dart';
-import 'package:givt_app_kids_web/features/recommendation/screens/organisations_screen.dart';
-import 'package:givt_app_kids_web/features/recommendation/screens/quiz_screen.dart';
+import 'package:givt_app_kids_web/features/recommendation/interests/cubit/interests_cubit.dart';
+import 'package:givt_app_kids_web/features/recommendation/interests/screens/interests_selection_screen.dart';
+import 'package:givt_app_kids_web/features/recommendation/organisations/screens/organisation_details_screen.dart';
+import 'package:givt_app_kids_web/features/recommendation/organisations/screens/organisations_screen.dart';
 import 'package:givt_app_kids_web/features/recommendation/screens/start_screen.dart';
+import 'package:givt_app_kids_web/features/recommendation/tags/cubit/tags_cubit.dart';
+import 'package:givt_app_kids_web/features/recommendation/tags/screens/location_selection_screen.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
@@ -37,11 +40,6 @@ class AppRouter {
           builder: (context, state) => const OrganisationDetailsScreen(),
         ),
         GoRoute(
-          path: Pages.quizWhere.path,
-          name: Pages.quizWhere.name,
-          builder: (context, state) => WhereScreen(),
-        ),
-        GoRoute(
           path: Pages.login.path,
           name: Pages.login.name,
           builder: (context, state) => const LoginScreen(),
@@ -55,6 +53,30 @@ class AppRouter {
           path: Pages.profileSelectionOverlay.path,
           name: Pages.profileSelectionOverlay.name,
           builder: (context, state) => const ProfileSelectionOverlayScreen(),
+        ),
+        GoRoute(
+          path: Pages.locationSelection.path,
+          name: Pages.locationSelection.name,
+          builder: (context, state) => BlocProvider(
+            create: (context) => TagsCubit(
+              getIt(),
+            )..fetchTags(),
+            child: const LocationSelectionScreen(),
+          ),
+        ),
+        GoRoute(
+          path: Pages.interestsSelection.path,
+          name: Pages.interestsSelection.name,
+          builder: (context, state) {
+            final tagsState = (state.extra! as TagsStateFetched);
+            return BlocProvider(
+              create: (context) => InterestsCubit(
+                location: tagsState.selectedLocation,
+                interests: tagsState.interests,
+              ),
+              child: const InterestsSelectionScreen(),
+            );
+          },
         ),
         GoRoute(
             path: Pages.parentDecision.path,

@@ -1,21 +1,15 @@
 enum Pages {
   start(path: '/', name: 'START'),
+  locationSelection(path: '/location-selection', name: 'LOCATION_SELECTION'),
+  interestsSelection(path: '/interests-selection', name: 'INTERESTS_SELECTION'),
   organisations(path: '/organisations', name: 'ORGANISATIONS'),
   organisationDetails(
       path: '/organisation-details', name: 'ORGANISATION_DETAILS'),
-  quizWhere(path: '/quiz-where', name: 'QUIZ_WHERE'),
   parentDecision(path: '/parent-decision', name: 'PARENT_DECISION'),
-
   login(path: '/login', name: 'LOGIN'),
   profileSelection(path: '/profile-selection', name: 'PROFILE_SELECTION'),
   profileSelectionOverlay(
       path: '/profile-selection-overlay', name: 'PROFILE_SELECTION_OVERLAY'),
-  // wallet(path: '/wallet', name: 'WALLET'),
-  // camera(path: '/camera', name: 'CAMERA'),
-  // success(path: '/success', name: 'SUCCESS'),
-  // recommend(path: '/recommend', name: 'RECOMMEND'),
-  // chooseAmountSlider(
-  //     path: '/choose-amount-slider', name: 'CHOOSE_AMOUNT_SLIDER'),
   ;
 
   final String path;

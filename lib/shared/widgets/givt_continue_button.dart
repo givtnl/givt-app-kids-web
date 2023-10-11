@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:givt_app_kids_web/core/app/pages.dart';
 import 'package:givt_app_kids_web/features/auth/cubit/auth_cubit.dart';
 import 'package:givt_app_kids_web/features/profiles/cubit/profiles_cubit.dart';
-import 'package:givt_app_kids_web/features/recommendation/quiz/cubit/quiz_cubit.dart';
 import 'package:givt_app_kids_web/utils/analytics_helper.dart';
 import 'package:givt_app_kids_web/utils/font_utils.dart';
 import 'package:go_router/go_router.dart';
@@ -26,18 +25,14 @@ class GivtContinueButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {
         AnalyticsHelper.logEvent(
-            eventName: AmplitudeEvent.buttonPressed,
-            eventProperties: {
-              'button_name': 'continue as guest',
-              'formatted_date': DateTime.now().toIso8601String(),
-              'screen_name': pageName,
-            });
+          eventName: AmplitudeEvent.continueAsGuestPressed,
+          eventProperties: {'page_name': pageName},
+        );
 
         context.read<AuthCubit>().logout();
         context.read<ProfilesCubit>().clearProfiles();
 
-        context.read<QuizCubit>().startQuiz();
-        context.pushReplacementNamed(Pages.quizWhere.name);
+        context.pushReplacementNamed(Pages.locationSelection.name);
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: _backgroundColor,

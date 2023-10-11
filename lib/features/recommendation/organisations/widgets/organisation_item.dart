@@ -57,100 +57,101 @@ class OrganisationItem extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(availableHeight * 0.07),
                 ),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: availableHeight * 0.033,
-                    ),
-                    SizedBox(
-                      height: availableHeight * 0.20,
-                      child: OrganisationHeader(
-                        organisation: organisation,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(availableHeight * 0.07),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: availableHeight * 0.24,
+                        child: OrganisationHeader(
+                          organisation: organisation,
+                        ),
                       ),
-                    ),
-                    isFlipped
-                        ? Container(
-                            height: availableHeight * 0.63,
-                            child: Card(
-                              margin: EdgeInsets.zero,
-                              elevation: 0,
-                              color: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                    availableHeight * 0.07),
-                              ),
-                              child: Stack(
-                                children: [
-                                  Column(
-                                    children: [
-                                      Container(
-                                        height: availableHeight * 0.5,
-                                        width: availableHeight * 0.5,
-                                        padding: EdgeInsets.only(
-                                          top: 20,
-                                          left: 20,
-                                          right: 20,
+                      isFlipped
+                          ? Container(
+                              height: availableHeight * 0.63,
+                              child: Card(
+                                margin: EdgeInsets.zero,
+                                elevation: 0,
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      availableHeight * 0.07),
+                                ),
+                                child: Stack(
+                                  children: [
+                                    Column(
+                                      children: [
+                                        Container(
+                                          height: availableHeight * 0.5,
+                                          width: availableHeight * 0.5,
+                                          padding: EdgeInsets.only(
+                                            top: 20,
+                                            left: 20,
+                                            right: 20,
+                                          ),
+                                          child: image,
                                         ),
-                                        child: image,
-                                      ),
-                                      Container(
-                                        height: availableHeight * 0.13,
-                                        width: double.infinity,
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                          'Scan with the\nGivt4Kids app to donate',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize:
-                                                FontUtils.getScaledFontSize(
-                                                    inputFontSize: 18,
-                                                    size: size),
-                                            color: const Color(0xFF54A1EE),
-                                            fontWeight: FontWeight.bold,
+                                        Container(
+                                          height: availableHeight * 0.13,
+                                          width: double.infinity,
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            'Scan with the\nGivt4Kids app to donate',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              fontSize:
+                                                  FontUtils.getScaledFontSize(
+                                                      inputFontSize: 18,
+                                                      size: size),
+                                              color: const Color(0xFF54A1EE),
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                           ),
                                         ),
+                                      ],
+                                    ),
+                                    Positioned(
+                                      right: 30,
+                                      top: availableHeight * 0.45,
+                                      child: SvgPicture.asset(
+                                        'images/scan_to_give_arrow.svg',
+                                        fit: BoxFit.fitHeight,
+                                        height: size.height * .1,
                                       ),
-                                    ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          : Column(
+                              children: [
+                                SizedBox(
+                                  height: availableHeight * 0.51,
+                                  child: Image.network(
+                                    organisation.promoPictureUrl,
+                                    fit: BoxFit.fitHeight,
                                   ),
-                                  Positioned(
-                                    right: 30,
-                                    top: availableHeight * 0.45,
-                                    child: SvgPicture.asset(
-                                      'images/scan_to_give_arrow.svg',
-                                      fit: BoxFit.fitHeight,
-                                      height: size.height * .1,
+                                ),
+                                Container(
+                                  alignment: Alignment.center,
+                                  height: availableHeight * 0.12,
+                                  padding: EdgeInsets.symmetric(horizontal: 5),
+                                  child: Text(
+                                    organisation.name,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: FontUtils.getScaledFontSize(
+                                          inputFontSize: 20, size: size),
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                          )
-                        : Column(
-                            children: [
-                              SizedBox(
-                                height: availableHeight * 0.51,
-                                child: Image.network(
-                                  organisation.promoPictureUrl,
-                                  fit: BoxFit.fitHeight,
-                                ),
-                              ),
-                              Container(
-                                alignment: Alignment.center,
-                                height: availableHeight * 0.12,
-                                child: Text(
-                                  organisation.name,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: FontUtils.getScaledFontSize(
-                                        inputFontSize: 20, size: size),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

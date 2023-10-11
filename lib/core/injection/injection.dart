@@ -7,7 +7,7 @@ import 'package:givt_app_kids_web/features/auth/repositories/auth_repository.dar
 import 'package:givt_app_kids_web/features/parental_approval/repositories/transaction_decision_repository.dart';
 import 'package:givt_app_kids_web/features/profiles/repository/profiles_repository.dart';
 import 'package:givt_app_kids_web/features/recommendation/organisations/repositories/organisations_repository.dart';
-import 'package:givt_app_kids_web/features/recommendation/quiz/repositories/tags_repository.dart';
+import 'package:givt_app_kids_web/features/recommendation/tags/repositories/tags_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final getIt = GetIt.instance;
@@ -62,18 +62,4 @@ void _initRepositories() {
         getIt(),
       ),
     );
-  //   ..registerLazySingleton<OrganisationDetailsRepository>(
-  //     () => OrganisationDetailsRepositoryImpl(
-  //       getIt(),
-  //     ),
-  //   )
-  //   ..registerLazySingleton<RecommendationRepository>(
-  //     () => RecommendationRepositoryImpl(
-  //       getIt(),
-  //     ),
-  //   )
-  //   ..registerLazySingleton<CreateTransactionRepository>(
-  //     () => CreateTransactionRepositoryImpl(
-  //       getIt(),
-  //     ),
 }

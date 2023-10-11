@@ -28,33 +28,15 @@ class Tag extends Equatable {
 
   const Tag.empty()
       : this(
-            key: '',
-            area: '',
-            color: Colors.amber,
-            displayText: 'Empty Tag',
-            pictureUrl: '',
-            type: TagType.INTERESTS);
+          key: '',
+          area: '',
+          color: Colors.amber,
+          displayText: 'Empty Tag',
+          pictureUrl: '',
+          type: TagType.INTERESTS,
+        );
 
   factory Tag.fromMap(Map<String, dynamic> map) {
-    Color _getColor(String area) {
-      switch (area) {
-        case "ENVIRONMENT":
-          return Color(0xFF00845A);
-        case 'HEALTH':
-          return Color(0xFF7AAA35);
-        case 'EDUCATION':
-          return Color(0xFF54A1EE);
-        case 'BASIC':
-          return Color(0xFFFAB63E);
-        case 'DISASTER':
-          return Color(0xFFF99370);
-        default:
-          {
-            return Color(0xFF285C92);
-          }
-      }
-    }
-
     return Tag(
       key: map['key'] ?? '',
       area: map['area'] ?? '',
@@ -66,6 +48,25 @@ class Tag extends Equatable {
         orElse: () => TagType.INTERESTS,
       ),
     );
+  }
+
+  static Color _getColor(String area) {
+    switch (area) {
+      case "ENVIRONMENT":
+        return const Color(0xFF00845A);
+      case 'HEALTH':
+        return const Color(0xFF7AAA35);
+      case 'EDUCATION':
+        return const Color(0xFF54A1EE);
+      case 'BASIC':
+        return const Color(0xFFFAB63E);
+      case 'DISASTER':
+        return const Color(0xFFF99370);
+      default:
+        {
+          return const Color(0xFF285C92);
+        }
+    }
   }
 
   Map<String, dynamic> toJson() {

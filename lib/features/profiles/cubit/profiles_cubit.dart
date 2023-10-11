@@ -51,11 +51,26 @@ class ProfilesCubit extends Cubit<ProfilesState> {
     emit(const ProfilesInitialState());
   }
 
-  void setActiveProfile(Profile profile) {
+  void setActiveProfile({
+    required Profile profile,
+    bool? logAnalytics = true,
+    String? pageName,
+  }) {
     final index = state.profiles.indexOf(profile);
-    emit(ProfilesUpdatedState(
-      profiles: state.profiles,
-      activeProfileIndex: index,
-    ));
+    emit(
+      ProfilesUpdatedState(
+        profiles: state.profiles,
+        activeProfileIndex: index,
+      ),
+    );
+    if (logAnalytics == true) {
+      AnalyticsHelper.logEvent(
+        eventName: AmplitudeEvent.profilePressed,
+        eventProperties: {
+          'profile_name': profile.firstName,
+          'page_name': pageName,
+        },
+      );
+    }
   }
 }

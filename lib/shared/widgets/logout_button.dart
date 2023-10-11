@@ -29,12 +29,8 @@ class _LogoutButtonState extends State<LogoutButton> {
     return GestureDetector(
       onTap: () async {
         AnalyticsHelper.logEvent(
-            eventName: AmplitudeEvent.buttonPressed,
-            eventProperties: {
-              'button_name': 'Log out',
-              'formatted_date': DateTime.now().toIso8601String(),
-              'screen_name': widget.pageName,
-            });
+            eventName: AmplitudeEvent.logoutButtonPressed,
+            eventProperties: {'page_name': widget.pageName});
 
         final confirmed = await showDialog<bool>(
             context: context,
@@ -45,18 +41,20 @@ class _LogoutButtonState extends State<LogoutButton> {
                   TextButton(
                       onPressed: () {
                         AnalyticsHelper.logEvent(
-                            eventName: AmplitudeEvent.buttonPressed,
-                            eventProperties: {
-                              'button_name': 'Log out confirmed',
-                              'formatted_date':
-                                  DateTime.now().toIso8601String(),
-                              'screen_name': widget.pageName,
-                            });
+                            eventName: AmplitudeEvent.logoutDialogConfirmed,
+                            eventProperties: {'page_name': widget.pageName});
+
                         context.pop(true);
                       },
                       child: const Text('YES')),
                   TextButton(
-                      onPressed: () => context.pop(false),
+                      onPressed: () {
+                        AnalyticsHelper.logEvent(
+                            eventName: AmplitudeEvent.logoutDialogCanceled,
+                            eventProperties: {'page_name': widget.pageName});
+
+                        context.pop(false);
+                      },
                       child: const Text('NO')),
                 ],
               );
@@ -64,7 +62,10 @@ class _LogoutButtonState extends State<LogoutButton> {
 
         if (confirmed == true && mounted) {
           context.read<AuthCubit>().logout();
-          context.read<ProfilesCubit>().setActiveProfile(const Profile.empty());
+          context.read<ProfilesCubit>().setActiveProfile(
+                profile: const Profile.empty(),
+                logAnalytics: false,
+              );
 
           context.goNamed(Pages.start.name);
         }

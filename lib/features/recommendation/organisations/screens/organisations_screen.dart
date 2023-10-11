@@ -8,9 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:givt_app_kids_web/core/app/pages.dart';
 import 'package:givt_app_kids_web/features/profiles/widgets/profile_wallet_button.dart';
 import 'package:givt_app_kids_web/features/recommendation/organisations/cubit/organisations_cubit.dart';
-import 'package:givt_app_kids_web/features/recommendation/widgets/fab_recomendation.dart';
-import 'package:givt_app_kids_web/features/recommendation/widgets/givy_bubble.dart';
-import 'package:givt_app_kids_web/features/recommendation/widgets/organisation_item.dart';
+import 'package:givt_app_kids_web/features/recommendation/widgets/recommendation_givy_bubble.dart';
+import 'package:givt_app_kids_web/features/recommendation/organisations/widgets/organisation_item.dart';
+import 'package:givt_app_kids_web/shared/widgets/givt_primary_elevated_button.dart';
 import 'package:givt_app_kids_web/utils/analytics_helper.dart';
 import 'package:go_router/go_router.dart';
 
@@ -59,7 +59,7 @@ class OrganisationsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        GivyBubble(
+                        RecommendationGivyBubble(
                           text: state.organisations.isEmpty
                               ? 'Oops, something went wrong...'
                               : 'These charities fit your interests!',
@@ -112,14 +112,19 @@ class OrganisationsScreen extends StatelessWidget {
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
           floatingActionButton: state.organisations.isEmpty
-              ? RecommendationFAB(
-                  active: true,
-                  text: 'Restart',
-                  onClicked: () {
-                    context.goNamed(Pages.start.name);
-                    AnalyticsHelper.logEvent(
-                        eventName: AmplitudeEvent.restartClicked);
-                  })
+              ? Container(
+                  margin: const EdgeInsets.only(bottom: 25),
+                  child: GivtPrimaryElevatedButton(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 90, vertical: 12),
+                    text: 'Restart',
+                    onPressed: () {
+                      context.goNamed(Pages.start.name);
+                      AnalyticsHelper.logEvent(
+                          eventName: AmplitudeEvent.restartPressed);
+                    },
+                  ),
+                )
               : null,
         );
       },

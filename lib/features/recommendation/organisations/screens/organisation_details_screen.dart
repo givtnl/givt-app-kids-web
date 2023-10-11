@@ -7,9 +7,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:givt_app_kids_web/core/app/pages.dart';
 import 'package:givt_app_kids_web/features/profiles/widgets/profile_wallet_button.dart';
 import 'package:givt_app_kids_web/features/recommendation/organisations/cubit/organisations_cubit.dart';
-import 'package:givt_app_kids_web/features/recommendation/widgets/fab_recomendation.dart';
 import 'package:givt_app_kids_web/features/recommendation/widgets/organisation_header.dart';
-import 'package:go_router/go_router.dart';
+import 'package:givt_app_kids_web/shared/widgets/givt_primary_elevated_button.dart';
 
 import 'package:givt_app_kids_web/shared/widgets/back_button.dart'
     as givt_widgets;
@@ -295,82 +294,6 @@ class OrganisationDetailsScreen extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                Container(
-                                  width: double.maxFinite,
-                                  height: availableHeight * 0.15,
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          alignment: Alignment.bottomCenter,
-                                          padding:
-                                              const EdgeInsets.only(bottom: 12),
-                                          child: ElevatedButton(
-                                            onPressed: () => context.pop(),
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor:
-                                                  const Color(0xFFD6EAFF),
-                                              elevation: 1,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(25),
-                                              ),
-                                            ),
-                                            child: const Padding(
-                                              padding: EdgeInsets.all(10),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  Icon(
-                                                    Icons.arrow_back_rounded,
-                                                    color: Color(0xFF0E90CC),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  Text(
-                                                    'back to results',
-                                                    style: TextStyle(
-                                                      color: Color(0xFF0E90CC),
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: state.isDonateMode
-                                            ? Container()
-                                            : Container(
-                                                alignment:
-                                                    Alignment.bottomCenter,
-                                                child: RecommendationFAB(
-                                                  active: true,
-                                                  text: 'Donate',
-                                                  padding: EdgeInsets.only(
-                                                    bottom: size.height * 0.01,
-                                                    top: size.height * 0.020,
-                                                  ),
-                                                  onClicked: () => context
-                                                      .read<
-                                                          OrganisationsCubit>()
-                                                      .showOrganisationDetails(
-                                                        organisation: state
-                                                            .selectedOrganisation,
-                                                        isDonateMode: true,
-                                                      ),
-                                                ),
-                                              ),
-                                      ),
-                                      const Spacer(),
-                                    ],
-                                  ),
-                                ),
                               ],
                             ),
                           ),
@@ -392,6 +315,25 @@ class OrganisationDetailsScreen extends StatelessWidget {
                 ),
               ],
             ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
+            floatingActionButton:
+                (state as OrganisationDetailesState).isDonateMode == false
+                    ? Container(
+                        margin: const EdgeInsets.only(bottom: 25),
+                        child: GivtPrimaryElevatedButton(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 90, vertical: 12),
+                          text: 'Donate',
+                          onPressed: () => context
+                              .read<OrganisationsCubit>()
+                              .showOrganisationDetails(
+                                organisation: state.selectedOrganisation,
+                                isDonateMode: true,
+                              ),
+                        ),
+                      )
+                    : null,
           ),
         );
       },

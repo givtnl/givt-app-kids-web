@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:givt_app_kids_web/utils/font_utils.dart';
 
-class GivyBubble extends StatelessWidget {
-  const GivyBubble({
+class RecommendationGivyBubble extends StatelessWidget {
+  const RecommendationGivyBubble({
     required this.text,
     this.extraChild,
     super.key,
