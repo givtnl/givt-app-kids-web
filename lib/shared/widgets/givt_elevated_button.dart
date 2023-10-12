@@ -4,12 +4,12 @@ import 'package:givt_app_kids_web/utils/font_utils.dart';
 class GivtElevatedButton extends StatelessWidget {
   const GivtElevatedButton({
     required this.text,
-    required this.onPressed,
     required this.backgroundColor,
     required this.foregroundColor,
     required this.isLoading,
+    this.onPressed,
     this.showBorder = false,
-    this.padding = const EdgeInsets.symmetric(horizontal: 45, vertical: 12),
+    required this.padding,
     super.key,
   });
 
@@ -17,7 +17,7 @@ class GivtElevatedButton extends StatelessWidget {
   final Color backgroundColor;
   final Color foregroundColor;
   final bool showBorder;
-  final void Function() onPressed;
+  final void Function()? onPressed;
   final EdgeInsets padding;
   final bool isLoading;
 

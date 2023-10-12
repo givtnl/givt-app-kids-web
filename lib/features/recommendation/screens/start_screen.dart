@@ -4,7 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:givt_app_kids_web/core/app/pages.dart';
 import 'package:givt_app_kids_web/features/auth/cubit/auth_cubit.dart';
 import 'package:givt_app_kids_web/features/profiles/cubit/profiles_cubit.dart';
-import 'package:givt_app_kids_web/features/recommendation/quiz/cubit/quiz_cubit.dart';
 import 'package:givt_app_kids_web/shared/widgets/bubble.dart';
 import 'package:givt_app_kids_web/shared/widgets/givt_primary_elevated_button.dart';
 import 'package:givt_app_kids_web/shared/widgets/givt_secondary_elevated_button.dart';
@@ -15,15 +14,13 @@ import 'package:go_router/go_router.dart';
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
 
-  void _startQuiz(BuildContext context) {
-    context.read<QuizCubit>().startQuiz();
-    context.pushNamed(Pages.quizWhere.name);
-  }
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     final anchorSize = size.aspectRatio > 1 ? size.width : size.height;
+
+    final authState = context.watch<AuthCubit>().state;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -93,34 +90,34 @@ class StartScreen extends StatelessWidget {
                           text: 'Continue as guest',
                           onPressed: () {
                             AnalyticsHelper.logEvent(
-                                eventName: AmplitudeEvent.buttonPressed,
-                                eventProperties: {
-                                  'button_name': 'Continue as guest',
-                                  'formatted_date':
-                                      DateTime.now().toIso8601String(),
-                                  'screen_name': Pages.start.name,
-                                });
+                              eventName: AmplitudeEvent.continueAsGuestPressed,
+                              eventProperties: {'page_name': Pages.start.name},
+                            );
 
                             context.read<AuthCubit>().logout();
-                            _startQuiz(context);
+                            context.read<ProfilesCubit>().clearProfiles();
+
+                            context.pushNamed(Pages.locationSelection.name);
                           },
                         ),
                         const SizedBox(
                           width: 30,
                         ),
                         GivtPrimaryElevatedButton(
-                          text: 'Login to discover',
+                          text: authState is LoggedInState
+                              ? 'Select profile'
+                              : 'Login to discover',
+                          padding: authState is LoggedInState
+                              ? const EdgeInsets.symmetric(
+                                  horizontal: 65, vertical: 12)
+                              : const EdgeInsets.symmetric(
+                                  horizontal: 45, vertical: 12),
                           onPressed: () {
                             AnalyticsHelper.logEvent(
-                                eventName: AmplitudeEvent.buttonPressed,
-                                eventProperties: {
-                                  'button_name': 'Login to discover',
-                                  'formatted_date':
-                                      DateTime.now().toIso8601String(),
-                                  'screen_name': Pages.start.name,
-                                });
+                              eventName: AmplitudeEvent.loginToDiscoverPressed,
+                              eventProperties: {'page_name': Pages.start.name},
+                            );
 
-                            final authState = context.read<AuthCubit>().state;
                             if (authState is LoggedInState) {
                               context
                                   .read<ProfilesCubit>()

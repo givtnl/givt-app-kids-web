@@ -1,11 +1,10 @@
-import 'dart:ui';
-
 import 'package:bloc/bloc.dart';
 
 import 'package:equatable/equatable.dart';
+import 'package:givt_app_kids_web/core/app/pages.dart';
 import 'package:givt_app_kids_web/features/recommendation/organisations/models/organisation.dart';
-import 'package:givt_app_kids_web/features/recommendation/choices/models/tag.dart';
 import 'package:givt_app_kids_web/features/recommendation/organisations/repositories/organisations_repository.dart';
+import 'package:givt_app_kids_web/features/recommendation/tags/models/tag.dart';
 import 'package:givt_app_kids_web/utils/analytics_helper.dart';
 
 part 'organisations_state.dart';
@@ -22,12 +21,17 @@ class OrganisationsCubit extends Cubit<OrganisationsState> {
     Duration fakeComputingExtraDelay = Duration.zero,
   }) async {
     emit(const OrganisationsFetchingState());
+
+    await Future.delayed(fakeComputingExtraDelay);
+
     try {
       AnalyticsHelper.logEvent(
-          eventName: AmplitudeEvent.helpPeopleClicked,
-          eventProperties: {
-            "interests": '${interests.map((e) => e.displayText).toList()}',
-          });
+        eventName: AmplitudeEvent.nextToCharitiesPressed,
+        eventProperties: {
+          'interests': '${interests.map((e) => e.displayText).toList()}',
+          'page_name': Pages.interestsSelection.name,
+        },
+      );
       final response =
           await _organisationsRepository.getRecommendedOrganisations(
               location: location, interests: interests);
@@ -56,9 +60,10 @@ class OrganisationsCubit extends Cubit<OrganisationsState> {
             currentFlippedOrganisation == organisation ? null : organisation,
       ));
       AnalyticsHelper.logEvent(
-          eventName: AmplitudeEvent.charityClicked,
+          eventName: AmplitudeEvent.charityCardPressed,
           eventProperties: {
-            "charity": organisation.name,
+            'charity_name': organisation.name,
+            'page_name': Pages.organisations.name,
           });
     }
   }
@@ -76,16 +81,20 @@ class OrganisationsCubit extends Cubit<OrganisationsState> {
       ));
       if (isDonateMode) {
         AnalyticsHelper.logEvent(
-            eventName: AmplitudeEvent.donateClicked,
-            eventProperties: {
-              "charity": organisation.name,
-            });
+          eventName: AmplitudeEvent.donatePressed,
+          eventProperties: {
+            "charity_name": organisation.name,
+            'page_name': Pages.organisationDetails.name,
+          },
+        );
       } else {
         AnalyticsHelper.logEvent(
-            eventName: AmplitudeEvent.learnMoreClicked,
-            eventProperties: {
-              "charity": organisation.name,
-            });
+          eventName: AmplitudeEvent.learnMorePressed,
+          eventProperties: {
+            'charity_name': organisation.name,
+            'page_name': Pages.organisations.name,
+          },
+        );
       }
     }
   }
@@ -96,45 +105,5 @@ class OrganisationsCubit extends Cubit<OrganisationsState> {
         organisations: state.organisations,
       ));
     }
-  }
-
-  Future<void> getRecommendedOrganisationsTEST() async {
-    return await getRecommendedOrganisations(
-      fakeComputingExtraDelay: const Duration(seconds: 0),
-      location: const Tag(
-        area: '',
-        color: Color(0xFF285C92),
-        key: 'USA',
-        displayText: '',
-        pictureUrl: '',
-        type: TagType.LOCATION,
-      ),
-      interests: [
-        const Tag(
-          key: 'CLEANOCEANS',
-          area: 'ENVIRONMENT',
-          color: Color(0xFF00845A),
-          displayText: '',
-          pictureUrl: '',
-          type: TagType.INTERESTS,
-        ),
-        const Tag(
-          key: 'GETFOOD',
-          area: 'BASIC',
-          color: Color(0xFFFAB63E),
-          displayText: '',
-          pictureUrl: '',
-          type: TagType.INTERESTS,
-        ),
-        const Tag(
-          key: 'CAREFORCHILDREN',
-          area: 'HEALTH',
-          color: Color(0xFF7AAA35),
-          displayText: '',
-          pictureUrl: '',
-          type: TagType.INTERESTS,
-        ),
-      ],
-    );
   }
 }

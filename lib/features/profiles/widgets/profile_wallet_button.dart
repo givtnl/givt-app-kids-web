@@ -17,13 +17,12 @@ class ProfileWalletButton extends StatelessWidget {
   final String pageName;
   final void Function()? onPressed;
 
-  void _showOverlayScreen(BuildContext context) {
+  void _showOverlayScreen(BuildContext context, Profile activeProfile) {
     AnalyticsHelper.logEvent(
-        eventName: AmplitudeEvent.buttonPressed,
+        eventName: AmplitudeEvent.profileSwitchButtonPressed,
         eventProperties: {
-          'button_name': 'profile wallet button',
-          'formatted_date': DateTime.now().toIso8601String(),
-          'screen_name': pageName,
+          'current_profile_name': activeProfile.firstName,
+          'page_name': pageName,
         });
 
     Navigator.of(context).push(
@@ -46,7 +45,8 @@ class ProfileWalletButton extends StatelessWidget {
         final size = MediaQuery.sizeOf(context);
         final anchorSize = size.aspectRatio > 1 ? size.width : size.height;
         return GestureDetector(
-          onTap: onPressed ?? () => _showOverlayScreen(context),
+          onTap: onPressed ??
+              () => _showOverlayScreen(context, state.activeProfile),
           child: Card(
             elevation: 3,
             color: const Color(0xFF54A1EE),

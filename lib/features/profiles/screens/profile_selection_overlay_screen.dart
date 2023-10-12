@@ -23,14 +23,14 @@ class ProfileSelectionOverlayScreen extends StatefulWidget {
 class _ProfileSelectionOverlayScreenState
     extends State<ProfileSelectionOverlayScreen> {
   void _selectProfile(BuildContext context, Profile profile) {
-    context.read<ProfilesCubit>().setActiveProfile(profile);
-    AnalyticsHelper.logEvent(
-      eventName: AmplitudeEvent.profilePressed,
-      eventProperties: {
-        "profile_name": profile.firstName,
-      },
-    );
-    context.pop();
+    context.read<ProfilesCubit>().setActiveProfile(
+          profile: profile,
+          pageName: Pages.profileSelectionOverlay.name,
+        );
+
+    //TODO: replace with go_router approach after go_router refactoring with nested routes
+    Navigator.of(context)
+        .popUntil(ModalRoute.withName(Pages.locationSelection.name));
   }
 
   @override
@@ -56,7 +56,12 @@ class _ProfileSelectionOverlayScreenState
     return Scaffold(
       backgroundColor: const Color.fromARGB(165, 22, 22, 20),
       body: GestureDetector(
-        onTap: () => context.pop(),
+        onTap: () {
+          AnalyticsHelper.logEvent(
+              eventName: AmplitudeEvent.profilesOverlayCanceled);
+
+          context.pop();
+        },
         child: Container(
             margin: const EdgeInsets.all(30),
             alignment: Alignment.topRight,
@@ -68,7 +73,12 @@ class _ProfileSelectionOverlayScreenState
                 children: [
                   ProfileWalletButton(
                     pageName: Pages.profileSelectionOverlay.name,
-                    onPressed: () => context.pop(),
+                    onPressed: () {
+                      AnalyticsHelper.logEvent(
+                          eventName: AmplitudeEvent.profilesOverlayCanceled);
+
+                      context.pop();
+                    },
                   ),
                   ...profiles
                       .map(

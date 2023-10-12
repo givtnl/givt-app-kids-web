@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:givt_app_kids_web/utils/font_utils.dart';
 
-class GivyBubble extends StatelessWidget {
-  const GivyBubble({
+class RecommendationGivyBubble extends StatelessWidget {
+  const RecommendationGivyBubble({
     required this.text,
     this.extraChild,
     super.key,
@@ -39,12 +40,16 @@ class GivyBubble extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: height * 0.01, vertical: 0),
-                child: Text(text,
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        color: Color(0xFF405A66),
-                        fontSize: 38,
-                        fontWeight: FontWeight.bold)),
+                child: Text(
+                  text,
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    color: const Color(0xFF405A66),
+                    fontSize: FontUtils.getScaledFontSize(
+                        inputFontSize: 31, size: size),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ),
             extraChild ?? const SizedBox()

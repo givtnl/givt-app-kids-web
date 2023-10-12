@@ -6,6 +6,7 @@ class GivtTertiaryElevatedButton extends StatelessWidget {
     required this.text,
     required this.onPressed,
     this.isLoading = false,
+    this.padding = const EdgeInsets.symmetric(horizontal: 65, vertical: 12),
     super.key,
   });
 
@@ -15,6 +16,7 @@ class GivtTertiaryElevatedButton extends StatelessWidget {
   final String text;
   final void Function() onPressed;
   final bool isLoading;
+  final EdgeInsets padding;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class GivtTertiaryElevatedButton extends StatelessWidget {
       backgroundColor: _tertiaryBackgroundColor,
       foregroundColor: _tertiaryForegroundColor,
       isLoading: isLoading,
-      padding: const EdgeInsets.symmetric(horizontal: 65, vertical: 12),
+      padding: padding,
     );
   }
 }

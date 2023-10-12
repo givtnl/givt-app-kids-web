@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
-import 'package:givt_app_kids_web/features/recommendation/choices/models/tag.dart';
+import 'package:givt_app_kids_web/features/recommendation/tags/models/tag.dart';
 
 class Organisation extends Equatable {
   const Organisation({

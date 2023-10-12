@@ -47,36 +47,30 @@ class ProfilesCubit extends Cubit<ProfilesState> {
     }
   }
 
-  void setActiveProfile(Profile profile) {
-    final index = state.profiles.indexOf(profile);
-    emit(ProfilesUpdatedState(
-      profiles: state.profiles,
-      activeProfileIndex: index,
-    ));
+  void clearProfiles() {
+    emit(const ProfilesInitialState());
   }
 
-  // @override
-  // ProfilesState? fromJson(Map<String, dynamic> json) {
-  //   log('fromJSON: $json');
-  //   final profilesMap = jsonDecode(json['profiles']);
-  //   final activeProfileIndex = json['activeProfileIndex'];
-  //   final List<Profile> profiles = [];
-  //   for (final profileMap in profilesMap) {
-  //     profiles.add(Profile.fromMap(profileMap));
-  //   }
-  //   return ProfilesUpdatedState(
-  //     profiles: profiles,
-  //     activeProfileIndex: activeProfileIndex,
-  //   );
-  // }
-
-  // @override
-  // Map<String, dynamic>? toJson(ProfilesState state) {
-  //   final result = {
-  //     'profiles': jsonEncode(state.profiles),
-  //     'activeProfileIndex': state.activeProfileIndex,
-  //   };
-  //   log('toJSON: $result');
-  //   return result;
-  // }
+  void setActiveProfile({
+    required Profile profile,
+    bool? logAnalytics = true,
+    String? pageName,
+  }) {
+    final index = state.profiles.indexOf(profile);
+    emit(
+      ProfilesUpdatedState(
+        profiles: state.profiles,
+        activeProfileIndex: index,
+      ),
+    );
+    if (logAnalytics == true) {
+      AnalyticsHelper.logEvent(
+        eventName: AmplitudeEvent.profilePressed,
+        eventProperties: {
+          'profile_name': profile.firstName,
+          'page_name': pageName,
+        },
+      );
+    }
+  }
 }

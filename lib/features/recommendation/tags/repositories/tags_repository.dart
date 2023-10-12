@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:givt_app_kids_web/core/network/network.dart';
-import 'package:givt_app_kids_web/features/recommendation/choices/models/tag.dart';
+import 'package:givt_app_kids_web/features/recommendation/tags/models/tag.dart';
 
 mixin TagsRepository {
   Future<List<Tag>> fetchTags();
