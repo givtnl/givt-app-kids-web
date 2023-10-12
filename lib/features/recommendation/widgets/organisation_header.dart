@@ -66,7 +66,6 @@ class OrganisationHeader extends StatelessWidget {
                           ),
                         ),
                       )
-                      .toList()
                       .take(3)
                       .toList(),
                 ),
