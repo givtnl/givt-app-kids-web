@@ -43,7 +43,7 @@ class OrganisationHeader extends StatelessWidget {
                         (tag) => Container(
                           margin: const EdgeInsets.symmetric(vertical: 3),
                           decoration: BoxDecoration(
-                            color: tag.color,
+                            color: tag.area.color,
                             borderRadius: const BorderRadius.only(
                               topRight: Radius.circular(25),
                               bottomRight: Radius.circular(25),

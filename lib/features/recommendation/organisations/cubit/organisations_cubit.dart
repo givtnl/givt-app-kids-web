@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:bloc/bloc.dart';
 
 import 'package:equatable/equatable.dart';
@@ -107,45 +105,5 @@ class OrganisationsCubit extends Cubit<OrganisationsState> {
         organisations: state.organisations,
       ));
     }
-  }
-
-  Future<void> getRecommendedOrganisationsTEST() async {
-    return await getRecommendedOrganisations(
-      fakeComputingExtraDelay: const Duration(seconds: 0),
-      location: const Tag(
-        area: '',
-        color: Color(0xFF285C92),
-        key: 'USA',
-        displayText: '',
-        pictureUrl: '',
-        type: TagType.LOCATION,
-      ),
-      interests: [
-        const Tag(
-          key: 'CLEANOCEANS',
-          area: 'ENVIRONMENT',
-          color: Color(0xFF00845A),
-          displayText: '',
-          pictureUrl: '',
-          type: TagType.INTERESTS,
-        ),
-        const Tag(
-          key: 'GETFOOD',
-          area: 'BASIC',
-          color: Color(0xFFFAB63E),
-          displayText: '',
-          pictureUrl: '',
-          type: TagType.INTERESTS,
-        ),
-        const Tag(
-          key: 'CAREFORCHILDREN',
-          area: 'HEALTH',
-          color: Color(0xFF7AAA35),
-          displayText: '',
-          pictureUrl: '',
-          type: TagType.INTERESTS,
-        ),
-      ],
-    );
   }
 }
