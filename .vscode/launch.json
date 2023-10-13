@@ -18,6 +18,19 @@
               ]
         },
         {
+            "name": "Launch production",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "program": "lib/main_production.dart",
+            "args": [
+                "--flavor",
+                "production",
+                "--target",
+                "lib/main_production.dart",
+              ]
+        },
+        {
             "name": "givt-app-kids-web (profile mode)",
             "request": "launch",
             "type": "dart",
