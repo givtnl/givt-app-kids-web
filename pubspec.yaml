@@ -21,6 +21,10 @@ dependencies:
   loading_animation_widget:
   go_router: ^10.1.2
   amplitude_flutter: ^3.16.0
+  http_interceptor: ^1.0.2
+  get_it: ^7.6.4
+  shared_preferences: ^2.2.1
+  countup: ^0.1.4
 
 dev_dependencies:
   flutter_test:

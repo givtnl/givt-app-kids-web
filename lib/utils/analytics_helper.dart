@@ -3,16 +3,28 @@ import 'dart:developer';
 import 'package:amplitude_flutter/amplitude.dart';
 
 enum AmplitudeEvent {
-  backClicked('back_clicked'),
+  donatePressed('donate_pressed'),
+  learnMorePressed('learn_more_pressed'),
+  backPressed('back_pressed'),
+  charityCardPressed('charity_card_pressed'),
+  nextToCharitiesPressed('next_to_charities_pressed'),
+  loginPressed('login_pressed'),
+  locationSelected('location_selected'),
   charitiesShown('charities_shown'),
-  charityClicked('charity_clicked'),
-  donateClicked('donate_clicked'),
-  helpPeopleClicked('help_people_clicked'),
-  learnMoreClicked('learn_more_clicked'),
-  nextClicked('next_clicked'),
+  profilePressed('profile_pressed'),
   recommendationFlowStarted('recommendation_flow_started'),
-  restartClicked('restart_clicked'),
-  whereToHelpClicked('where_to_help_clicked'),
+  restartPressed('restart_pressed'),
+// new events
+  continueAsGuestPressed('continue_as_guest_pressed'),
+  loginToDiscoverPressed('login_to_discover_pressed'),
+  passwordEyeSwitched('password_eye_switched'),
+  profileSwitchButtonPressed('profile_switch_button_pressed'),
+  nextToInterestsPressed('next_to_interests_pressed'),
+  logoutButtonPressed('logout_button_pressed'),
+  logoutDialogConfirmed('logout_dialog_confirmed'),
+  logoutDialogCanceled('logout_dialog_canceled'),
+  profilesOverlayCanceled('profiles_overlay_canceled'),
+  interestSelected('interest_selected'),
   ;
 
   final String value;

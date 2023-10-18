@@ -1,10 +1,12 @@
+import 'package:flutter/material.dart';
+
 class FontUtils {
   static double getScaledFontSize({
     required double inputFontSize,
-    required double availableWidth,
-    required double availableHeight,
+    required Size size,
   }) {
-    final area = availableWidth * availableHeight;
-    return inputFontSize * area * 0.0000055;
+    final anchorSize = size.aspectRatio > 1 ? size.width : size.height;
+    final fontSizeMultiplier = anchorSize * 0.0009;
+    return inputFontSize * fontSizeMultiplier;
   }
 }

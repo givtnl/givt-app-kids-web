@@ -1,6 +1,6 @@
-import 'package:givt_app_kids_web/app_config.dart';
-import 'package:givt_app_kids_web/bootstrap.dart';
-import 'package:givt_app_kids_web/givt_app.dart';
+import 'package:givt_app_kids_web/core/app/app_config.dart';
+import 'package:givt_app_kids_web/core/app/bootstrap.dart';
+import 'package:givt_app_kids_web/core/app/givt_app.dart';
 
 void main() {
   var configuredApp = AppConfig(
