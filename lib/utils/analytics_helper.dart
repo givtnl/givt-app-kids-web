@@ -24,10 +24,12 @@ class AnalyticsHelper {
   static Amplitude? _amplitude;
 
   static Future<void> init(String key) async {
-    _amplitude = Amplitude.getInstance();
-    await _amplitude!.init(key);
-    await _amplitude!.enableCoppaControl();
-    await _amplitude!.trackingSessionEvents(true);
+    // commented out to disable tracking.
+
+    // _amplitude = Amplitude.getInstance();
+    // await _amplitude!.init(key);
+    // await _amplitude!.enableCoppaControl();
+    // await _amplitude!.trackingSessionEvents(true);
   }
 
   static Future<void> setUserId(String profileName) async {
