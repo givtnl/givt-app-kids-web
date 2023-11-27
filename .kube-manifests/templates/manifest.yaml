@@ -54,7 +54,7 @@ spec:
       match: "Host(`{{ $.Values.hostName }}`) && PathPrefix(`/`)"
       priority: 10
       middlewares:
-        - kids-redirect
+        - name: kids-redirect
       services:
         - kind: Service
           name: "kids-webapp"
