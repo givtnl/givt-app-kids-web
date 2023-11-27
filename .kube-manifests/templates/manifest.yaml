@@ -22,9 +22,9 @@ spec:
               containerPort: 80
           resources:
             limits:
-              cpu: 200m
+              cpu: 1m
             requests:
-              cpu: 100m
+              cpu: 1m
 ---
 apiVersion: v1
 kind: Service
@@ -53,6 +53,8 @@ spec:
     - kind: Rule
       match: "Host(`{{ $.Values.hostName }}`) && PathPrefix(`/`)"
       priority: 10
+      middlewares:
+        - kids-redirect
       services:
         - kind: Service
           name: "kids-webapp"
@@ -73,3 +75,13 @@ spec:
           weight: 10
   tls:
     certResolver: letsencrypt
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-kids
+  namespace: default
+spec:
+  redirectRegex:
+    regex: (.*)givt4kids.app(.*)
+    replacement: http://givt.app/givt4kids/
